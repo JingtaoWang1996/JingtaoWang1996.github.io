@@ -11,23 +11,22 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* 01/2020-09/2018  M.S. The state University of NewYork, University at Buffalo
+* 09/2014-06/2018  B.S. Chongqing University of Posts and Telecommunications
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* 06/2020-now: Research & Development Engineer
+  * CETC Cyber Security Research Instituion
+<!--   * Duties included: Tagging issues -->
+<!--   * Supervisor: Professor Git -->
 
-* Fall 2015: Research Assistant
+<!-- * Fall 2015: Research Assistant
   * Github University
   * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+  * Supervisor: Professor Hub -->
   
-Skills
+<!-- Skills
 ======
 * Skill 1
 * Skill 2
@@ -57,3 +56,4 @@ Teaching
 Service and leadership
 ======
 * Currently signed in to 43 different slack teams
+ -->
