@@ -23,16 +23,20 @@ Work experience
 
 Project experiences （Selected）
 ======
-* 10/2020-01/2023: DNS domain verify system development
-   * Developed a 100k/minute/server-level domain query modual by asynchronous multiprocess method.
+* 02/2022-04/2022: Anomaly Detection: BGP data based
+   * Collect real attack events (Nimda/Slammer/CodeRed) time sequential update message data from RIPE.
+   * Data preprocess and select 7 features (Based on attack relevance) as the model input. 
+   * By testing, LSTM can gain 93.7% accuracy with both 3k of normal and anomaly sequential data.
+* 10/2020-now: DNS domain verify system
+   * Develope a 100k/minute/server-level domain query modual by asynchronous multiprocess method.
    * Assigned maintenance related works.
    * Gain Develop/Performance optimization/Batch deployment/maintenance experience on Linux Server.
 * 02/2019-01/2020: Nonparametric QCD for High-dimensional Sequential Data  （M.S thesis）
-   * Proposed Generative Model (GAN & VAE) based nonparametric QCD algorithms to deal with high-dimensional sequential data QCD problem. 
+   * Propose Generative Model (GAN & VAE) based nonparametric QCD algorithms to deal with high-dimensional sequential data QCD problem. 
    * Best QCD peformance on 10D Gaussian/KDD/SWAT datasets compared with some popular QCD alogrithms. 
 * 03/2018-05/2018: BPNN based Transformer Fault Detection （B.S thesis）
-   * Established BPNN a transformer fault detection model with IEC three ratio processed transformer gas data.
-   * Optimized BPNN model with GA & PSO algorithms and gain the optimal detection accuracy: 95%± 2%
+   * Establish BPNN a transformer fault detection model with IEC three ratio processed transformer gas data.
+   * Optimize BPNN model with GA & PSO algorithms and gain the optimal detection accuracy: 95%± 2%
   
   
 <!-- Skills
