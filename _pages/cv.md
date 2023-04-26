@@ -24,11 +24,11 @@ Work experience
 Project experiences （Selected）
 ======
 * 10/2020-01/2023: DNS domain verify system development
-   * Build up a 100k per minutes per server level domain asynchronously query functional modual by asynchronous multiprocess method.
+   * Developed a 100k/minute/server level domain-asynchronously-query modual by asynchronous multiprocess method.
    * Assigned maintenance related works.
-   * Gain Development & Debug & Performance optimization & Batch deployment/maintenance experience on Linux Server
+   * Development & Debug & Performance optimization & Batch deployment/maintenance experience on Linux Server.
 * 02/2019-01/2020: Nonparametric QCD for High-dimensional Sequential Data  （M.S thesis）
-   * Based on Generative Model (GAN & VAE), proposed a nonparametric QCD algorithm to deal with high-dimensional sequential data QCD problem. 
+   * Proposed Generative Model(GAN & VAE) based nonparametric QCD algorithms to deal with high-dimensional sequential data QCD problem. 
    * Best QCD peformance on 10D Gaussian/KDD/SWAT datasets compared with some popular QCD alogrithms. 
 * 03/2018-05/2018: BPNN based Transformer Fault Detection （B.S thesis）
    * Established BPNN a transformer fault detection model with IEC three ratio processed transformer gas data.
