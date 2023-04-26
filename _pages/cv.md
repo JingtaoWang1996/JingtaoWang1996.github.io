@@ -21,10 +21,12 @@ Work experience
 <!--   * Duties included: Tagging issues -->
 <!--   * Supervisor: Professor Git -->
 
-<!-- * Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub -->
+Project experiences
+======
+* 03/2018-05/2018: BPNN based Transformer Fault Detection
+   * Based on BPNN to establish a transformer fault detection model with IEC three ratio processed transformer gas data.
+   * Using GA & PSO algorithm to optimize BPNN model to gain final optimized detection accuracy: 95%± 2%
+  
   
 <!-- Skills
 ======
