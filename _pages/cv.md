@@ -23,9 +23,15 @@ Work experience
 
 Project experiences
 ======
-* 03/2018-05/2018: BPNN based Transformer Fault Detection
-   * Based on BPNN to establish a transformer fault detection model with IEC three ratio processed transformer gas data.
-   * Using GA & PSO algorithm to optimize BPNN model to gain final optimized detection accuracy: 95%± 2%
+* 10/2020-01/2023: DNS domain verify system development
+   * 
+   * assigned maintenance related works.
+* 02/2019-01/2020: Nonparametric QCD for High-dimensional Sequential Data  （M.S thesis）
+   * Based on Generative Model (GAN & VAE), proposed a nonparametric QCD algorithm to deal with high-dimensional sequential data QCD problem. 
+   * 
+* 03/2018-05/2018: BPNN based Transformer Fault Detection （B.S thesis）
+   * Established BPNN a transformer fault detection model with IEC three ratio processed transformer gas data.
+   * Using GA & PSO algorithms to optimize BPNN model and gain the optimal detection accuracy: 95%± 2%
   
   
 <!-- Skills
