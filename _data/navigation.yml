@@ -16,7 +16,7 @@ main:
     url: /social_works/ 
     
   - title: "Lifes"
-    url: /portfolio/
+    url: /lifes/
     
   - title: "Guide"
     url: /markdown/
