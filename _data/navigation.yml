@@ -13,10 +13,10 @@ main:
     url: /cv/
   
   - title: "Social Works"
-    url: /social-works/ 
+    url: /teaching/ 
     
   - title: "Lifes"
-    url: /lifes/
+    url: /portfolio/
     
   - title: "Guide"
     url: /markdown/
