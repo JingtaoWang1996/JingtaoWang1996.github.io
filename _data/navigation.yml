@@ -12,11 +12,11 @@ main:
   - title: "CV"
     url: /cv/
   
-  - title: "Social Work"
-    url: /teaching/ 
+  - title: "Social Works"
+    url: /social-works/ 
     
-  - title: "Travel pic"
-    url: /portfolio/
+  - title: "Lifes"
+    url: /lifes/
     
   - title: "Guide"
     url: /markdown/
