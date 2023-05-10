@@ -1,6 +1,6 @@
 ---
 title: "See these meaningful Icons"
-excerpt: "Each icon means a city or place I have spend several times on.<br/><img src='/images/cn_map.png'>"
+excerpt: "Each icon means a city or place I have spend several times on."
 collection: portfolio
 ---
 
@@ -8,5 +8,6 @@ collection: portfolio
 
 **China**
 <br/><img src='/images/cn_map.png'>
+
 **Other Nations**
 <br/><img src='/images/foreign_map.png'>
