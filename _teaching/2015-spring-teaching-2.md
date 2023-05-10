@@ -1,9 +1,9 @@
 ---
 title: "Oversea students in China sports competition(South-West division) Volunteer"
 collection: teaching
-type: "Workshop"
+type: "Volunteer"
 permalink: /teaching/2015-spring-teaching-1
-venue: "University 1, Department"
+venue: "Chongqing, China"
 date: 2016-06-24 
 location: "Chongqing, China"
 ---
