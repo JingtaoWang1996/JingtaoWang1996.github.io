@@ -1,5 +1,5 @@
 ---
-title: "Oversea students in China sports competition(South-West division) Volunteer"
+title: "Oversea students in China sports competition(South-West division)"
 collection: teaching
 type: "Volunteer"
 permalink: /teaching/2015-spring-teaching-1
