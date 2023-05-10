@@ -9,8 +9,7 @@ This is an item in your portfolio. It can be have images or nice text. If you na
 
 ---
 title: "See these meaningful Icon"
-excerpt: "Each icon means a city or place I have spend several times on " 
-<!-- <br/><img src='/_portfolio/map.html'>" -->
+excerpt: "Each icon means a city or place I have spend several times on <br/><img src='/images/500x300.png'>" 
 collection: portfolio
 ---
 Each icon means a city or place I have spend several times on, both city and landmarks. See the map [here](./map.html){:target="_blank"}.
