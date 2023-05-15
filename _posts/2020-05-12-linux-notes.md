@@ -158,21 +158,21 @@ Some linux usage experience.
 
     查看traceroute 路径，丢包率，平均解析时延等，通过这条命令结合实际情况观察路径上的丢包情况等。
 
-* 网络是否通畅curl：curl ip
+* 网络是否通畅\|：\| ip
 
   * 通过url执行上传或下载
 
-  * curl --h  查看help 文件命令执行方式。
+  * \| --h  查看help 文件命令执行方式。
 
-  * curl --k  跳过ssl 认证环节。
+  * \| --k  跳过ssl 认证环节。
 
-  * curl –data-urlencode()  url 编码的数据
+  * \| –data-urlencode()  url 编码的数据
 
-  * curl url：port/path  查看当前路径内容。
+  * \| url：port/path  查看当前路径内容。
 
     使用示例
 
-  * curl –k https://ip:443
+  * \| –k https://ip:443
 
 * bgpdump：linux解析bgp报文命令，[安装步骤](https://blog.csdn.net/weixin_35708669/article/details/89442180)
 
@@ -215,6 +215,18 @@ Some linux usage experience.
 # 其他命令
 
 ## ssh 建隧道
+
+* 建隧道例子：ssh -f -N -L 9988:211.144.18.3:20022 root@10.42.25.13  
+  *  将跳板机（211.144.18.3：20022）通过9988端口映射到本地13
+  * ssh -f -N -L 9854:172.20.10.46:22 common@localhost -p 9988 
+  * 将通过跳板机连接的目标服务器（172.20.10.46:22）通过9854端口映射到跳板机的端口9988，进而映射到本地
+
+* 直接从本地电脑上传文件到远端服务器---完成上述映射之后: scp -p 9854 /cygdrive/待上传文件本地目录 root@localhost：/上传的目标路径
+
+* 跳板机（13）传文件到远程目录下
+  *  文件传到13 root 目录下
+  *  scp -P 20022 dnspython.conf common@211.144.18.3:/home/common
+  * 控制节点 /home/common 再scp
 
 ## 任务绑定CPU
 
