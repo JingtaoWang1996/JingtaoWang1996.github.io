@@ -1,5 +1,5 @@
 ---
-title: 'python notes'
+title: 'python-notes'
 date: 2023-05-15
 permalink: /posts/2023/05/python-notes/
 tags:
@@ -8,7 +8,7 @@ tags:
   - category2
 ---
 
-This is a blog contains python related content.
+python related contents.
 
 # 开发相关
 
