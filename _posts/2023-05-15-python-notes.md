@@ -1,3 +1,12 @@
+---
+title: 'python-notes'
+date: 2023-05-15
+permalink: /posts/2023/05/python-notes/
+<!-- tags:
+  - cool posts
+  - category1
+  - category2 -->
+---
 # 开发相关
 
 ## 带参数启动
