@@ -75,7 +75,7 @@ Some linux usage experience.
 
 # 进程操作命令
 
-* 查看进程状态：ps -ef\|grep 进程字段or文件名（eg: ps -ef|grep python3)
+* 查看进程状态：ps -ef\|grep 进程字段or文件名（eg: ps -ef\|grep python3)
 
   执行后的参数说明例子：
 
@@ -105,7 +105,7 @@ Some linux usage experience.
 # 系统资源查看命令
 
 * 端口占用：netstat –anp\|grep 端口号
-* 端口是否已对外开放: netstat -ntulp | grep 端口号
+* 端口是否已对外开放: netstat -ntulp \| grep 端口号
 * 指定端口是否已开放：firewall-cmd –query-port=666/tcp（yes 已开启）
 * cpu信息：lscpu
 * linux 系统版本号：cat/proc/version
@@ -230,7 +230,27 @@ Some linux usage experience.
 
 ## 任务绑定CPU
 
+当多个进程争抢一个CPU资源（或1个CPU资源分配了多个进程，前几个进程执行时资源耗尽）导致代码耗时不稳定，[参考](https://blog.csdn.net/qq_30683329/article/details/88779390)
 
+* CPU 亲和力：CPU affinity是一种调度属性(scheduler property), 它可以**将一个进程"绑定" 到一个或一组CPU上**.在SMP(Symmetric Multi-Processing对称多处理)架构下，Linux调度器(scheduler)会根据CPU affinity的设置让指定的进程运行在"**绑定"**的CPU上,而不会在别的CPU上运行。**Linux调度器同样支持自然CPU亲和性(natural CPU affinity): 调度器会试图保持进程在相同的CPU上运行, <u>这意味着进程通常**不会在处理器之间频繁迁移,进程迁移的频率小就意味着产生的负载小。</u>
+
+  因为**程序的作者比调度器更了解程序,所以我们可以手动地为其分配CPU核，而不会过多地占用CPU0，或是让我们关键进程和一堆别的进程挤在一起,**所有设置CPU亲和性可以使某些程序提高性能。
+
+* CPU核心表示方法
+
+  CPU affinity 使用位掩码（bitmask）表示，每一位都表示一个CPU
+
+  最低位表示第一个逻辑CPU,最高为表示最后一个逻辑CPU
+
+  CPU affinity 典型的表示方法是使用16进制：
+
+  1）0x00000001   is processor #0
+
+  2）0x00000003   is processors #0 and processor #1
+
+  0Xfffffffff      is all processors
+
+* 
 
 # 操作系统
 
