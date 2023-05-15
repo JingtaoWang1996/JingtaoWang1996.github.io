@@ -63,8 +63,8 @@ Some linux usage experience.
   * **切换到编辑模式在复制粘贴文件**：按照1）vim 进入之后   按i（进入编辑模式）ctrl+c/v
 
 * 文件or 日志搜索（关键词匹配）：tail -f 
-  * 实时刷新日志：tail -f 文件名 | grep 关键词
-  * 实时刷新日志的最新100行：tail -100f 文件名 | grep 关键词
+  * 实时刷新日志：tail -f 文件名 \| grep 关键词
+  * 实时刷新日志的最新100行：tail -100f 文件名 \| grep 关键词
 
 * 传文件/文件夹: scp
   * 远程服务器上的文件复制到本机: scp root@ip:/path/ /localpath
@@ -75,7 +75,7 @@ Some linux usage experience.
 
 # 进程操作命令
 
-* 查看进程状态：ps -ef|grep 进程字段or文件名（eg: ps -ef|grep python3)
+* 查看进程状态：ps -ef\|grep 进程字段or文件名（eg: ps -ef|grep python3)
 
   执行后的参数说明例子：
 
@@ -104,20 +104,22 @@ Some linux usage experience.
 
 # 系统资源查看命令
 
-* 端口占用：netstat –anp|grep 端口号
+* 端口占用：netstat –anp\|grep 端口号
+* 端口是否已对外开放: netstat -ntulp | grep 端口号
+* 指定端口是否已开放：firewall-cmd –query-port=666/tcp（yes 已开启）
 * cpu信息：lscpu
 * linux 系统版本号：cat/proc/version
 * 服务器cpu数
-  * 物理CPU：cat /proc/cpuinfo|grep “physical id”|sort –u|wc –l
-  * 每个物理CPU中的核数：cat /proc/cpuinfo|grep “cpu cores”|uniq
-  * 逻辑cpu：cat /proc/cpuinfo|grep “processor”|wc -l
-  * Cpu名称型号：cat /proc/cpuinfo|grep “name”|cut –f2 –d:|uniq
+  * 物理CPU：cat /proc/cpuinfo\|grep “physical id”\|sort –u\|wc –l
+  * 每个物理CPU中的核数：cat /proc/cpuinfo\|grep “cpu cores”\|uniq
+  * 逻辑cpu：cat /proc/cpuinfo\|grep “processor”\|wc -l
+  * Cpu名称型号：cat /proc/cpuinfo\|grep “name”\|cut –f2 –d:\|uniq
 
 * 内存占用
 
   * 最大命令：free -h   【free -h -s 2 每2s自动执行一次该命令】
 
-  * 某个进程的内存占用：ps -aux|grep python3(进程名)
+  * 某个进程的内存占用：ps -aux\|grep python3(进程名)
 
   * 更详细的内存占比： cat /proc/进程号/status: VmRSS为进程所占用的内存
 
@@ -134,7 +136,11 @@ Some linux usage experience.
 
 ​         PS: df -h 没有发现大文件之后的查询思路：**lsof -n grep deleted**，找到对应进程号后杀掉[参考](https://www.cnblogs.com/muchengnanfeng/p/9554993.html)
 
-* 进程运行在哪个逻辑CPU上：ps -eo pid，args，psr |grep nginx
+* 进程运行在哪个逻辑CPU上：ps -eo pid，args，psr \|grep nginx
+* linux 下的python console 交互
+  * 查看当前python连接：ll /usr/bin/grep python
+  * 进入命令行模式：python3
+  * 退出命令行模式：ctrl+D
 
 # 网络相关命令
 
@@ -152,7 +158,83 @@ Some linux usage experience.
 
     查看traceroute 路径，丢包率，平均解析时延等，通过这条命令结合实际情况观察路径上的丢包情况等。
 
+* 网络是否通畅curl：curl ip
 
+  * 通过url执行上传或下载
+
+  * curl --h  查看help 文件命令执行方式。
+
+  * curl --k  跳过ssl 认证环节。
+
+  * curl –data-urlencode()  url 编码的数据
+
+  * curl url：port/path  查看当前路径内容。
+
+    使用示例
+
+  * curl –k https://ip:443
+
+* bgpdump：linux解析bgp报文命令，[安装步骤](https://blog.csdn.net/weixin_35708669/article/details/89442180)
+
+* iptable
+
+  ifconfig 确定网卡名称后
+
+  * 53的tcp 和 udp **重定向**到5053
+
+    iptables -t nat -A PREROUTING -i enp125s0f0 -p tcp --dport 53 -j REDIRECT --to-ports 5053
+
+    iptables -t nat -A PREROUTING -i enp125s0f0 -p udp --dport 53 -j REDIRECT --to-ports 5053
+
+  * 查看iptable 规则：iptables -t nat -L -v -n
+
+  * 删除某条规则
+
+    规则行号：iptables -t nat -L -n --line-numbers
+
+    根据num行号确定删除规则： iptables –t nat –D INPUT 第几条规则
+
+​              PS: 若报错iptables：index of deletion too big，则需要明确要删除的表（ iptables -t nat -D PREROUTING 第几条规则）
+
+* 防火墙操作
+
+  * 查看防火墙状态: systemctl status firewalled
+
+  * 开启防火墙：systemctl start firewalled // service firewalled start
+
+  * 关闭防火墙：systemctl stop firewalled
+
+    若遇到无法开启防火墙的情况
+
+  * 先 systemctl unmask firewalled.service
+
+  * 再 systemctl start firewalled.service
+
+* telent：telnet ip port
+
+# 其他命令
+
+## ssh 建隧道
+
+## 任务绑定CPU
+
+
+
+# 操作系统
+
+centos、debian等操作系统使用时遇到的问题记录
+
+## Debian 装GUI图形界面
+
+* sudo su –
+* 更新debian系统： apt update & apt –y upgrade
+* GNOME 使用一下命令安装桌面环境【耗时】：apt –y install task-gnome-desktop
+* 上一步完成后，分配graphical runlevel：systemctl set-default graphical.target
+* 默认情况通过GNOME 显示管理器GDM禁用root用户登录，去掉限制：
+  * vi /etc/pam.d/gdm-password
+  * 注释掉：# auth  required pam_succeed_if.so user !=root quite_success
+* 重启debian服务器：reboot
+* 参考：搜索“如何为debian11安装图形用户界面GUI"
 
 
 ------
