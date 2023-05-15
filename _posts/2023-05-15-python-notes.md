@@ -1,4 +1,4 @@
----
+<!-- ---
 title: 'python-notes'
 date: 2023-05-15
 permalink: /posts/2023/05/python-notes/
@@ -6,6 +6,11 @@ permalink: /posts/2023/05/python-notes/
   - cool posts
   - category1
   - category2 -->
+--- -->
+---
+title: "python-notes"
+excerpt: ""
+collection: posts
 ---
 # 开发相关
 
