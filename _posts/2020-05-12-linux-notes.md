@@ -309,6 +309,20 @@ centos、debian等操作系统使用时遇到的问题记录
 
   解决方案：更新yum源，[参考](https://zhuanlan.zhihu.com/p/430561706)
 
+## Linux
+
+### 安装虚拟机
+
+[参考](https://www.tecmint.com/install-vmware-workstation-in-linux/)
+
+* 下载vmware workstation [安装文件](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)
+
+* 上传到15对应目录 /root/vmware/
+
+* 修改权限否则报错: chmod a+x VMware…xx.boundle
+* 安装: **./VMwarexxxxx.boundle**
+* 启动vmware
+
 # 系统配置相关
 
 ## /etc/hosts/
@@ -342,7 +356,67 @@ centos、debian等操作系统使用时遇到的问题记录
 * cd 到脚本目录下后 执行 sh xxxx.sh
 * 使用脚本绝对路径：sh /DNS/XXX.sh
 * 增加权限后执行，cd到具体路径后：chmod +x ./test.sh #使脚本具有执行权限
-* 
+* 将shell 脚本作为解释器参数运行（这种运行方式，不需要在第一行指定解释器信息， #！/bin/bash 这个）eg： /bin/sh test.sh              /bin/php test.php
+
+## 脚本命令
+
+* \#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。
+* Shell 注释： 和python 一致，通过 # 注释
+* echo 命令： shell 脚本的字符串输出命令，eg ：echo "Hello World !"，显示和输出命令
+* shell字符串：单双引号，不用引号均可
+  * 单引号：单引号当中的所有字符都会原样输出，单引号字符串引变量无效
+  *  双引号：可以引变量，转义字符
+* shell变量定义：不加美元符号定义，可重复定义已定义变量。
+* 使用一个定义过的变量，只需要再其前面加美元符号即可： $
+* **只读变量** 添加关键词 readonly 将变量定义为只读变量，只读变量的值不能被改变
+* 脚本传参：执行shell 脚本向脚本传递参数，脚本内获取参数的格式： $n, n 为1个数字，1为执行脚本的第一次参数，2 为执行脚本的第二个参数
+
+# 其他
+
+## epoll 机制
+
+ Epoll 是linux内核为了处理大批量文件描述而作了改进的poll，是linux下多路复用IO接口select/poll的增强版本，能够显著提高程序在高并发连接中只有少量活跃的情况下的系统CPU利用率。
+
+* epoll的优点：
+  * 支持一个进程打开大数目的socket描述。Select的一个进程打开的FD由FD_SETSIZE来设定，epoll没有这个限制，它所支持的FD上限是最大可打开文件数目，远大于2048.
+  * IO效率不随FD数目增加而线性下降：由于epoll只会对“活跃”的socket进行操作，只有“活跃”的socket才会主动调用callback函数，其他idle状态的socket则不会。
+  * mmap加速内核与用户空间的消息传递。Epoll 是通过内核与用户空间mmap同存一块内存而实现的。
+
+## libev 机制
+
+* 提供指定文件描述符合事件发生时调用回调函数的机制。Libev是一个事件循环器：向libev
+
+* 注册事件，如socket可读事件，libev会对所注册的事件的源进行管理，并在事件发生时触发相应程序。
+
+* gevent 方法spawn了一些jobs，然后通过gevent.joinall 将jobs加入到微线程的执行队列中等待其完成，设置超时时间为2s。执行后的结果通过检查gevent.greenlet.value 值来收集。
+* Monket patching 的 python环境允许我们在运行时修改大部分对象，包括模块、类甚至函数。虽然这样做会产生“隐式副作用”，而且出现问题很难调试，但在需要修改python本身的基础行为时，monkey patching 就排上用场了。
+  * 通过monkey.patch_socket()方法，urllib2模块可以在多微线程环境，达到与gevent共同工作的目的。
+  * 事件循环：gevent和eventlet 类似，在一个greenlet中隐式循环。没有必须调用run() 或者dispatch() 的反应器（reactor），在wtisted中是有reactor的。当gevent的API函数想阻塞时，它获得Hub实例，并进行切换。
+  * 提供的事件循环默认使用系统最快轮询机制，设置LIBEV_FLAGS环境变量可指定轮询机制。LIBEV_FLAGS =1 为select，2为poll，4为epoll，8为kqueue。
+
+* Libev的API位于gevent,core下。注意libevAPI的回调在hub的greenlet上运行，因此使用同步greenlet的API，可以使用spawn() 和 event.set() 等异步API.
+
+
+
+## C10k问题—操作系统处理高并发请求的问题
+
+10 thousand clients problem
+
+* problem raiser：Dan Kegel
+
+* 技术层面定义c10k问题:设计不够良好的程序，其性能和连接数及机器的性能关系往往是非线性的。
+
+  Eg：基于selector的程序在旧的服务器上能处理1000并发的吞吐量，但在2倍性能服务器上无法处理2000并发的吞吐量。因为策略不当时，大量操作的消耗和当前连接数n线性相关（单个任务资源消耗和当前连接数的关系是O（n））当服务程序对数以万计的socket进行IO处理，积累下来的资源消耗会相当可观。
+
+* 问题本质: 操作系统的限制，传统同步阻塞IO模型处理方式都是requests per second，并发10k和100的关系区别在于CPU(创建的进程/线程多了，数据拷贝频繁-缓存IO,内核将数据拷贝到用户进程空间、阻塞；进程线程上下文切换消耗巨大，导致系统崩溃。
+
+  解决问题的关键：减少CPU等核心计算资源消耗，从而榨干单台服务器的性能。
+
+* 可能的解决方案: 每个进程、线程同时处理多个连接（IO多路复用）
+  * 循环挨个处理连接，每个连接一个socket，当所有socket都有数据的时候，这种方法可行，但当某个socket的数据不ready的时候，整个应用阻塞等待。【DNS就是这个问题】
+  * select 解决上面阻塞问题：在读取句柄之前，先查看确认状态，ready才进行处理。这样做的问题：小规模连接逐个检查句柄问题不大，大规模逐个检查状态就很慢。【selector 往往存在管理句柄上限。】
+  * poll 解决select 的前两个问题，通过一个pollfd 数组向内核传递需要关注的事件消除句柄上限，同时使用不同字段分别标注事件和发生事件，来避免重复初始化。
+  * epoll 解决逐个排查所有文件句柄状态效率不高的问题。假如调用返回的时候只给应用提供状态变化的文件句柄，就能提高排查效率。（当文件句柄数量达到10k的时候，epoll已经超过select 和 poll 两个数量级。）
 
 
 ------
