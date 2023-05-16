@@ -250,7 +250,19 @@ Some linux usage experience.
 
   0Xfffffffff      is all processors
 
-* 
+* 如何确定绑核成功
+
+  top命令 -> F -> last used CPU ->ESC ->退回正常top界面，就可以看到哪些进程泡在哪些核上，若lastCPU一直保持不动，则绑核成功。
+
+* Taskset 使用方法
+
+  通过该命令，可以将一个启动的进程直接绑定在某个核上运行。
+
+  * 命令格式taskset-cp cpu(cpu-list) pid
+
+    eg：taskset -cp 1(1-3) 1927 将进程号为1927的进程绑定在核1/1-3上
+
+  * taskset -h 查看具体参数说明
 
 # 操作系统
 
@@ -267,6 +279,70 @@ centos、debian等操作系统使用时遇到的问题记录
   * 注释掉：# auth  required pam_succeed_if.so user !=root quite_success
 * 重启debian服务器：reboot
 * 参考：搜索“如何为debian11安装图形用户界面GUI"
+
+## Centos
+
+### 修改最大链接数方法
+
+* 暂时修改：ulimit -n 100001 【服务器重启后失效】
+
+* 永久修改，[参考]( https://www.jianshu.com/p/1d3d368365bf)
+
+  * vim /etc/security/limits.conf：在文件end of file 之后加上
+
+    ```
+    * soft nofile 65535
+    * hard nofile 65535
+    * soft nproc 65535
+    * hard nproc 65535
+    ```
+
+  * ulimit -n： 查看确认最大链接数已被修改
+
+### 问题记录
+
+* centos yum 无法使用
+
+  解决方案：/etc/yum.repos.d/ 下Centos-Base.repo 无法正常使用，需更新yum源，[参考](https://zhuanlan.zhihu.com/p/430561706)
+
+* arm centos yum 无法正常使用---yum源只有x86
+
+  解决方案：更新yum源，[参考](https://zhuanlan.zhihu.com/p/430561706)
+
+# 系统配置相关
+
+## /etc/hosts/
+
+​      在通过服务器IP连接某个部署的文件或进程时，可直接使用IP 或 linux /etc/hosts/文件下写好的别名：
+
+```
+ vim /etc/hosts/
+ --------------------
+ ip 别名
+```
+
+## /dev/null
+
+* /dev/null 称为空设备，是一个特殊的设备文件，它将丢弃一切写入其中的数据（但报告写入成功），读取该文件会立即得到一个EOF。类似于一个黑洞，常用于丢弃不需要的输出流。使用这些操作通常由重定向完成。
+
+* 使用nohup 重定向的命令行方式： **nohup python3 new_main.py >/dev/null 2>&1 &**
+
+## /etc/resolv.conf
+
+若上述DNS配置文件无法解析DNS，则在**文件最后增加一个空格**：eg-- nameserver 8.8.8.8 
+
+# shell 脚本
+
+[参考内容](https://www.runoob.com/linux/linux-shell.html)
+
+在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 **#!/bin/sh**，它同样也可以改为 **#!/bin/bash**
+
+## 脚本运行
+
+* cd 到脚本目录下后 执行 sh xxxx.sh
+* 使用脚本绝对路径：sh /DNS/XXX.sh
+* 增加权限后执行，cd到具体路径后：chmod +x ./test.sh #使脚本具有执行权限
+* 
 
 
 ------
