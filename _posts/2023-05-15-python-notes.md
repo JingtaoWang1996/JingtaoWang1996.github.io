@@ -7,8 +7,7 @@ tags:
   - category1
   - category2
 ---
-
-python related contents.
+Some python usage experience.
 
 # 开发相关
 
