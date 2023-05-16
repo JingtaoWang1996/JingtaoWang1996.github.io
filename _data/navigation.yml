@@ -18,5 +18,5 @@ main:
   - title: "Lifes"
     url: /lifes/
     
-  - title: "Guide"
-    url: /markdown/
+#   - title: "Guide"
+#     url: /markdown/
