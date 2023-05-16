@@ -94,6 +94,70 @@ Some Java usage experience.
 
     构造函数的时候，通过this可以调用同一类中别的构造函数
 
+* 接口&实现
+
+  * 接口关键词：interface
+  * 实现关键词：implements
+  * 接口实现必须实现接口所有的方法，否则用abstract
+
+# 进阶方法
+
+## 单例模式
+
+避免java多次访问某个类时重复new该类增大消耗，[参考](https://www.runoob.com/design-pattern/singleton-pattern.html)
+
+## 序列化serialize
+
+* 处理对象流的机制，将对象的内容进行流化，将数据分解成字节流，便于存储或是在网络上进行传输。
+
+* Java 数据的存储形式都是对象，没有办法直接在网络中进行传输，所以需要序列化，且要求序列化可逆。【java 通过Serializable 接口进行实现】
+
+* 第三方序列化方式：FastJson、Json、Protobuff 序列化。
+
+​       PS: 静态statics 属性不会被序列化。
+
+## 克隆
+
+Java 直接复制只是复制索引，不能复制object，复制需要用clone来完成-**类似深浅拷贝**
+
+具体使用,[参考](https://baiyuliang.blog.csdn.net/article/details/109250816)：
+
+* class 中重写clone方法
+
+  ```java
+  public class Example implements Cloneable{
+     @override
+     public Object clone() throws CloneNotSupportedException{
+         return super.clone();
+     }
+  }
+  ```
+
+* 调用该类时，直接.clone()
+
+## 日志
+
+import下面两个jar包,然后直接在logger里面增加
+
+```Java
+// 引入slf4j接口的logger和loggerFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory;
+
+public class UserService{
+    //声明一个logger，statistc的方式
+    private final static Logger logger = LoggerFactory.getLogger(UserService.class);
+    public Boolean verifyLoginInfo(String name, String password){
+        logger.info(“start to verify aaaaaaa”);
+        return false;
+    }
+}
+```
+
+## XML接口文档
+
+* xml 负责数据的传输和存储，html 用来显示数据。Xml 是独立于软件、硬件的信息传输工具、
+
 # spring-boot
 
 [参考](https://baiyuliang.blog.csdn.net/article/details/109250816)
@@ -106,6 +170,89 @@ Some Java usage experience.
 
 上述内容选择好后直接generate，然后用开发工具打开
 
+## spring-boot项目结构 
+
+* 启动类：/src/main/java/com.cetc.项目名（公司域名.项目名），这个目录下为启动类
+* **/src/main/java/工程名称/Application class 为整个springboot文件主函数入口**
+* /src/test/下为测试类
+* pom.xml：maven 配置文件，所有springboot相关模块的引入
+* /src/main/resource/ application.properties：应用配置文件，比如项目名、数据库连接、redis连接等等，基本上所有的项目配置选项，都在这里配置；【可以用.yml 替换，yml注意缩进机制】
+
+## controller/service/dao/entity层
+
+* Controller层：控制业务层Service，主要是建立与外界业务沟通，前端调用接口访问相关业务都会通过controller，由controller调用相关业务层代码并把数据返回给前端
+
+  * [两种写法](https://baiyuliang.blog.csdn.net/article/details/109254387)
+
+  ​      @Controller+@RequestMapping+@ResponseBody
+
+  ​      @RestController+@GetMapping(PostMapping,PutMapping 方式)
+
+  * @Controller & @RestController
+
+  ​       如果使用**@Controller** **就必须指明方法中的返回数据类型**，如@ResponseBody。可以返回指定数据格式的数据，也可以返回具体网页路径。
+
+  ​       @RestController 只能返回json等固定格式数据，不能再返回html等页面
+
+  ​       @RestController = @Controller+@ResponseBody组合（注解如上右图）
+
+  ​      说明：
+
+  ​      * 不管是上述两种哪一种，均在Contorller类当中新增具体的方法作为接口，和service层交互。
+
+  ​      * 在为前端写端口时，常用@Restcontroller
+
+   **@RequestMapping**
+
+  实际开发过程中，经常划分业务模块，因为在书写controller时，会为controller里所有方法定义一个父级RequestMapping，如下图的 /test 模块，项目当中是API模块，
+
+  ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image008.jpg)
+
+* Service层：业务层/服务层，所有内部的业务逻辑，都在service层，比如：用户增删改查、验证码等等，业务层由数据进行支持，实现controller的所有接口
+
+* Dao层：数据库持久化层，与数据库交互，常用框架：JPA（springboot官方）、MyBatis
+
+    --- 项目复杂程度一般、追求稳定、迭代速率低（JPA）
+
+    --- 项目复杂、需求变更频繁，迭代速度快（mybatis）
+
+* controller不允许直接操作数据库，只能和service交互, 中间转发者，不在controller暴露service层逻辑，直接return service处理结果
+
+* 一个controller对应一个service，一个service对应一个Dao；复杂情况，一个controller可以调用多个Service
+
+* controller层、service层均不允许互调
+
+## spring-boot项目运行
+
+ 运行成功log信息会提示tomcat 版本号和端口号，然后浏览器输入： http：//localhost:8080/
+
+## swagger调试
+
+前后端接口联调，登录配置好的swagger接口测试界面后，找到对应接口发送输入数据测试后端controller.
+
+* localhost:8081/doc.html
+
+* 每次调试都需要重新运行application class启动整个springboot项目进行调试,如果有报错，则一定会同步执行
+
+## 注解说明
+
+* 所有注解格式：@xxxxx
+
+* @Getmapping & @Postmapping
+
+  * Getmapping:查询操作
+  * PostMapping: 新增、编辑、删除等内容修改操作
+
+* @RequestBody
+
+  将前端传来的json格式的数据转为自己定义好的javaBean 对象，需要注意的是传入数据的属性名称要和后端javabean中定义的一致，发送请求后可以看到通过javabean对象的get方法打印出了前端传来的值
+
+## 前后端联调
+
+* F12, google 浏览器查看传参情况，调用具体接口的情况
+
+​       F12->network ->看具体请求接口的header（参数）、payload、response
+
 # IJ
 
 打jar包
@@ -114,11 +261,11 @@ Some Java usage experience.
 
 * profiles 简介：maven 当中的profiles 表示不同的运行环境
 
-<img src="./img/profiles例子.png" alt="profiles例子"  />
+
 
 对应pom文件中profiles的相关配置
 
-<img src="./img/pom对应的profiles配置.png" alt="pom对应的profiles配置" style="zoom:67%;" />
+<img src="/img/pom对应的profiles配置.png" alt="pom对应的profiles配置" style="zoom:67%;" />
 
 ![pom对应的profiles配置2](./img/pom对应的profiles配置2.png)
 
@@ -187,11 +334,39 @@ Some Java usage experience.
 
   ![jar2](./img/jar2.png)
 
-## 问题记录
+# 问题记录
 
 * 报错：ij报缺少某个类，但实际文件是存在的
 
   解决方案：file->reload from sdk
+
+* 报错：java环境变量后不生效的问题
+
+  解决方案：[参考](https://www.runoob.com/java/java-environment-setup.html)
+
+  * cmd 后where java
+  * 删除最上面默认位置的文件
+  * java -version 验证
+
+* 报错：idea标红无法识别
+
+  解决方案：首先考虑[pom文件是否添加依赖](https://blog.csdn.net/xiaojutu/article/details/118218123),网上搜索dependency添加到pom.xml 之后import
+
+* 报错：@Getmapping not applicable to type
+
+  解决方案：@Getmapping的注解是加在方法上面，而不是class类上面
+
+* 报错：Cannot resolve symbol xxxxxxx)springframework
+
+  解决方案：大概率是maven没有配置或加载好，去pom.xml 当中右键标红的地方->maven->reload project & generate source
+
+* 报错：不支持发行版本5
+
+  解决方案：IJ当中file->project Structure->查看project & Modules的版本是否与本地一致,若不一致，对应修改为本地的11
+
+
+
+
 
 
 ------
