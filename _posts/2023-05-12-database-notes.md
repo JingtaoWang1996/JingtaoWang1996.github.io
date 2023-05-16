@@ -138,7 +138,7 @@ RDMS 基本概念
 
 * 参照完整性：参照的完整性要求关系**中不允许引用不存在的实体**，与实体的完整性是关系模型必须满足的完整性约束条件，目的是保证数据一致性。
 
-  ![mysql示例图](./img/mysql示例图.png)
+  ![mysql示例图](https://github.com/JingtaoWang1996/JingtaoWang1996.github.io/tree/master/_posts/img/mysql示例图.png)
 
  例子如图：
 
