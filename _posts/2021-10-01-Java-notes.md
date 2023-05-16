@@ -169,11 +169,11 @@ Some Java usage experience.
 
   * IJ中，ctrl +alt+shift+s，进入下图界面，点击+号
 
-    ![jar1-1](./img/jar1-1.png)
+    ![jar1-1](/img/jar1-1.png)
 
   * 进入路径设置
 
-    ![jar1-2](./img/jar1-2.png)
+    ![jar1-2](/img/jar1-2.png)
 
   * 设置入口函数和jar包位置
 
