@@ -166,7 +166,7 @@ public class UserService{
 
 官方推荐：[参考](https://start.spring.io/)
 
-<img src="./img/springboot创建示例.png" alt="springboot创建示例" style="zoom: 67%;" />
+<img src='/images/img/springboot创建示例.png'>
 
 上述内容选择好后直接generate，然后用开发工具打开
 
@@ -259,15 +259,10 @@ public class UserService{
 
 ## Maven project
 
-* profiles 简介：maven 当中的profiles 表示不同的运行环境
+* profiles 简介：maven 当中的profiles 表示不同的运行环境,对应pom文件中profiles的相关配置
 
-
-
-对应pom文件中profiles的相关配置
-
-<img src="/img/pom对应的profiles配置.png" alt="pom对应的profiles配置" style="zoom:67%;" />
-
-![pom对应的profiles配置2](./img/pom对应的profiles配置2.png)
+<img src='/images/img/pom对应的profiles配置.png'>
+<img src='/images/img/pom对应的profiles配置2.png'>
 
 ## pom文件详细说明
 
@@ -316,11 +311,11 @@ public class UserService{
 
   * IJ中，ctrl +alt+shift+s，进入下图界面，点击+号
 
-    ![jar1-1](./img/jar1-1.png)
+    <img src='/images/img/jar1-1.png'>
 
   * 进入路径设置
-
-    ![jar1-2](./img/jar1-2.png)
+     
+    <img src='/images/img/jar1-2.png'>
 
   * 设置入口函数和jar包位置
 
@@ -331,8 +326,8 @@ public class UserService{
   * 找到jar包位置，传入服务器进行后续操作
 
 * 方法2：右侧maven-packages
-
-  ![jar2](./img/jar2.png)
+  
+  <img src='/images/img/jar2.png'>
 
 # 问题记录
 
