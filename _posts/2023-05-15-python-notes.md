@@ -571,7 +571,7 @@ Run -> Edit Configurations -> 勾选Allow parallel run前面的框 [示例见下
 
 Run -> Edit Configurations -> 选择脚本后，右侧“parameters“ 中添加参数
 
-![pycharm运行参数配置图](./img/pycharm运行参数配置图.png)
+<img src='/images/img/pycharm运行参数配置图.png'>
 
 ## pycharm中修改源码库
 
@@ -739,8 +739,7 @@ b = json.dumps(a) # b={'a':'aaaa'}
 * 树状数组的构建 --- 比正常数组多一个下标0,因此第一个0不用。
 
   利用“二进制”进行分段。树状结构大致如下：
-
-  <img src="./img/树状数组实例图.png" alt="树状数组实例图" style="zoom:80%;" />
+  <img src='/images/img/树状数组实例图.png' alt="树状数组实例图" style="zoom:80%;" />
 
    例: 求前11项的和
 
@@ -749,8 +748,8 @@ b = json.dumps(a) # b={'a':'aaaa'}
      2）Step2：前11项的和转化为 (0000，1000],(1000,1010],(1010,1011]
 
      3）对上述三个区间求和，三个区间的由来：不断去掉最右边的1改为0
-
-  <img src="./img/树状数组实例区间图.png" alt="树状数组实例区间图" style="zoom:80%;" />
+  
+  <img src='/images/img/树状数组实例区间图.png' alt="树状数组实例区间图" style="zoom:80%;" />
 
   ​    **Ps:** 前8项的和可以参照上图，(0000，0100],(0100,0110],(0110,0111]
 
@@ -791,8 +790,8 @@ b = json.dumps(a) # b={'a':'aaaa'}
   * 例子：以二进制数100110 为例
 
   ​       (100100,100110] 最小区间；（100000，1010000] （100000，110000] （000000，100000]； 为lowbit的较大范围区间，如下图：**左边为****lowbit计算方式**，**右边为每次加上lowbit后进位**, 这样更新区间不会超过log（maxN），能够以O（logN）进行查询的和修改的数据结构便完成了。
-
-  <img src="./img/树状数组更新示例.png" alt="树状数组更新示例" style="zoom:50%;" />
+  
+   <img src='/images/img/树状数组更新示例.png' alt="树状数组更新示例" style="zoom:50%;" />
 
 ## 前缀树Trie
 
@@ -813,8 +812,8 @@ b = json.dumps(a) # b={'a':'aaaa'}
   * 每个节点的所有子节点包含字符不相同（都含有26个可能的子节点表示26个字母）
 
 * 前缀树例子:假设有b,abc,bcd,abcd,efg,hii 6个单词创建就得到下述前缀树
-
-  <img src="./img/前缀树例子.png" alt="前缀树例子" style="zoom: 80%;" />
+  
+  <img src='/images/img/前缀树例子.png' alt="前缀树例子" style="zoom:80%;" />
 
 * 实现步骤
 
