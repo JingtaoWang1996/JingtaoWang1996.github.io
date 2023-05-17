@@ -153,8 +153,8 @@ Some linux usage experience.
 * mtr命令：（ping+traceroute)
 
   * 命令格式：mtr ip
-
-    ![mtr示例](./img/mtr示例.png)
+    
+    <img src='/images/img/mtr示例.png'>
 
     查看traceroute 路径，丢包率，平均解析时延等，通过这条命令结合实际情况观察路径上的丢包情况等。
 
