@@ -580,6 +580,61 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * 报错信息：“msg“: “Invalid/incorrect password: Permission denied, please try again.“，[参考](https://blog.51cto.com/u_15233520/5222515)
   解决方案：若提示密码错误，则将密码加双引号
 
+# logstash
+
+[官网](https://www.elastic.co/cn/logstash/) 
+
+免费且开放的服务器端数据处理管道，能够从多个来源采集数据，转换数据、然后存库
+
+## 搭建
+
+Elasticsearch是当前主流的分布式大数据存储和搜索引擎，可以为用户提供强大的全文本检索能力，广泛应用于日志检索，全站搜索等领域。Logstash作为Elasicsearch常用的实时数据采集引擎，可以采集来自不同数据源的数据，并对数据进行处理后输出到多种输出源，是Elastic Stack 的[重要组成部分](https://cloud.tencent.com/developer/article/1549890)
+
+* [下载安装](https://cloud.tencent.com/developer/article/1549890)
+* 架构：基于logstash构建的日志收集处理体系是基于消息的，整个系统由4个组件组成。
+  * shipper 搬运者，将事件发送到logstash，一般来说在应用服务所在的机器上只需要部署改组件。
+  * broker and indexer 收集事件并进行处理，完成数据过滤，数据格式化等，然后传输到制定存储系统或者本地数据持久化。【一般由logstash担当】
+  * search & storage 用于存储和搜索事件。
+  * web interface 网络接口，通过web界面向用户展示数据。
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image002.jpg)
+
+Logstash 一般当做indexer 和 broker。
+
+Logstash 当做shipper则是自收自发的模式，**tpot standard****模式**
+
+Logstash 只收，ssh定时传数据到制定
+
+# flink
+
+## 安装配置
+
+* 最新稳定版：1.11.2
+
+* [maven 依赖](https://flink.apache.org/zh/downloads.html)
+
+  ```
+  <dependency>
+   <groupId>org.apache.flink</groupId>
+   <artifactId>flink-java</artifactId>
+   <version>1.11.2</version>
+  </dependency>
+  <dependency>
+   <groupId>org.apache.flink</groupId>
+   <artifactId>flink-streaming-java_2.11</artifactId>
+   <version>1.11.2</version>
+  </dependency>
+  <dependency>
+   <groupId>org.apache.flink</groupId>
+   <artifactId>flink-clients_2.11</artifactId>
+   <version>1.11.2</version>
+  </dependency>
+  ```
+
+  
+
+
+
 
 ------
 
