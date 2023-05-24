@@ -387,6 +387,23 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * Connection to node -1 (/127.0.0.1:9092) could not be established. Broker may not be available
   * kafka server 配置 & kafka 服务是否还在正常运行
 
+# Zookeeper
+
+[官网](https://zookeeper.apache.org/)
+
+## 概述
+
+* 分布式应用程序中心/协调服务，提供的功能包括: 配置维护、分布式同步、组服务等。
+* 目标：封装好复杂易出错的关键服务，将接口、性能高效、功能稳定的系统提供给用户。
+* 提供JAVA 和C接口，代码版本提供了分布式独享锁、选举、队列接口（选举只有JAVA版本）
+
+## 安装配置
+
+* [官网下载](https://zookeeper.apache.org/releases.html)，注意选择stable版本
+* 单机启动：参见kafka linux 安装配置步骤
+* 集群启动: 【待测试】
+* [可视化客户端配置]([https://issues.apache.org/jira/secure/attachment/12436620/ZooInspector.zip](https://links.jianshu.com/go?to=https%3A%2F%2Fissues.apache.org%2Fjira%2Fsecure%2Fattachment%2F12436620%2FZooInspector.zip)) 解压后进入build目录执行命令：java -jar zookeeper-dev-ZooInspector.jar
+
 # Postman
 
 [官网及下载](https://www.postman.com/)
@@ -415,6 +432,153 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * 停止 nginx：
   * 快速停止：nginx –s stop
   * 正常退出nginx –s quit 
+
+# supervisor 
+
+基于python的自动化运维工具，[参见](https://www.cnblogs.com/zhoujinyi/p/6073705.html)
+
+## 安装配置
+
+* 命令安装： easy_install supervisor  |  pip install supervisor |  apt-get install supervisor
+* supervisor配置文件：/etc/supervisor/supervisord.conf
+  * supervisor 不会直接跟系统的句柄数修改，需要修改配置文件中的minfds 参数，[参见](https://www.jianshu.com/p/56e278f2fb7d)
+  * supervisor 本身的日志路径也在这个文件中
+* 服务管理的配置文件: /etc/supervisor/conf.d/*.conf
+  * 根据需要将自动监控的服务仿照上述路径下最开始的.conf文件作为扩展名
+  * 根据示例文件配置好：命令、参数、**日志路径**等等
+
+## 运行启动
+
+* 修改或更新配置后需先运行：supervisorctl update（出现 dnspython: add to group xxxx 表示dnspython 添加成功并开始运行）
+* supervisorctl restart/start/stop xxxxx：重启、启动、停止xxxx任务
+* supervisorctl status：确认运行状态
+
+# Ansible--批量运维工具
+
+* 自动化运维工具：批量系统配置、批量程序部署、批量运行命令等
+
+* 基于paramiko开发，本身没有批量部署的能力，基于ssh和远程通讯完成。
+* 只需要在**主控端部署ansible环境**，被控机器无需任何操作，默认使用ssh 对设备进行管理。
+* 基于playbook(.yml文件格式)定义部署方式
+
+## 安装配置
+
+* pip3 install ansible
+
+* yum install epel-release -y & yum install ansible –y
+
+* 安装目录
+
+  * 配置文件目录：/etc/ansible/
+  * 执行文件目录：/usr/bin/
+  * Lib库依赖目录：/usr/lib/pythonX.X/site-packages/ansible/
+  * Help文档目录：/usr/share/doc/ansible-X.X.X/ 
+  * Man文档目录：/usr/share/man/man1/
+
+* 配置文件：【需从多个地方查找配置文件】
+
+  * 检查环境变量 ANSIBLE_CONFIG 指向的路径文件：export ANSIBLE_CONFIG=/etc/ansible.cfg；
+  * ~/.ansible.cfg，检查当前目录下的ansible.cfg配置文件；
+  * /etc/ansible.cfg检查etc目录的配置文件；
+  *  /etc/ansible/ansible.cfg or(/etc/ansible/ansible/ansible.cfg 常见参数配置：
+
+  ```
+  inventory = /etc/ansible/hosts		#这个参数表示资源清单inventory文件的位置
+  library = /usr/share/ansible		#指向存放Ansible模块的目录，支持多个目录方式，用冒号隔开
+  forks = 5		#并发连接数，默认为5
+  sudo_user = root		#设置默认执行命令的用户
+  remote_port = 22		#指定连接被管节点的管理端口，默认为22端口，建议修改，能够更加安全
+  host_key_checking = False	#是否检查SSH主机的密钥，True/False。关闭后第一次连接不会提示配置实例
+  timeout = 60		#设置SSH连接的超时时间，单位为秒
+  log_path = /var/log/ansible.log		#指定一个存储ansible日志的文件（默认不记录日志）
+  ```
+
+## hosts 文件配置
+
+* hosts 文件用于配置被控节点主机列表，包含：ip、密码、用户名、所属操作部分等
+
+* 文件位置（常见路径）：/etc/ansible/hosts/ 
+
+* 基本定义方式如下：
+
+  ```
+  [active] # 组名1,下面是具体主机的ip列表,默认通过ssh连接
+  192.168.253.159
+  192.168.253.160
+  
+  [all] # 至少需要ip,本组第一个为包含hostname、user、密码的全部情况
+  33.22.11.22 hostname=node1 ip=33.22.11.22 ansible_ssh_user=root ansible_ssh_pass=xxxx
+  4.5.6.7 hostname=node1 ansible_ssh_user=root
+  ```
+
+## ansible 相关命令
+
+在hosts文件所属路径下，[参考](https://www.cnblogs.com/amber-liu/p/10403512.html)
+
+* **批量执行命令**（如dig）：**ansible -i hosts_all all -m shell -a “dig cn. ns @2001:dc7:9d0e::3”**
+
+  命令格式： ansible -i <hosts文件名><hosts文件里面需要执行命令的group> -m shell -a <执行的shell命令>
+
+  在ansible 配置了具体文件的路径下执行ansible脚本
+
+  * 单个文件分发： ansible -i hosts_24 active -m copy -a "src=./控制节点文件路径 dest=目标服务器路径"
+
+  ​       src：要分发文件的路径，dest：目标目录，具体服务器在ansible配置文件中进行了配置
+
+  * 配置的具体目录下执行下述目录supervisor 启动
+
+  ​       ansible -i hosts_24 active -m shell -a "ansible kafka -m shell -a 'supervisorctl restart dnspython'
+
+命令集：
+
+* **/usr/bin/ansible　　Ansibe AD-Hoc 临时命令执行工具，常用于临时命令的执行**
+* /usr/bin/ansible-doc 　　Ansible 模块功能查看工具
+* /usr/bin/ansible-galaxy　　下载/上传优秀代码或Roles模块 的官网平台，基于网络的
+* **/usr/bin/ansible-playbook　　Ansible 定制自动化的任务集编排工具**
+* /usr/bin/ansible-pull　　Ansible远程执行命令的工具，拉取配置而非推送配置（使用较少，海量机器时使用，对运维的架构能力要求较高）
+* /usr/bin/ansible-vault　　Ansible 文件加密工具
+* /usr/bin/ansible-console　基于Linux Consoble界面可与用户交互的命令执行工具
+* ansible-doc -l                  #获取全部模块的信息
+* ansible-doc -s MOD_NAME       #获取指定模块的使用帮助
+
+## 常用模块
+
+* 主机连通性测试：ansible web -m ping (ping字段返回值为pong则说明正常联通)
+
+* shell 模块：支持在被控节点调用shell解释器运行命令：ansible web -m shell -a “具体的shell命令”
+
+* command模块：被控主机执行命令，并返回结果：ansible web -m command -a "具体命令"
+
+* copy模块：将文件复制到远程主机，同时支持给定内容生成文件和修改权限，其相关选项如下：
+
+  * src：被复制到远程主机的本地文件。可以是绝对路径，也可以是相对路径。如果路径是一个目录，则会递归复制，用法类似于"rsync"
+  * content：#用于替换"src"，可以直接指定文件的值
+  * dest：#必选项，将源文件复制到的远程主机的绝对路径
+  * backup：#当文件内容发生改变后，在覆盖之前把源文件备份，备份文件包含时间信息
+  * directory_mode：#递归设定目录的权限，默认为系统默认权限
+  * force：#当目标主机包含该文件，但内容不同时，设为"yes"，表示强制覆盖；设为"no"，表示目标主机的目标位置不存在该文件才复制。默认为"yes"
+  * others：#所有的 file 模块中的选项可以在这里使用
+    * eg1: 复制文件  # ansible web -m copy -a 'src=~/hello dest=/data/hello'
+    * eg2： 给定内容并生成文件：# ansible web -m copy -a 'content="I am keer\n" dest=/data/name mode=666'
+
+* ### ansible 批量更新脚本
+
+  1、 在ansible 配置了具体文件的路径下执行ansible脚本
+
+  2、 单个脚本分发
+
+  ansible -i hosts_24 active -m copy -a "src=./combDataUpdateFromRedis0526.py dest=/DNS/activeDNS/combDataUpdateFromRedis0526.py"
+
+  src：要分发文件的路径，dest：目标目录，具体服务器在ansible配置文件中进行了配置
+
+  3、配置的具体目录下执行下述目录supervisor 启动
+
+  ansible -i hosts_24 active -m shell -a "ansible kafka -m shell -a 'supervisorctl restart dnspython'
+
+## 问题记录
+
+* 报错信息：“msg“: “Invalid/incorrect password: Permission denied, please try again.“，[参考](https://blog.51cto.com/u_15233520/5222515)
+  解决方案：若提示密码错误，则将密码加双引号
 
 
 ------
