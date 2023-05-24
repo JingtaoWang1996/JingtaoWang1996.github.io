@@ -215,12 +215,6 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
   4、Service下面定义的container只能docker-compose 命令使用，docker命令只能docker ps进行查看。
   ```
 
-  
-
-
-
-
-
 ## 其他相关命令
 
 * 获取容器Id/名称：docker ps -a
@@ -273,9 +267,154 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 
 # kafka
 
+## 概述
+
+* 消息系统：将数据从一个应用传递到另一个应用，只关注数据，不关注具体如何传递。常见两种模式：
+
+  * **点对点发模式**：消息持久化到某个队列中，可以包含优先级，每个数据被消费1次
+  * **发布订阅模式**（大部分系统、kafka采用的方式）：类似kafka通过topic进行消费，
+
+* Kafka 是一个分布式，分区，多副本，多订阅者，**基于zookeeper** 协调的分布式消息系统
+
+* 设计目标：以时间复杂度为O（1）的方式提供消息持久化能力；高吞吐率；**支持消息分区，分布式消费，同时保证每个partition** **内消息顺序传输**；数据离线和实时处理；
+
+* 优点
+
+  * 解耦：消息中间件，将消息生产者部分和消费者部分的代码逻辑相互解耦。
+  * 冗余：partition之间有备份，在消息完全处理完值钱。
+  * 扩展性：在网络开销等方面允许的情况下，增加消费者、生产者提高吞吐量。
+  * 并发性+异步处理：多个消费者同时消费多个partition+允许用户将消息存入队列，需要时在处理。
+  * 顺序性+缓冲：**充当系统中耗时不同任务的缓冲层用于处理任务。**
+
+* 缺点
+
+* 相关定义
+
+  * broker： kafka集群中包含一个或多个服务器，服务器节点称为 broker，broker 存储topic当中的数据。
+  * topic：消息逻辑存储参数
+  * partition：一个topic包含多个分区用于存储信息，便于多个消费者对应消费。
+
+* 消息存储方式：
+
+  * 硬盘顺序写入的方式来存储文件。
+
+  * 内存映射: 即使顺序写入，硬盘的访问速度还是更不上内存。所以kafka的数据并不是实时写入硬盘，而是通过分页存储来利用内存提高I/O 效率。
+
+## linux 安装配置步骤
+
+以22安装单节点为例,[参考](https://www.cnblogs.com/biehongli/p/10216309.html)
+
+* 下载kafka[安装包](https://kafka.apache.org/downloads), 选择  binary download
+
+* 解压文件：tar -xzf xxx.tgz
+
+* vim ./config/server.properties, 放开这一行
+
+  ```
+  listeners=PLAINTEXT://localhost:9092
+  ```
+
+* 先后台启动zk: nohup ./bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1
+
+* 在ps 确定zk启动的基础上，基于server.properties 启动kafka:
+
+  * nohup ./bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
+
+  * ps -ef|grep kafka 
+
+* 
+
+## producer 参数调优
+
+除去必要的：kafka配置、参数值、topic等，其他可能影响kafka发送效率的可调整参数：
+
+* batch_size: 默认16KB，积累到一个batch的数据量后统一发送
+* linger_ms: 发送延迟，单位ms. 当缓存空间中达到batch_size 和 linger_ms 任意一个之后就发送。
+* compression_type: 数据压缩方式，lz4>snappy>gzip（发1w条，加了压缩参数后用时从 2.7s降到0.67s
+
+## consumer 参数调优
+
+必传参数
+
+*  bootstrap_servers=dns_conf.hosts, # Kafka服务器的地址和端口
+* group_id=dns_conf.consumer_group_id, # 消费者组标识符
+
+可选参数
+
+* value_deserializer=lambda x: x.decode('utf-8'), # str类消费者消息能够直接decode
+
+性能参数
+
+* max_poll_records=5000, # 一次poll能获取的最大数据量
+* max_poll_interval_ms= 300000 # 控制消费者两次拉取时间的最大轮训间隔，**若在这个时间段内没有消费到任何消息，就会任务失去了心跳链接，触发重平衡过程**，默认5min【控制连接问题】
+
+​       PS: 若max.poll.records 在这个interval_ms时间内没有完成，就会触发rebalance
+
+* fetch_max_wait_ms=5, # 每多少ms拉去一次数据，默认500ms，往小调能够增加拉取频率，提高消费效率
+
+* fetch_max_bytes=10485760, # 设置每次拉取的最大数据量为 100MB，server端可返回给consumer的大小
+
+* max_partition_fetch_bytes=5242880 # 设置单个分区的最大数据量5MB=1024*1024*5
+
+## 操作命令
+
+cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](https://blog.csdn.net/ytp552200ytp/article/details/119914474)
+
+* **查看当前存在的所有消费组**：./bin/kafka-consumer-groups.sh -bootstrap-server localhost:9092 --list
+* **查看某个消费组消费状态及lag**：./bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group 消费组名称 --describe
+* 命令消费数据：
+  * **从头手动消费kafka数据**：./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic名称 -from-beginning
+  * **手动消费数据**：./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic名称
+* topic 相关类：
+  * **创建topic**：./bin/kafka-topics.sh --create --zookeeper localhost:2181 --topic test --partitions 1 --replication-factor 1
+  * **查看topic list**：./bin/kafka-topics.sh --list --zookeeper localhost:2181
+  * **删除topic**：./bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic名称
+  * **查看topic 分区**：./bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic topic 名称
+* producer 压力测试：./bin/kafka-producer-perf-test.sh  --topic test --record-size 500 --num-records 100000 --throughput -1 --producer-props bootstrap.servers=localhost:9092
+
+## 问题记录
+
+* kafka producer 生产者不断发送的过程中，如果延迟过小，则容易产生丢包的情况。Linger_ms 参数需要正常设置。 同时，kafka 丢包问题还可能因为代码运行时间不够，导致丢包情况。
+
+* Linux kafka python 包当中Producer 需要放在脚本内部调用，放在全局变量的位置容易产生 producer 无法发包的情况。
+
+* **No brokers available**: 最大可能的原因---/etc/hosts 文件当中的 IP 和别名对应关系不对：要么是别名被修改【这个是最大的可能】or kafka挂了
+
+* 启动kfk命令之后，报错：configured broker id 0 doesn't match stored broker id 2 in meta.properties
+
+​      解决方法：根据报错修改Server.properties 里面的broker.id 和zk当中的不一致
+
+* Connection to node -1 (/127.0.0.1:9092) could not be established. Broker may not be available
+  * kafka server 配置 & kafka 服务是否还在正常运行
+
 # Postman
 
+[官网及下载](https://www.postman.com/)
+
+* **接口测试转发工具，可以模拟用户发起各类HTTP**请求，将请求数据发送到服务端，获取对应的响应结果。[get、post、delete、put类请求]
+* Postman 与浏览器的区别在于浏览器不能输出Json格式，而postman可以更直观看到接口返回结果。
+
 # Nignx
+
+* 高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。
+* 内存占有率小、并发能力强、可在大多数Linux上编译运行，同时也是优秀的邮件代理服务器。
+
+## 安装配置
+
+* 下载对应版本的压缩包 D:\173\nginx-1.22.1\：
+* nginx 相关配置
+  * 配置文件：conf 目录下的nginx.conf
+  * 默认监听端口：80
+  * 查看端口是否被占用：netstat –ano| findstr 0.0.0.0：80
+
+* 启动nginx：
+  * 运行 nginx.exe, 黑色弹窗一闪而过就完成了
+  * win+R 切到nginx 目录后 start nginx
+  * 查看nginx 是否成功启动：浏览器输入: localhost：80
+
+* 停止 nginx：
+  * 快速停止：nginx –s stop
+  * 正常退出nginx –s quit 
 
 
 ------
