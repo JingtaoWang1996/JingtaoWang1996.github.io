@@ -161,6 +161,47 @@ from sklearn.naive_bayes import GaussianNB,BernoulliNB,MultinomialNB
 
 * 时序模型一般情况不使用dropout，因为RNN存在累乘效应，使用dropout会破坏学习过程。需要使用的话只能在RNN or LSTM之外使用。
 
+# Markov Model
+
+* 一阶马尔科夫假设（First order markov assumptions）：**N 时刻的观测值仅依赖于N-1时刻的观测值**
+  $$
+  p(x_n|x_{n-1},x_{n-2},...,x_1,x_0) = p(x_n|x_{n-1})
+  $$
+
+* 转移概率：从状态Si到Sj的概率
+  $$
+  a_{i,j} =p(x_n=S_j|x_{n-1}=S_i)
+  $$
+
+* 时不变性：
+  $$
+  p(x_n=S_j|x_{n-1}=S_i)=p(x_{n+T}=S_j|x_{n-1+T}=S_i)
+  $$
+
+## 隐马尔科夫模型HMM
+
+统计模型，用来描述一个含有隐含未知参数的马尔科夫过程，难点在于如何从可观察的参数中确定隐含参数。
+
+* 问题模型：假设有一个人被锁房间里很多天，但想知道外面的天气是什么。他猜测天气的唯一途径是看每天来照顾他的人有没有带伞。
+  * 观察状态（observed state）={带伞、不带伞}
+  * 隐含状态（hidden state） = {晴、雨}
+  * 由hidden state 得到的observed state 是可观察的，需要通过倒推来确认状态
+  * 能够解决的问题：已知初始化模型a = {A,B,prob},观测序列： 1）计算某个序列出现的概率；2）已知观测序列，求最可能的hidden state
+
+# 生成模型
+
+遇到过的生成模型包括：GAN、AutoEncoder、VAE 等。
+
+## GPT: generative pre-Training Model
+
+[参考](https://paperswithcode.com/method/gpt)
+
+* A Transformer-based architecture and training procedure for NLP.
+* 1st stage procedure: using unlabeled data to learn the initial parameters of network model.
+* 2nd stage producre: adapt these parameters to a corresponding supervised task.
+* 无标签文本语料很丰富，但可以通过无标签文本训练出一个“通用语言模型”，再使用**特定任务**的有标签语料数据进行迁移学习，GPT模型在12个任务中的9个都实现了SOTA的效果，且个别任务效果提升明显。
+* 预训练使用语言模型LanguageModel的训练方式，模型使用的是transformer变体，多层transformer-decoder，
+
 # 其他
 
 ## 回溯
@@ -237,11 +278,12 @@ attention [mechanism/model](https://blog.csdn.net/qq_40027052/article/details/78
 
   * 注意力机制将当前固定1中间值修改为权重变化占比。示例如下
 
-    !<img src='/images/img/git命令行操作图1.png'>
+    <img src='/images/img/注意力机制翻译权重示例.png'>
 
 ## 特征工程
 
-* 模型外部的注意力机制：将原始数据、信号转化为数值向量，在数据科学中
+* 模型外部的注意力机制：将原始数据、信号转化为数值向量，在数据科学中，帮助模型有效选取适当的特征，进而完成任务。
+* 良好的特征工程需要特征工程师对任务内容有一定了解，才能更好的进行特征选取。
 
 
 
