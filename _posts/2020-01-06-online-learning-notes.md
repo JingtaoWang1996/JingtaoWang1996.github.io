@@ -130,9 +130,38 @@ Online learning notes：coursera, etc.
 
 梯度下降训练过程，存在：cost function 下降，但最终prediction不理想的情况，此时适合采用gradient checking 来确保梯度下降算法正确，确认正确后，具体训练迭代时关闭检验部分。
 
-```python
+<img src='/images/img/梯度检验示例图.jpg'>
 
-```
+* 仅用于验证梯度下降算法参数等是否正确，**正式训练时需要关闭gradient checking，因为很占据计算资源**。
+
+## 其他
+
+* 模型优化方向：列出可行操作后，论证选择最可行的方向进行优化
+
+* 优化之前可以先做一个demo测试，进一步论证方向是否可行：同样需要开发、验证、测试三集合数据：60%，20%，20%
+
+* SVM 参数选择：核函数中：
+  $$
+  e^{||x-l||^2/2σ²}
+  $$
+  
+
+  * C = 1/λ: large C/small λ--小偏差，大方差；small C/large λ--大偏差，小方差；
+  * σ² : large σ² --大偏差，小方差，函数更加平稳；small σ²--小偏差，大方差 ，函数更陡更集中
+
+* Dimensionality reduction
+
+  * 减少存储、计算资源占用，方便区分、统一数据，同时降维后的数据直观了解方便建模。
+  * PCA: 找一个更低维度的平面将数据进行投影，降低数据维度。
+  * 降低后的维度选择：前后误差均值在1%范围内
+
+* 特征选择和变化：假如所取的特征不服从某个分布，例如Gaussian Distribution，则可以**将特征做log变换或者开根号变换使得最终的图像更加符合高斯分布。**
+
+* 关注特别大或者特别小的特征值，这很可能对数据区分有帮助。
+
+* learning with large dataset：**It's not who has the best algorithm wins, it's who has the most data.**
+
+# Intro 2 statistic
 
 
 
