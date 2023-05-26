@@ -163,7 +163,55 @@ Online learning notes：coursera, etc.
 
 # Intro 2 statistic
 
+* **The empirical rules**
 
+  若数据服从自然分布，则正态分布的数据服从如下经验：
+
+  * 2/3 of the data within one standard deviation of mean.
+  * 95% of the data within two standard deviation of the mean.
+  * 99.7% fall within 3 standard deviations of the mean 。
+
+* **Normal approximation:正态估计**
+
+  finding areas under the normal curve to find the percentage.
+
+* **Law of large number **
+
+  当独立随机变量数量增加时，它们的**平均值会趋向于其期望值的现象。**（在实验条件不变的情况下，重复试验多次，随机事件的出现的频率近似于它的概率）
+
+* **Central limit Theorem**
+
+  当随机变量数量增加时，**它们的和的分布逐渐趋近于正态分布**。
+
+* **Square root law 应用**
+
+  Toss a coin 100 times. How many tails do you expected? Give or take how many?
+
+  ```python
+  tails,head =1,0
+  P(1)=P(0) = 0.5
+  μ = 0*P(0)+1*P(1) = 0.5
+  expected NUMBER OF TAILS = E(SUM)*μ = 100 * 0.5 = 50 
+  give or take:SE(SUM) = √100*μ = 5
+  σ² = (tails-μ)^2+(head-μ)^2=
+      
+  ```
+
+  
+
+* To be continue ...
+
+* 
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 ------
