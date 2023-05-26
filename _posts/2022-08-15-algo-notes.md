@@ -217,6 +217,54 @@ from sklearn.naive_bayes import GaussianNB,BernoulliNB,MultinomialNB
 
 # 并查集
 
+* 适用范围：找不相交的数据合并及查询问题   lcd 547/684/685
+
+* 树形数据结构，用于处理相交的合并及查询问题，树的根节点唯一标识了一个集合，只要找到某个元素的树根，就能确定它在哪个集合里。[参考](https://zhuanlan.zhihu.com/p/93647900/)
+
+* 主要用于解决**元素分组**问题，管理一系列**不相交的集合**，同时支持：
+
+  * 合并Union：将两个不相交的集合合并为1个集合
+  * 查询Find：查询两个元素是否在同一个集合中。
+
+* 问题示例：若某个家族人员过于庞大，给出某个亲戚关系图后，确定任意两人是否具有亲戚关系。（x是y亲戚，y是z亲戚，则x是z亲戚
+
+* 解决思路：**用集合的一个元素来代表集合**，通过一定规律将元素相互合并之后，构成类似于树和图的搜索结构，判断两个数之间的关系只需要判断他们是否属于同一个根节点即可。
+
+* 路径压缩：在构成并查集的过程中，可能会出现长链结构，为了简化查询，**可以将长链的每个节点父节点都设为根节点，降低查询复杂度**
+
+  PS: 合并过程---**尽量将简单树向复杂树上合并**
+
+* 具体步骤：
+
+  * 每个元素初始化为个1个集合，其根节点为自身，建一个parents = [i for i in range (n)]
+  * 根据提供的元素之间的关系表格，将直接相连的两个元素进行合并（合并条件自己定义），更新上述list。
+  * find 函数主要用于寻找当前位置的根元素
+
+```python
+# 并查集class
+class solution:
+    def find_redundant_connection(self, edges):
+        # 根据给定关系建立表
+        def finds(index):
+            # 查找根节点
+            if parents[index] != index:
+                parents[index] = finds(parents[index])
+            return parents[index]
+
+        # 合并
+        def union(node1, node2):
+            parents[finds(node2)] = finds(node1)
+        
+        n = len(edges)
+        parents = [i for i in range(n)]
+        
+        for data in edges:
+            if finds(data[0]-1)!=finds(data[1]-1):
+                union(data[0]-1,data[1]-1)
+        else:
+            return data
+```
+
 
 
 # 其他
