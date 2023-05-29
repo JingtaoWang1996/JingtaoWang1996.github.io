@@ -177,11 +177,17 @@ Online learning notes：coursera, etc.
 
 * **Law of large number **
 
-  当独立随机变量数量增加时，它们的**平均值会趋向于其期望值的现象。**（在实验条件不变的情况下，重复试验多次，随机事件的出现的频率近似于它的概率）
+  当独立随机变量数量增加时，它们的**平均值会趋向于其期望值的现象。**（在实验条件不变的情况下，**重复试验多次，随机事件的出现的频率近似于它的概率**）
 
 * **Central limit Theorem**
 
   当随机变量数量增加时，**它们的和的分布逐渐趋近于正态分布**。
+
+  关键点：
+
+  * 考察的统计量一定是：**sum**
+  * 样本数量必须足够大
+  * 独立同分布的 r.v.
 
 * **Square root law 应用**
 
@@ -193,15 +199,74 @@ Online learning notes：coursera, etc.
   μ = 0*P(0)+1*P(1) = 0.5
   expected NUMBER OF TAILS = E(SUM)*μ = 100 * 0.5 = 50 
   give or take:SE(SUM) = √100*μ = 5
-  σ² = (tails-μ)^2+(head-μ)^2=
-      
+  σ² = (tails-μ)^2*0.5+(head-μ)^2*0.5=0.25
+  SE(percentage) = 0.5/√100 = 0.05 = 5%
   ```
 
+  * the standard error of the sample mean goes to zero as the sample size increase.
+  * Thus, the sample mean will be close to its expected value μ as the sample size is large.
+
+* 相关性度量
+
+  * correlation coefficient measure: the **strength** of linear relationship；**direction** of relationship
+  * 相关性系数r仅用于确定”线性相关度“，r=0表示非线性相关。
+
+* 残差图（residual plot) 
+
+  用于确定预测模型正确度或是输入数据需要修正的修正度。
+
+## Hypothesis Testing
+
+两类关键假设定义：（通过提出与H0相对应H1，然后通过实验努力拒绝H0，如果实验结果不满足H0，那么就拒绝H0，接受H1。）
+
+* Null hypothesis--H0：普遍接受的事实（**努力通过研究使得这个假设变得无效化**）
+* Alternative hypothesis - H1：备选假设，与H0相反的可能性。
+
+示例：toss a coin 10 times a get 7 tails. Is it sufficient to conclude that the coin is biased?
+
+* **Null hypothesis：nothing extraordinary is going on**--- P(T) = 0.5
+
+* **Alternative hypothesis: opposite to H0** -- P(T) !=0.5
+* hypothesis testing processed by collecting data and evaluate whether the data are compatible with H0 or Not.
+
+ 其他补充定义
+
+* test static：measures how far away the data from what we would expect if H0 were True.
+* **p-value**(observed significance level)：判定假设检验结果的一个参数，极端值情况下可以确保H0为真，**The smaller p-value， the stronger the evidence against H0**
+  * **P-value less than 5%, then the result is called statistically significant.**
+
+### 多重检验/多重假设检验
+
+* 多重检验：通过多重比较之后，降低因为偶然误差导致的单次假设p-value值极小的情况发生。
+* 多重假设检验：通过p-value 对假设的检验，主要是通过人为设定的阈值来进行，但随着检验总次数无限放大，会导致false positive 概率增高，因此引入多重假设检验来进行校正。
+  * Bonferroni correction：拒绝所有false positive 发生的可能性，通过对p值进行校正来消除false positive。【校正公式：p*(1/n)   p –原始阈值 n 总校验次数】
+
+# Discrete Optimization
+
+* 时间复杂度：当问题规模扩大后，程序需要的时间增长有多快【不管数据规模多大，花费时间一定，O(1) 常数级别时间复杂度：数据量多大，时间就有多长。】
+
+  PS: 通常选择的算法都是多项式级复杂度；非多项式时间复杂度，除非数据量较小，否则易超时。
+
+* **P类问题**：若一个问题可以在多项式时间内找到它的解法，这个问题为P类问题。
+
+* **NP类问题**：可以在多项式时间内**验证一个解**的问题(多项式时间内猜出一个解。
+
+  * NP类问题不是非P类问题，P属于NP类问题，但P=NP? 还无法证明。
+
+* **NPC类问题**：
+
+  * 约化reducibility：**问题A可以约化为问题B == 问题B的解法可以解决问题A**（问题B的时间复杂度高于问题A）
+  * NPC类问题定义：**存在一个NP问题，所有的NP问题都可以约化成它**，解决了这一个问题就解决了所有NP问题，这就是NPC类问题。
+
+  <img src='/images/img/NPC问题图.png'>
+
+## Knapsack problem 背包问题
+
+* 问题模型：给定一组物品，每种物品都有自己的重量和价格，**在限定的总重量内，选择物品使得价格更高**
+
+*  To be continue ...
+
   
-
-* To be continue ...
-
-* 
 
   
 
