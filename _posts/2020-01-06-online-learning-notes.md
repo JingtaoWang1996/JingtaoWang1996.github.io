@@ -351,8 +351,16 @@ Online learning notes：coursera, etc.
 ## Four color map theorem --四色定理
 
 * <u>**四色定理：如果在平面中划出一些相邻有限区域，那么一定可以用“四种”颜色来给这些区域染色，使得相邻区域两个颜色不相同。**</u>（every map can be colored with just 4 colors-1st computer proven theorem)
+
 * 具体步骤：
-  * 
+
+  * 计算每个区域的相邻区域个数
+  * 选择相邻个数最多的区域先上色（确保相互之间颜色不同）or **只剩1个颜色选择的优先。**
+  * 重复上述步骤，直到所有区域被填上色
+
+  <img src='/images/img/四色定理地图.png'><img src='/images/img/四色定理地图2.png'>
+
+  Notes：起始为中间黑色部分，红色的虽然相邻5个，但5个互相之间相邻的只有4个，且**相隔一个可以使用相同颜色**，如图中两个黄色部分
 
 *  To be continue ...
 
