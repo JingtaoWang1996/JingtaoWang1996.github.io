@@ -253,7 +253,13 @@ Online learning notes：coursera, etc.
 
   * NP类问题不是非P类问题，P属于NP类问题，但P=NP? 还无法证明。
 
-* **NPC类问题**：
+* **NP完全性的两个特性**：
+
+  * we can check a solution quickly in a polynominal time.
+  * if we can solve one NP complete quickly, we can solve them all.
+  * **Find the best solution approach to the real answer, but not the global yes one.**
+
+* **NPC类问题**
 
   * 约化reducibility：**问题A可以约化为问题B == 问题B的解法可以解决问题A**（问题B的时间复杂度高于问题A）
   * NPC类问题定义：**存在一个NP问题，所有的NP问题都可以约化成它**，解决了这一个问题就解决了所有NP问题，这就是NPC类问题。
@@ -264,7 +270,95 @@ Online learning notes：coursera, etc.
 
 * 问题模型：给定一组物品，每种物品都有自己的重量和价格，**在限定的总重量内，选择物品使得价格更高**
 
+* Greedy algorithm 2 solve knapsack prob--possible solutions:
+
+  * Take the most valuable items 1st.
+  * Take the small one at 1st, them bag as many item as possible
+  * Use value density to decide bag order: dollars/weight
+
+* How to model optimization problem:
+
+  * define a description of the problem.
+
+  * choose some **decision variables**(they typically encode the result we are interested in)
+
+  * express the **problem constraints** in term of these variables.
+
+  * express the **objective function**
+    $$
+    max ∑v_ix_i, i∈I\\
+    s.t ∑w_ix_i≤K \\
+    x_i∈{0,1},i∈I
+    $$
+    v-value，w-weight，x-choose or not
+
+## Dynamic Programming
+
+### Recurrence Relations - DP 计算方式及步骤
+
+* Bellman Equation
+  * Assume we know how to solve **O(k,j-1) for all k in 0,k**
+  * We want to solve **O(k,j)**
+  * If wj≤k, there are two cases:1) we don not select j, the best item is O(k,j-1) 2) we select j, the best solution is vj+O(k-wj,j-1)
+  * Conclusion: **O(k,j) = max(O(k,j-1), vj+O(k-wj,j-1)) if wj≤k,else O(k,j) = O(k,j-1)**
+* Dp 步骤：从状态0开始迭代计算，直到达到需要的状态。
+
+### Branch&Bound--分支定界法
+
+​        求解整数规划的常用方法，根据实际是否取用该变量构建树状图之后：通过判定<u>**树状图到子节点是否超过边界条件or是否当前选择步骤无法超过之前的最佳结果**</u>来确定剪枝缩短搜索空间范围，进而进行深度和广度优先搜索。
+
+* branching：将问题划分为子问题
+* bounding：找到每个子问题的最优解
+* Optimization Tips：以背包问题为例，如果能够取部分值达到更优解，那么可以不必局限于是否必须取或不取。
+
+<img src='/images/img/分支界定图.png'>
+
+### Search Strategy -- 深度和广度优先搜索
+
+* depth-first 深度
+
+  当前节点估计比之前最佳方案差时，对该节点进行剪枝，不再计算后续节点的可能。
+
+* best-first广度
+
+  同理深度。
+
+* least-discrepancy
+
+## Constraint Programming--CP约束编程
+
+* Use **constraints to reduce the set of values** that each variable can take
+* **Remove value that cannot appear in any solution**
+* make choice when no more deduction can be performed
+* The choice can be wrong, which means backtracks is needed.
+
+模型构建方法
+
+* 尽可能描述清楚问题并表达清楚期望的架构。
+* 尽可能提供所有的限制条件。
+
+限制条件的作用
+
+* 减小解的搜索空间
+* 最终解的可行性确认（是否违反某一个限制条件）
+
+## 8-queen problem
+
+* 问题模型：国际象棋棋盘上放置8个皇后让他们无法互相攻击，皇后可以横竖斜走。
+* <u>思路：1）国际象棋棋盘8*8，因此，每一列上都必须要有一个皇后被放置。2）**基于CP，棋盘上每次放置一个皇后之后，减少棋盘上可以继续放置的空间。**</u>【此处不带图，可直接搜索】
+* decision variable：每一行用一个decision variable来进行描述，便于模型构建和限制条件描述。
+
+## Four color map theorem --四色定理
+
+* <u>**四色定理：如果在平面中划出一些相邻有限区域，那么一定可以用“四种”颜色来给这些区域染色，使得相邻区域两个颜色不相同。**</u>（every map can be colored with just 4 colors-1st computer proven theorem)
+* 具体步骤：
+  * 
+
 *  To be continue ...
+
+  
+
+  
 
   
 
