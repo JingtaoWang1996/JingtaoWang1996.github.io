@@ -265,7 +265,14 @@ class solution:
             return data
 ```
 
+# 图类模型
 
+## 二分图
+
+* [模型定义](https://web.ntnu.edu.tw/~algo/BipartiteGraph.html)：设G=(V,E)是无向图，若顶点V可分割为两个互不相交的子集(A,B),且图中的每条边（i,j)所关联的两个顶点i和j分别属于这两个子集，则图G为二分图。【decision variable 和变量值各在一个子集，通过边相连】
+* matching：二分图中的任意两条边，不连接在相同的顶点上的情况。
+* maximum matching：若二分图中所有matching等于变量个数，那么该解有效（变量和值一一对应）
+  * maximum matching的寻找过程：从任意边开始，对所有未match的边进行替换，直到无法再优化。
 
 # 其他
 
