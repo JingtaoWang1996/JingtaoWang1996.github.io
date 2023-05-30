@@ -291,6 +291,25 @@ Online learning notes：coursera, etc.
     x_i∈{0,1},i∈I
     $$
     v-value，w-weight，x-choose or not
+  
+* Binary knapsack：背包问题的所有value只能取 0 or 1
+  $$
+  l≤∑w_kx_k≤u,k∈R \\
+  x_k∈\{0，1\}
+  $$
+  eg: 10≤2x1+3x2+4x3+5x4≤12 , decision variable 只能取0，1
+
+  **前后向图**来决定某一个decision variable 是否取0
+
+  * 前向图：取值默认为1，根据权重进行调整
+
+  <img src='/images/img/前向图.png'>
+
+  * 后向图：根据限制条件排除不可能的情况
+
+  <img src='/images/img/后向图.png'>
+
+  
 
 ## Dynamic Programming
 
@@ -342,6 +361,52 @@ Online learning notes：coursera, etc.
 * 减小解的搜索空间
 * 最终解的可行性确认（是否违反某一个限制条件）
 
+一些限制的定义
+
+* Reification：The ability to transform a constraint into a 0/1 variable. (variable = 1 if constraint is True)
+* Global constraint：capture combinatorial substructure.
+  * make more easier and more natural to explain to others.
+  * convey problem structure to solver that does not have to rediscover it.
+  * give the ability to exploit dedicate algorithms.
+  * Discover in-feasibility earlier & Make search more efficient.
+* **Symmetry breaking**: 许多问题自然带有搜索空间&结果对称的特性，在结果搜索时，只需要搜索对称结果一半的部分即可，不需要全部搜索，这样能够明显减少搜索空间及时间。
+* **Redundant constraint**：不对模型解数量产生影响的前提下的其他限制条件。
+
+### magic series
+
+* 问题模型：A series S = （S0,S1,...,Sn) is magic if Si represents the number of occurrences of i in S
+
+  |             | 0    | 1    | 2    | 3    | 4    |
+  | ----------- | ---- | ---- | ---- | ---- | ---- |
+  | occurrences | 2    | 1    | 2    | 0    | 0    |
+
+* redundant constraints: 最大值 = series长度；确定序列中一个值，其他值就会同步改变。
+
+### Car sequencing-- 制造顺序安排
+
+* 问题模型：根据流水线上每个制造步骤能够连续执行的次数及休息间隔制定最佳制造方案（A步骤执行2次休息1次，B步骤执行3次休息2次）。
+* **Dual Modeling**
+  * 将对于某个问题的不同模型方法进行组合后（限制条件等全部组合），大概率优势互补且得到全新的思路。
+
+### Scene allocation --电影场景分配
+
+* 问题模型：一部电影每天最多拍摄k个镜头，该电影的每个演员都已被安排拍摄某些镜头，且每个演员每天出现在现场都需要支付工资，问：如何将总支出最小。
+* 思路：镜头安排的顺序上没有对称，但是在天数上可以达到-值对称
+* 具体实现：镜头S，天数D
+  * 对于S1，将其安排在D1后；
+  * 对于S2,  余下的天数当中选择
+  * 对于排序：已经用掉的天数+未被安排的一天新的，构成天数序列【减少搜索空间，不必每一个天数排序都试一遍。】
+
+### BIBD(Balanced Incomplete Block Designs)
+
+* 问题模型：
+  * 输入：(v,b,r,k,l)
+  * **输出：一个值全部为0/1的v行b列的矩阵，其中每行有r个1，每列k个1，任意两列乘积是1**
+* BIBD对称性：满足上述条件的矩阵，任意教皇两行or两列，依然是满足条件的解法。
+* 减少对成性搜索的方法：根据字典大小-lexicographic order（从上到下or从左到右序列值增大）
+
+
+
 ## 8-queen problem
 
 * 问题模型：国际象棋棋盘上放置8个皇后让他们无法互相攻击，皇后可以横竖斜走。
@@ -362,43 +427,15 @@ Online learning notes：coursera, etc.
 
   Notes：起始为中间黑色部分，红色的虽然相邻5个，但5个互相之间相邻的只有4个，且**相隔一个可以使用相同颜色**，如图中两个黄色部分
 
-## 其他问题模型
-
-* Reification：The ability to transform a constraint into a 0/1 variable. (variable = 1 if constraint is True)
-* Global constraint：capture combinatorial substructure.
-  * make more easier and more natural to explain to others.
-  * convey problem structure to solver that does not have to rediscover it.
-  * give the ability to exploit dedicate algorithms.
-  * Discover in-feasibility earlier & Make search more efficient.
-* Redundant constraint：减少搜索空间、
-* **Symmetry breaking**: 许多问题自然带有搜索空间&结果对称的特性，在结果搜索时，只需要搜索对称结果一半的部分即可，不需要全部搜索。
-* BIBD(Balanced Incomplete Block Designs)
-* 
-
-### magic series
-
-* 问题模型：A series S = （S0,S1,...,Sn) is magic if Si represents the number of occurrences of i in S
-
-  |             | 0    | 1    | 2    | 3    | 4    |
-  | ----------- | ---- | ---- | ---- | ---- | ---- |
-  | occurrences | 2    | 1    | 2    | 0    | 0    |
 
 
 
-
-### Sudoku--数独
-
-### Scene allocation --电影场景分配
-
-* value symmetry
-
-*  To be continue ...
 
   
 
   
 
-  
+  TO BE CONTINUE ...
 
   
 
