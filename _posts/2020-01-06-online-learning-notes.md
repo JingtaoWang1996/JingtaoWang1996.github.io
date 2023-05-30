@@ -459,11 +459,13 @@ Online learning notes：coursera, etc.
 ## Local Search
 
 * move from configuration 2 configuration by doing local move.(从任意情况开始，通过局部移动来实现对满足条件的限制结果搜索。)
-
 * **移动后是否采纳主要取决于限制和冲突情况是否减少**
 * 选择local move的时候，从包含限制条件最多/冲突最多的地方开始。
 * 局部搜索无法确保获得全局最优解
 * 常见移动：交换、
+* 搜索空间不连续的情况：对当前搜索空间进行交换，直到搜索空间能够连接。
+* Tabu search 禁忌搜索：跳出局部最优的方法之一，标记已搜索过的局部最优解，避免重复搜索，同时跳出局部最优解。
+* **Simulated annealing模拟退火**：随机选择开始点，每次选择一个移动步骤，然后判断是否接受（好优化则接受，坏优化则一定概率接受）直到最终的函数值越来越小。
 
 ### Warehouse location problem
 
@@ -472,11 +474,24 @@ Online learning notes：coursera, etc.
 ### Travel salesman problem
 
 * 问题模型：给定很多城市坐标，visit 每个城市1次不重复，使得总路径最小
-* 
+* K-opt：选择n调路径，进行对应更换，用于缩短最终距离
+  * 找到每一个点附近最近的点，先构成连接，然后逐渐去掉冲突（某个点有两个点相连的情况，找到附近一个没有被链接且距离最近的点进行替换解决冲突）
 
+### Graphic coloring
 
+* 问题模型：用最少的颜色，完成上千节点的着色工作，s.b. 相邻节点颜色不同
+* 思路：
+  * 初始化一定的颜色数量k，尝试进行着色，若不满足则增加数量；若满足则逐渐减少颜色总数，并调整着色，直到最终取得最优颜色数量
+  * 若颜色存在冲突，可以通过交换颜色来优化确认是否最优点。
+  * 优化：主客交换、队伍交换、轮次交换 来解决冲突
 
-  TO BE CONTINUE ...
+### Sports Scheduling
+
+* 问题模型：赛程安排，constraint（转播收益、主客数量、队伍总路程，不能连续主场or客场 & ；两个队伍不能连续碰）--objective：优化总路程
+
+## Linear programming 
+
+ TO BE CONTINUE ...
 
   
 
