@@ -362,6 +362,36 @@ Online learning notes：coursera, etc.
 
   Notes：起始为中间黑色部分，红色的虽然相邻5个，但5个互相之间相邻的只有4个，且**相隔一个可以使用相同颜色**，如图中两个黄色部分
 
+## 其他问题模型
+
+* Reification：The ability to transform a constraint into a 0/1 variable. (variable = 1 if constraint is True)
+* Global constraint：capture combinatorial substructure.
+  * make more easier and more natural to explain to others.
+  * convey problem structure to solver that does not have to rediscover it.
+  * give the ability to exploit dedicate algorithms.
+  * Discover in-feasibility earlier & Make search more efficient.
+* Redundant constraint：减少搜索空间、
+* **Symmetry breaking**: 许多问题自然带有搜索空间&结果对称的特性，在结果搜索时，只需要搜索对称结果一半的部分即可，不需要全部搜索。
+* BIBD(Balanced Incomplete Block Designs)
+* 
+
+### magic series
+
+* 问题模型：A series S = （S0,S1,...,Sn) is magic if Si represents the number of occurrences of i in S
+
+  |             | 0    | 1    | 2    | 3    | 4    |
+  | ----------- | ---- | ---- | ---- | ---- | ---- |
+  | occurrences | 2    | 1    | 2    | 0    | 0    |
+
+
+
+
+### Sudoku--数独
+
+### Scene allocation --电影场景分配
+
+* value symmetry
+
 *  To be continue ...
 
   
