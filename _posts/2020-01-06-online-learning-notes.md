@@ -362,13 +362,21 @@ Online learning notes：coursera, etc.
 一些限制的定义
 
 * Reification：The ability to transform a constraint into a 0/1 variable. (variable = 1 if constraint is True)
+
 * Global constraint：capture combinatorial substructure.
+
   * make more easier and more natural to explain to others.
   * convey problem structure to solver that does not have to rediscover it.
   * give the ability to exploit dedicate algorithms.
   * Discover in-feasibility earlier & Make search more efficient.
+
 * **Symmetry breaking**: 许多问题自然带有搜索空间&结果对称的特性，在结果搜索时，只需要搜索对称结果一半的部分即可，不需要全部搜索，这样能够明显减少搜索空间及时间。
+
 * **Redundant constraint**：不对模型解数量产生影响的前提下的其他限制条件。
+
+* **First fail principle**：try 1st where you are most likely to fail, if fails, fails early!(若有m件任务需要全部解决才算成功，则优先解决最困难的一件，否则最困难的一件没有成功整件事情还是失败)
+
+  
 
 ### magic series
 
@@ -379,6 +387,11 @@ Online learning notes：coursera, etc.
   | occurrences | 2    | 1    | 2    | 0    | 0    |
 
 * redundant constraints: 最大值 = series长度；确定序列中一个值，其他值就会同步改变。
+
+### magic square 
+
+* 问题模型：在一个n*n的矩阵中填入数字，每行每列不同，但行、列、对角线和相同
+* 思路：计算得到需要得到的和之后，二分查找减小搜索空间。
 
 ### Car sequencing-- 制造顺序安排
 
@@ -403,15 +416,18 @@ Online learning notes：coursera, etc.
 * BIBD对称性：满足上述条件的矩阵，任意教皇两行or两列，依然是满足条件的解法。
 * 减少对成性搜索的方法：根据字典大小-lexicographic order（从上到下or从左到右序列值增大）
 
+### Euler Knight Problem
 
+* 问题模型：国际象棋棋盘上的骑士能够走完棋盘且每个位置只能走一次。
+* 思路：从最容易失败的位置：角落开始，**每次的下一步每次选择余下步数最少的位置，**最终尝试连线。
 
-## 8-queen problem
+### 8-queen problem
 
 * 问题模型：国际象棋棋盘上放置8个皇后让他们无法互相攻击，皇后可以横竖斜走。
 * <u>思路：1）国际象棋棋盘8*8，因此，每一列上都必须要有一个皇后被放置。2）**基于CP，棋盘上每次放置一个皇后之后，减少棋盘上可以继续放置的空间。**</u>【此处不带图，可直接搜索】
 * decision variable：每一行用一个decision variable来进行描述，便于模型构建和限制条件描述。
 
-## Four color map theorem --四色定理
+### Four color map theorem --四色定理
 
 * <u>**四色定理：如果在平面中划出一些相邻有限区域，那么一定可以用“四种”颜色来给这些区域染色，使得相邻区域两个颜色不相同。**</u>（every map can be colored with just 4 colors-1st computer proven theorem)
 
@@ -431,9 +447,18 @@ Online learning notes：coursera, etc.
 * 思路: 建立假设表，每次假设一个decision variable 的值之后，根据假设去掉搜索空间，直到有解or冲突。
 * 问题例子：X1∈{1，2}，X2∈{2，3}，X3∈{1，3}，X4∈{2，4}，X5∈{3，4，5，6}，X6∈{6，7}，在每个值取值不同的情况下，x4是否能取2
 
+### The perfect square problem
+
+* 问题模型：给定一系列正方形的顶点坐标，看他们是否能够再中间不留空白的情况下拼成一个大正方形。
+* 思路：最终的形状必须要满足的性质
+  * 4个角上1个点，余下的要么两个正方形相邻，要么4个顶点合并。
+  * 3个正方形的情况，更大可能是两个相邻边+一个长边。
+  * redundant constraint：大正方形随便一条线经过的所有正方形长度之和等于大正方形边长。
+  * 每次放了一个正方形之后就考虑在它旁边放哪个正方形更合适。
+
+## Local Search
 
 
-  
 
   
 
