@@ -458,9 +458,23 @@ Online learning notes：coursera, etc.
 
 ## Local Search
 
+* move from configuration 2 configuration by doing local move.(从任意情况开始，通过局部移动来实现对满足条件的限制结果搜索。)
+
+* **移动后是否采纳主要取决于限制和冲突情况是否减少**
+* 选择local move的时候，从包含限制条件最多/冲突最多的地方开始。
+* 局部搜索无法确保获得全局最优解
+* 常见移动：交换、
+
+### Warehouse location problem
+
+* 问题模型：给定仓库位置、造价、顾客位置及到每个仓库的距离，选择哪几个warehouse 开放使得**造价最低、顾客总距离最低**
+
+### Travel salesman problem
+
+* 问题模型：给定很多城市坐标，visit 每个城市1次不重复，使得总路径最小
+* 
 
 
-  
 
   TO BE CONTINUE ...
 
