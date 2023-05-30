@@ -309,8 +309,6 @@ Online learning notes：coursera, etc.
 
   <img src='/images/img/后向图.png'>
 
-  
-
 ## Dynamic Programming
 
 ### Recurrence Relations - DP 计算方式及步骤
@@ -427,7 +425,11 @@ Online learning notes：coursera, etc.
 
   Notes：起始为中间黑色部分，红色的虽然相邻5个，但5个互相之间相邻的只有4个，且**相隔一个可以使用相同颜色**，如图中两个黄色部分
 
+### All different 类问题
 
+* 问题模型：在所有给定的decision variable 中，保证**每个变量取值不同**，是否有解
+* 思路: 建立假设表，每次假设一个decision variable 的值之后，根据假设去掉搜索空间，直到有解or冲突。
+* 问题例子：X1∈{1，2}，X2∈{2，3}，X3∈{1，3}，X4∈{2，4}，X5∈{3，4，5，6}，X6∈{6，7}，在每个值取值不同的情况下，x4是否能取2
 
 
 
