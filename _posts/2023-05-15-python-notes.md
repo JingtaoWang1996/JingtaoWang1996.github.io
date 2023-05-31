@@ -8,8 +8,6 @@ tags:
   - category2
 ---
 
-Online learning notes：coursera, etc.
-
 Some python usage experience.
 
 # 语言特性
