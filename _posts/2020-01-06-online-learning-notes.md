@@ -491,7 +491,75 @@ Online learning notes：coursera, etc.
 
 ## Linear programming 
 
- TO BE CONTINUE ...
+* 问题模型示例：
+  $$
+  min~c_1x_1+...+c_nx_n\\
+  s.b~ a_{11}x_1+...+a_{1n}x_n≤b_1 \\
+  ...
+  a_{m1}x_1+...+a_{mn}x_n≤b_m
+  $$
+
+  * min = - max
+  * non-linear constraint 不能用在linear programming 当中。
+  * discrete value variables can not used in linear programming
+  * 等于的限制条件可以同步为：大于等于+小于等于
+
+### Geometry of linear programs
+
+* convex set 凸集：在集合中随机找两个点，若他们**连线中所有点都在集合当中**，则该集合叫做凸集。(eg:集合是个五角星，两相邻角的顶点连线就在集合外)
+
+* Convex combination：
+  $$
+  λ_1v_1+...+λ_nv_n~is~a~convex~combination~of~v_1,..,v_n \\
+  if~ λ_1+...+λ_n = 1~ and~λ_i≥0
+  $$
+
+  * the intersection of convex set is a convex set
+  * every point in a polytope is a convex combination of its vertices
+
+* 根据条件划定搜索范围后，由objective function 在划定范围中判定最优解（使得目标函数最大or最小的解）
+
+* Theorem：至少由一个点在搜索范围中能够使得目标函数最小。
+
+### The simplex algorithm--单纯形法
+
+* 应用简单，但最坏情况耗时可能是指数级的。
+
+* Guarantee to find the global optimum
+
+* 
+
+* 实例：--goal: be on the top of the world
+
+  * the top of the world is the top of a mountain
+  * the top of a mountain is a **Beautiful Fantastic Spot（BFS)**
+  * can move from one BFS to anther BFS, repeat until at the top of the world
+
+* 如何将不等式转化为等式
+  $$
+  a_{11}x_1+...+a_{1n}x_n≤b_1 \\
+  ...
+  a_{m1}x_1+...+a_{mn}x_n≤b_m \\
+  ...增加一个常量S_i后转化\\
+  a_{11}x_1+...+a_{1n}x_n+S_1 = b_1 \\
+  ...
+  a_{m1}x_1+...+a_{mn}x_n+S_n = b_m \\
+  $$
+
+* 
+
+​      PS: 上式中增加的使等式成立的常量Si--slack variables
+
+* 
+
+### Matrix Notation
+
+* Used to simplify the presentation of calculation in linear programming，利用矩阵性质来对线性规划中的变量进行表达，简化后续计算。
+* 示例：
+
+<img src='/images/img/matrix_notation.png'>
+
+TO BE CONTINUE ...
 
   
 

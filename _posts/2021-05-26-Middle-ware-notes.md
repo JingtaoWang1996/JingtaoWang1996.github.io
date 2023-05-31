@@ -351,10 +351,20 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 ​       PS: 若max.poll.records 在这个interval_ms时间内没有完成，就会触发rebalance
 
 * fetch_max_wait_ms=5, # 每多少ms拉去一次数据，默认500ms，往小调能够增加拉取频率，提高消费效率
-
 * fetch_max_bytes=10485760, # 设置每次拉取的最大数据量为 100MB，server端可返回给consumer的大小
-
 * max_partition_fetch_bytes=5242880 # 设置单个分区的最大数据量5MB=1024*1024*5
+
+### 重复消费的问题
+
+出现重复消费的场景
+
+* 消费过程中，进程被kill掉或者发生异常
+* consumer消费时间过长：在consumer定义的两次消费间隔max.poll.interval.ms 之中，若无法消费完消息，consumer就会主动发起“离开消费组“的请求。
+
+解决方案：
+
+* 增加数据标识符
+* 消费重试机制--spring-kafka 有，但kafka-python 只能通过代码逻辑实现
 
 ## 操作命令
 
