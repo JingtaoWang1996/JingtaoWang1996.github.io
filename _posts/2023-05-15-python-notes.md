@@ -6,8 +6,9 @@ tags:
   - cool posts
   - category1
   - category2
-
 ---
+
+Online learning notes：coursera, etc.
 
 Some python usage experience.
 
@@ -265,9 +266,9 @@ log 命令能够显示不同级别参数和消息，消息等级大写：INFO,DE
 
 * 局部变量：定义在方法中的变量，只作用于当前实例的类。
 
-*  实例变量：在类的声明中，属性通过变量来表示，这种变量称为实例变量，即：用self修饰的变量。
+* 实例变量：在类的声明中，属性通过变量来表示，这种变量称为实例变量，即：用self修饰的变量。
 
-*  实例化：创建一个类的实例，类的具体对象。
+* 实例化：创建一个类的实例，类的具体对象。
 
 ### 实例
 
@@ -334,9 +335,9 @@ if __name__ == "__main__":
 ### 相对导入
 
 - project/
-    - main.py
-    - directory/
-        - module.py
+  - main.py
+  - directory/
+    - module.py
 
 要在main.py中导入module.py：from directory import module
 
@@ -429,7 +430,7 @@ q.get()  # 从队列中取值
 
 * join & task_done()
 
-   join 阻塞进程，直到所有任务完成，需要配合task_done(）
+  join 阻塞进程，直到所有任务完成，需要配合task_done(）
 
 ```
 import queue
@@ -476,11 +477,11 @@ t.start()  # 启动线程
 thread 实例对象的其他方法
 
 *   Xxx.is\_alive() # xxx线程是否存活
-* Xxx.getName() # 返回线程名
-* Xxx.setName() # 设置线程
-* Threading.currentThread() # 返回当前的线程变量
-* Threading.enumerate() # 返回一个包含正常运行的线程list
-* Threading.activeCount()#正在运行的线程数量 = len（threading.enumerate()）
+*   Xxx.getName() # 返回线程名
+*   Xxx.setName() # 设置线程
+*   Threading.currentThread() # 返回当前的线程变量
+*   Threading.enumerate() # 返回一个包含正常运行的线程list
+*   Threading.activeCount()#正在运行的线程数量 = len（threading.enumerate()）
 
 ### 锁
 
@@ -595,7 +596,7 @@ Run -> Edit Configurations -> 勾选Allow parallel run前面的框 [示例见下
 
 Run -> Edit Configurations -> 选择脚本后，右侧“parameters“ 中添加参数
 
-![pycharm运行参数配置图](./img/pycharm运行参数配置图.png)
+<img src='/images/img/pycharm运行参数配置图.png'>
 
 ## pycharm中修改源码库
 
@@ -764,7 +765,9 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
   利用“二进制”进行分段。树状结构大致如下：
 
-  <img src="./img/树状数组实例图.png" alt="树状数组实例图" style="zoom:80%;" />
+  <img src='/images/img/树状数组实例图.png'>
+
+  
 
    例: 求前11项的和
 
@@ -774,7 +777,9 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
      3）对上述三个区间求和，三个区间的由来：不断去掉最右边的1改为0
 
-  <img src="./img/树状数组实例区间图.png" alt="树状数组实例区间图" style="zoom:80%;" />
+  <img src='/images/img/树状数组实例区间图.png'>
+
+  
 
   ​    **Ps:** 前8项的和可以参照上图，(0000，0100],(0100,0110],(0110,0111]
 
@@ -806,7 +811,7 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
   * C8 = (10000-10000,10000] = (0,8] = A[1]+…+A[8]
 
-     C[i] = A[i-2^k+1]+A[i-2^k+2]+…+A[i] //k 为二进制最低位到最高位连续0的长度
+    C[i] = A[i-2^k+1]+A[i-2^k+2]+…+A[i] //k 为二进制最低位到最高位连续0的长度
 
 * 树状数组的更新
 
@@ -816,7 +821,9 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
   ​       (100100,100110] 最小区间；（100000，1010000] （100000，110000] （000000，100000]； 为lowbit的较大范围区间，如下图：**左边为****lowbit计算方式**，**右边为每次加上lowbit后进位**, 这样更新区间不会超过log（maxN），能够以O（logN）进行查询的和修改的数据结构便完成了。
 
-  <img src="./img/树状数组更新示例.png" alt="树状数组更新示例" style="zoom:50%;" />
+  <img src='/images/img/树状数组更新示例.png'>
+  
+  
 
 ## 前缀树Trie
 
@@ -826,7 +833,7 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
 * 典型应用：统计、排序和保存大量字符串（不限于字符串），经常被搜索引擎用于文本词频统计。
 
-    PS: 其他应用--单词自动补全、拼写检查、最长前缀匹配、前缀预测单词、统一前缀的全部键值等
+  PS: 其他应用--单词自动补全、拼写检查、最长前缀匹配、前缀预测单词、统一前缀的全部键值等
 
 * 主要操作：插入、查找、删除
 
@@ -838,7 +845,7 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
 * 前缀树例子:假设有b,abc,bcd,abcd,efg,hii 6个单词创建就得到下述前缀树
 
-  <img src="./img/前缀树例子.png" alt="前缀树例子" style="zoom: 80%;" />
+  <img src='/images/img/前缀树例子.png'>
 
 * 实现步骤
 
@@ -881,12 +888,12 @@ b = json.dumps(a) # b={'a':'aaaa'}
 
 * 具体实现 ---leetcode 307
 
-     * 建立BIT: BIT =[0]+原数组 # 2进制原因第一个下标不用
-     * 建立lowbit函数：x &(-x)
-     * 初始化BIT：BIT下标index 从1开始，计算 j = index+lowbit(index),若j在BIT 长度以内，BIT[j]+=BIT[i]
-     * 自定义前缀和函数presum，通过lowbit对下标递减更新需要求和的区间
-     * 区间求和 presum（right）-presum(left-1)
-     * 更新某个位置的元素：sumRange（x,x)
+  * 建立BIT: BIT =[0]+原数组 # 2进制原因第一个下标不用
+  * 建立lowbit函数：x &(-x)
+  * 初始化BIT：BIT下标index 从1开始，计算 j = index+lowbit(index),若j在BIT 长度以内，BIT[j]+=BIT[i]
+  * 自定义前缀和函数presum，通过lowbit对下标递减更新需要求和的区间
+  * 区间求和 presum（right）-presum(left-1)
+  * 更新某个位置的元素：sumRange（x,x)
 
   ```
   class BIT_tree:
@@ -1277,7 +1284,7 @@ G = nx.MultiDiGraph() # 创建空的有向图
 
 * 检查是否安装成功：import django   &  django.get_version()
 
-   ps: 清华源下载Django：sudo pip3 install Django -i https://pypi.tuna.tsinghua.edu.cn/simple
+  ps: 清华源下载Django：sudo pip3 install Django -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ### Flask
 
@@ -1311,5 +1318,12 @@ def hello():
 
 * Backend 工程 testFlask.py 是一个简单的demo
 * 运行之后，浏览器登录 http://127.0.0.1:5000/ 就能看到hello方法的返回值
-*  flask静态文件：一般是css 和 JS。理想情况下，服务器已经配置好了提供静态文件的服务，但flask同样能完成配置。 
+* flask静态文件：一般是css 和 JS。理想情况下，服务器已经配置好了提供静态文件的服务，但flask同样能完成配置。 
+
+
+
+
+
+
+------
 
