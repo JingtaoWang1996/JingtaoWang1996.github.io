@@ -1,3 +1,16 @@
+---
+title: 'Python-notes'
+date: 2023-05-15
+permalink: /posts/2023/05/Python-notes/
+tags:
+  - cool posts
+  - category1
+  - category2
+
+---
+
+Some python usage experience.
+
 # 语言特性
 
 ## Global Interpreter Lock（GIL）
