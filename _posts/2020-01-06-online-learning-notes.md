@@ -527,8 +527,6 @@ Online learning notes：coursera, etc.
 
 * Guarantee to find the global optimum
 
-* 
-
 * 实例：--goal: be on the top of the world
 
   * the top of the world is the top of a mountain
@@ -545,12 +543,9 @@ Online learning notes：coursera, etc.
   ...
   a_{m1}x_1+...+a_{mn}x_n+S_n = b_m \\
   $$
-
-* 
-
-​      PS: 上式中增加的使等式成立的常量Si--slack variables
-
-* 
+PS: 上式中增加的使等式成立的常量Si--slack variables
+  
+* 选择好目标变量与待替换变量，当目标函数中所有变量的系数值均为正，即视为达到最佳情况。
 
 ### Matrix Notation
 
@@ -558,6 +553,8 @@ Online learning notes：coursera, etc.
 * 示例：
 
 <img src='/images/img/matrix_notation.png'>
+
+
 
 TO BE CONTINUE ...
 
