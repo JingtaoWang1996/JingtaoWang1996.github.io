@@ -590,7 +590,40 @@ PS: 上式中增加的使等式成立的常量Si--slack variables
 ## Mixed Integer Programming 整数规划
 
 * 定义：**规划中的变量（全部or部分）限制为整数。**
-* 
+* **线性模型中,变量限制为整数，则为整数线性规划**
+* 整数混合模型大多选择0/1为变量
+* eg：warehouse problem： 某个warehouse 是否开门的变量取值限制为：0-开门；1-不开门
+
+模型优劣
+
+* 同等objective model，**限制条件更少or不强于之前的限制条件**的一个，视为更好的模型
+* 模型等价只能一句条件弱到强而非强到弱。
+
+### Cutting plans --割平面法
+
+* 增加线性条件 == 在搜索空间中进行平面切割
+
+示例：
+
+<img src='/images/img/cut_plan1.png'>
+
+上述三个限制条件可在平面上得到如下值，红色为x2<=1的切割平面。
+
+<img src='/images/img/cut_plan2.png'>
+
+根据红色线切割后得到下图：
+
+<img src='/images/img/cut_plan3.png'>
+
+去掉不是整数点之后的切割平面后得到下图最终结果
+
+<img src='/images/img/cut_plan4.png'>
+
+Conclusion：从最开始的限制条件绘制平面后，逐步增加新的条件限制进行优化，得到整数点。
+
+### Gomory Cut
+
+* 对于
 
 TO BE CONTINUE ...
 
