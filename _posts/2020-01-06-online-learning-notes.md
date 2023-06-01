@@ -554,7 +554,43 @@ PS: 上式中增加的使等式成立的常量Si--slack variables
 
 <img src='/images/img/matrix_notation.png'>
 
+### Duality derivation & interpretation 二元性推导
 
+* Duality Theory：address itself to the study of the connection between two related linear programming problem.
+
+* prime & dual formation:
+
+  * primal:
+
+  $$
+  min~cx \\subject~to~Ax≥b~\&~x_j≥0
+  $$
+
+  * dual:
+    $$
+    max~yb\\subject~to~yA≥c~\&~y_i≥0
+    $$
+
+  * 示例：
+
+    <img src='/images/img/primal_dual.png'>
+
+* Theorem：If prime has an optimal solution,dual format also has an optimal solution with same cost.
+
+* Dual of the dual is prime.
+
+* The primal objective function is always greater or equal than the dual. So primal find minimum, dual find optimal
+
+* Primal always feasible, but dual not, until optimality;
+
+* Dual always feasible, but primal not, until optimality;
+
+* 不管是primal还是dual，两类问题出发只要有一个找到optimal结果，那么新增限制条件，可以从当前的primal or dual 出发继续求解。
+
+## Mixed Integer Programming 整数规划
+
+* 定义：**规划中的变量（全部or部分）限制为整数。**
+* 
 
 TO BE CONTINUE ...
 
