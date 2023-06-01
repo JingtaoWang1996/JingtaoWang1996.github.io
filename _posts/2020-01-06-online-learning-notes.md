@@ -623,7 +623,16 @@ Conclusion：从最开始的限制条件绘制平面后，逐步增加新的条�
 
 ### Gomory Cut
 
-* 对于
+* **key point：对于限制条件，将系数向下取整，最终将可行结果一起向下取整进行优化。**
+
+  <img src='/images/img/gomory_cut.png'>
+
+* 具体步骤：
+
+  * Solve the linear relaxation
+  * Choose a row i whose constant is fractional and add gomory cut
+  * apply the dual simplex to obtain feasibility
+  * Iterate until: integer solution or no feasible solution
 
 TO BE CONTINUE ...
 
