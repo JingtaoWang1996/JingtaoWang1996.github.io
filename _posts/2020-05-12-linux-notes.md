@@ -72,6 +72,7 @@ Some linux usage experience.
   * 本地文件复制到远程服务器：scp /localpath root@ip:/path
   *  本地文件夹复制到远程服务器：scp –r /local/path root@ip:/path
   *  直接从本地电脑上传文件到远端服务器：scp -p 9854 /cygdrive/待上传文件本地目录 root@localhost：/上传的目标路径
+* vim 之后删除某一行：在esc状态下，直接dd，表示删除当前行。
 
 # 进程操作命令
 
@@ -153,8 +154,8 @@ Some linux usage experience.
 * mtr命令：（ping+traceroute)
 
   * 命令格式：mtr ip
-    
-    <img src='/images/img/mtr示例.png'>
+
+    ![mtr示例](./img/mtr示例.png)
 
     查看traceroute 路径，丢包率，平均解析时延等，通过这条命令结合实际情况观察路径上的丢包情况等。
 
