@@ -101,7 +101,14 @@ Some linux usage experience.
     ​    eg: nohup python3 new_main.py >/dev/null 2>&1 & 
 
 * 查看后台运行任务：jobs -l 
+
 * 查找某个进程pid：pidof python3
+
+* 最大进程数：sysctl kernel.pid_max
+
+## 查看并杀死僵尸进程
+
+* 统计僵尸进程命令：ps -ef | grep defunct | grep -v grep | wc -l
 
 # 系统资源查看命令
 
