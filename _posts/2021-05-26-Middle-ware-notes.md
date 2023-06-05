@@ -366,12 +366,15 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 * 增加数据标识符
 * 消费重试机制--spring-kafka 有，但kafka-python 只能通过代码逻辑实现
 
+### 单机kafka broker的
+
 ## 操作命令
 
 cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](https://blog.csdn.net/ytp552200ytp/article/details/119914474)
 
 * **查看当前存在的所有消费组**：./bin/kafka-consumer-groups.sh -bootstrap-server localhost:9092 --list
 * **查看某个消费组消费状态及lag**：./bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group 消费组名称 --describe
+* **查看kafka的topic对应的分区及broker数量**：./bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe
 * 命令消费数据：
   * **从头手动消费kafka数据**：./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic名称 -from-beginning
   * **手动消费数据**：./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic名称
@@ -446,6 +449,11 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 # supervisor 
 
 基于python的自动化运维工具，[参见](https://www.cnblogs.com/zhoujinyi/p/6073705.html)
+
+supervisor运行python脚本，默认情况下是后台运行。
+
+* supervisor stop  == 发送一个SIGTERM 信号给进程，要求它终止，
+* kill -9 相当于发送SIGKILL信号
 
 ## 安装配置
 
