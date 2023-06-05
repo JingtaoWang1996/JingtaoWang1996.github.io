@@ -219,7 +219,12 @@ mapReduce的三个阶段：**map->shuffle->reduce**
 
     ps：pagecache全部是对文件系统的频繁读写操作进行缓存。
 
+## clash 全局代理模式
 
+* 更新到最新版本，然后搜索[clash for windows 接管流量](https://itlanyan.com/use-enhanced-mode-in-clash-to-global-proxy/)
+* 优先使用[TUN模式]([https://www.dejavu.moe/posts/cfw-tun/#tun-%E6%A8%A1%E5%BC%8F](https://www.dejavu.moe/posts/cfw-tun/#tun-模式))
+* windows下[参考]([https://www.dejavu.moe/posts/cfw-tun/#tun-%E6%A8%A1%E5%BC%8F](https://www.dejavu.moe/posts/cfw-tun/#tun-模式))，每一步走完后，在：控制面板/网络和internet/网络连接中看到“clash”为名称的图标之后，右键“状态”确认状态是否已启用
+* Tun mode 绿色，system proxy 绿色，即可。
 
 
 ------

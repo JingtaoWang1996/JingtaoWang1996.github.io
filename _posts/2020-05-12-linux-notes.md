@@ -220,6 +220,10 @@ Some linux usage experience.
 
 * telent：telnet ip port
 
+* ifconfig： 查看网卡信息 & 确认ip等内容
+
+  * 服务器若出现ping不同网关等情况：1）背后网线没插对口 2）ifconfig 后出现了类似于“brixxx”开头的网卡，ifconfig brixxxx down 停用后解决。
+
 # 其他命令
 
 ## ssh 建隧道
