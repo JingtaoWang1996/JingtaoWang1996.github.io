@@ -33,6 +33,21 @@ Computer Science related notes included.
 * 任何技术都可使用。
 * 所有的service interface 做好设计成为能对外开放的接口。
 
+经典资料
+
+* 8条分布式被推翻的基本假设：网络稳定、传输延迟为0、带宽无穷大、网络是安全的、网络拓扑不变、只有一个系统管理员、数据传输成本为0、整个网络同构。
+
+<details>
+    <summary>经典图书</summary>
+        An introduction to distributed systems【分布式系统提纲】
+        Distributed Systems for fun and profit【免费电子书】
+        Distributed Systems: Principles and Paradigms
+        Scalable Web Architecture and Distributed Systems
+        Principles of Distributed Systems【苏黎世联邦理工教材：分布式用到的算法】
+        Making reliable distributed systems in the presence of software errors
+        Designing Data Intensive Applications
+</details>
+
 ## 需要注意的问题
 
 * 异构系统标准性：软件、应用、通信协议、数据格式、开发和运维过程是否标准。
@@ -122,11 +137,50 @@ Computer Science related notes included.
 
 ## 流量调度
 
+* 自动调度，无需人工干预，在弹性计算扩容较长事件窗口内或底层资源消耗殆尽的情况下，保持系统平稳运行。
+* API gateway：高性能语言、集群技术、业务逻辑简单，服务化(Admin API 来不停机管理变更配置)
+* 状态数据的调度：通过第三方服务进行存储。
+* 分布式事务一致性问题：各个节点上的数据备份问题，数据冗余解决数据不丢失的问题。（备份、master-slave、master-master、多阶段提交、Paxos）
+  * 凡通过业务补偿或在业务应用层上做的分布式都是两阶段提交
 
+## 数据调度
 
+* 分布一致性真正算法：**Paxos**(Lesile Lamport 1990 提出的基于消息传递且具有高度容错性的一致性算法)
+* 逻辑钟和向量钟（检测响应的数据冲突）：分布系统钟为了解决消息有序问题而布置的时钟，**由于不同的机器有不同的本地时间，同步这些时间相对困难导致消息乱序。因此，每个系统维护一个本地计数器，每执行一个事件，计数器**+1，跨系统传递时，接收端同步更新自己的计数器。
 
+## 弹性设计
 
+### 幂等性-去除重复请求
 
+* 幂等设计：一次或多次请求某个资源应具有相同的副作用。
+  * 系统解耦隔离后，服务间的调用可能会有三个状态：success, failed,timeout.前两者是明确的状态，第三种不知道是什么状态。【超时可能产生副作用：订单超时是多创建一笔？还是多扣一次钱？】
+  * 处理方式：下游系统提供相应查询接口。上游timeout后，下游差一次，查到就不做了，没查到再重复；**幂等性：**查询交给下游系统，上游只管重试，下游保证次和多次重试一致。
+* 幂等设计具体实现
+  * **全局id**：同一笔交易使用相同的id来保证幂等性。（ID的分配：使用id冲突极小的算法--UUID、snowflake【Twitter提出，long型64位id】）
+  * **过滤收到的id是否重复**：幂等性要求下游对收到的id进行存储，用于后续查询。
+* http幂等性
+  * HTTP get 方法获取资源，无副作用，是幂等的。
+  * http head 和 get 本质是一样的，区别在于head 只有头部信息，也是幂等的。[可以用来判断某个资源是否存在—用head 做探活]
+  * http options：获取当前URL所支持的方法，幂等。
+  * http delete：删除资源，同样幂等。
+  * http put：用于创建或更新操作，幂等性。
+
+### ACID
+
+* A-atomicity 原子性：事务里的所有操作，要么完成，要么不做，只要有一个操作失败，整个事务就失败，此时回滚。
+* C-consistency 一致性：数据库处于一致状态，事务的运行不会改变数据库原本的一致性约束。
+* I-Isolation 独立性：并发的事情不会相互影响，如果一个事务访问的数据正在被另一个事务修改，只要另一个事务未提交，它访问的数据就没有影响。
+* D-Durability 持久性：一旦提交后的事务，它所做的修改将会永久保存在数据库上，即使宕机也不会丢失。
+
+### CAP 
+
+对于一个分布式计算系统来说，不可能同时满足以下3点，最多2个
+
+* 一致性Consistency：所有节点同一时间具有相同的数据【要么获得最近写入的数据，要么获得一个错误。】
+* 可用性Availability：保证每个请求不管成功或失败都有响应。【每次请求都能获得一个非错误的响应，但不保证返回是最新写入的数据。】
+* 分隔容忍Partition tolerance：系统任意信息的丢失或失败不会影响系统运行操作【尽管任意数量的消息被节点间的网络丢失或延迟，系统仍然继续运行。】
+
+### BASE
 
 
 
