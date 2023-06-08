@@ -636,13 +636,24 @@ Conclusion：从最开始的限制条件绘制平面后，逐步增加新的条�
 
 TO BE CONTINUE ...
 
-  
+  ### Polyhedral cut
 
-  
+* convex hull 凸包：线性规划解空间中（多维），最外围整数点解连线构成的区域所包含的范围。
+* 凸包（Convex Hull）是**一个计算几何（图形学）中的概念**。 在一个实数向量空间V中，对于给定集合X，所有包含X的凸集的交集S被称为X的凸包。 X的凸包可以用X内所有点(X1，...Xn)的凸组合来构造. 在二维欧几里得空间中，凸包可想象为一条刚好包著所有点的橡皮圈。[参考](https://baike.baidu.com/item/%E5%87%B8%E5%8C%85/179150)
 
-  
+  <img src='/images/img/cut_hull.png'>
 
-  
+* **polyhedral cuts：**cuts that represent the facets of the convex hull of integer solutions.
+  * these cuts do not remove any integer solution.
+  * use linear programming to solve & get solution.
+  * derived from the structure of constraints & not based on information in the tableau.
+  * do not need to generate all of them.
+
+  **What is a Facet?**
+
+
+
+
 
   
 
