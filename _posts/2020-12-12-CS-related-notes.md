@@ -130,8 +130,94 @@ PS: 类型是“仅主机”的应该直接就是虚拟交换机
 
 ## 服务器搭建
 
-* centos 搭建DNS解析服务器（使用named-ckeckconf -z 命令无输出则无错误），[参考](https://blog.csdn.net/qq_40707090/article/details/123561997)
-* 虚拟机上搭建bind服务器
+* centos 搭建DNS解析服务器(使用named-ckeckconf -z 命令无输出则无错误),[参考](https://blog.csdn.net/qq_40707090/article/details/123561997)
+* DNS服务器是否支持DOH测试命令：curl -H 'accept: application/dns-json' 'https://rubyfish.cn/dns-query?name=www.google.com&type=A
+
+### 虚拟机搭建bind服务器
+
+[ref1](https://blog.csdn.net/liang12360640/article/details/45219637),[ref2](https://www.jb51.net/article/33941.htm)
+
+* 基本环境级网络配置：VMware+Ubuntu20.04
+
+* bind9 安装：su root ->apt-get install bind9
+
+* 配置虚拟机网络vmware：
+
+  * 编辑->虚拟网络编辑器 ->修改“桥接模式（将虚拟机直接连接到外网）”【已桥接至后面的“自动” 修改为的Intel ethernet connection，连接网卡】
+
+  * 修改ipv4地址（ubuntu可以通过界面-wired settings-wired 修改ipv4地址、网关、掩码）
+
+    PS: 网关和掩码可以cmd运行“ipconfig/all”获取；
+
+    PPS: ip自动获取需要从DHCP修改为manual
+
+* 创建DNS根区文件：
+
+  * vim /etc/named.conf(添加域名sword.cn 正向解析区域，见图中"Zone定义部分")
+
+    <img src='/images/img/DNS1.png'>
+
+    PS:这样添加文件应在 /etc/bind/下面，若写明/var/named/xx 文件会在/var/named/下面
+
+  * named-checkconf命令：检查预防是否正确
+
+  * rndc-confgen> /etc/rndc.conf
+
+  * mkdir /var/named
+
+  * 创建对应域名的根区文件
+
+    <img src='/images/img/DNS2.png'>
+
+    PS: 必须按章上述格式完全一致来，最后两行先写NS记录，再写其他记录
+
+    Named-checkzone 192.168.1.sword /var/named/192.168.1.sword (不一定需要)
+
+* 开启服务：service named start or named -u cetc21
+
+* 更改DNS区文件(/etc/bind 下面的sword.cn文件)后重启服务：rndc reload
+
+* 使用dig命令进行验证: 确保测试机和虚拟机之间能够直接ping通
+
+## dig 命令
+
+[参考1]( [https://ww w.jianshu.com/p/18359188f3e4](https://www.jianshu.com/p/18359188f3e4)),[参考2](https://www.cnblogs.com/ginvip/p/6365605.html)
+
+### 常见记录
+
+* A：域名的ipv4地址
+* AAAA: 域名的ipv6地址
+* CNAME: 域名存在的别名
+* NS: 域名服务器记录
+
+### 使用示例
+
+* 命令格式：dig 域名 要查询记录类型 @服务器ip  【dig -6 域名 类型@目标服务器ipv6】
+
+* 若不指定目标服务器ip，则依次从 /etc/resolv.conf里选择nameserver 作为DNS目标服务器。
+
+  **ps：若dig不通，除了联网排查外，还需要考虑 /etc/resolv.conf 是否缺少解析服务器**
+
+  **pps：若代码修改 /etc/resolv.conf 后出现dig无法解析的情况，可能原因是最后缺少一个空格。**
+
+* 结果说明（重点关注）
+
+  * rcode: status  NOERROR---查询结果正常返回。
+  * Answer/Authority/Additional section: 返回的解析结果
+  * querytime：解析时间
+  * server：目标服务器ip
+
+* 命令格式中加入：+short,则只显示制定域名的解析结果，不包含其他信息【dig +short 域名】
+
+* 跟踪整个查询过程加入：+trace,显示整个查询过程
+
+* 反查ip对应的域名：dig -x 8.8.8.8 +short
+
+* 仅查某section：dig qq.com +nocomments +noquestion +noauthority +noadditional +nostats
+
+## CDN & DNS
+
+
 
 
 ------
