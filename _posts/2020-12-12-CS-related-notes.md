@@ -89,6 +89,11 @@ vmware提供的[三种工作模式](https://blog.csdn.net/weixin_42442713/articl
 
 PS: 类型是“仅主机”的应该直接就是虚拟交换机
 
+## 心跳机制
+
+* 心跳包：定时发送一个自定义结构体（心跳包），让对方知道自己还活着，以**确保连接有效性。**
+* TCP 已经实现了可设置参数的心跳机制，如果设置了心跳，那么TCP就会在一定时间内发送你设置次数的心跳，并且此信息不会影响你自己定义的协议。
+
 # IO 模型
 
 * 4种常见IO模型：同步IO (synchronous)、异步IO(asynchronous)、阻塞（blocking）、非阻塞IO（同步 ≈ 阻塞，异步≈非阻塞）
@@ -180,6 +185,132 @@ PS: 类型是“仅主机”的应该直接就是虚拟交换机
 * 更改DNS区文件(/etc/bind 下面的sword.cn文件)后重启服务：rndc reload
 
 * 使用dig命令进行验证: 确保测试机和虚拟机之间能够直接ping通
+
+### DOH&DOT
+
+#### DOH&DOT&DNSSEC服务器搭建
+
+DOH 服务器安装，[ref1](https://blog.csdn.net/qq_39378221/article/details/103245108),[ref2](https://www.aaflalo.me/2018/10/tutorial-setup-dns-over-https-server/)
+
+* ubuntu20.04 +dnscrypt安装
+
+  * sudo add-apt-repository ppa:shevchuk/dnscrypt-proxy
+  * apt-get update & sudo apt install dnscrypt-proxy
+
+* 安装成功后会出现：/etc/dnscrypt-proxy,显示监听地址：127.0.0.53:53
+
+* vim /etc/dnscrypt-proxy/dnscrypt-proxy.toml 文件的server_name字段：**server_names = ['cloudflare']**
+
+* 重启dnscrypt-proxy服务：sudo systemctl restart dnscrypt-proxy
+
+* DOH服务器包[下载链接](https://pan.baidu.com/s/1au3-AbPOcMo6wqyyVqeZJg):密码fgnl，下载号之后，执行：dpkg -i doh-server\_*_amd64.deb
+
+* cd  /etc/dns-over-https/doh-server.conf 修改参数：
+
+  ```
+  listen = ["127.0.0.1:8053"]
+  upstream = ["127.0.0.53:53"] //dns-proxy监听地址
+  ```
+
+* 修改完成后重启doh服务：sudo systemctl restart doh-server
+
+nignx安装（反向代理服务器，将收到的https请求解码并发送到doh-server上）
+
+* 安装 nginx：add-apt-repository ppa:ondrej/nginx
+
+* apt-get update & apt install nginx-full
+* 配置 nginx：sudo add-apt-repository ppa:ondrej/nginx  & sudo apt install nginx-full
+
+* 将如下内容放入 /etc/nginx/sites-available/dns-over-https
+
+```
+upstream dns-backend {
+server 127.0.0.1:8053;
+}
+
+server {
+listen 80;
+server_name dns.example.com;
+root /var/www/html/dns;
+access_log /var/log/nginx/dns.access.log;
+location /dns-query {
+proxy_set_header X-Real-IP **$remote_addr**;
+proxy_set_header X-Forwarded-**For** **$proxy_add_x_forwarded_for**;
+proxy_set_header Host **$http_host**;
+proxy_set_header X-NginX-Proxy true;
+proxy_http_version 1.1;
+proxy_set_header Upgrade **$http_upgrade**;
+proxy_redirect off;
+proxy_set_header X-Forwarded-Proto **$scheme**;
+proxy_read_timeout 86400;
+proxy_pass http://dns-backend/dns-query ;
+}
+
+}
+```
+
+
+
+#### 判断服务器是否支持DoT, DoH
+
+* DNS over TLS：基于TLS进行报文加密的DNS请求，侧重于DNS交互报文的加密性。
+
+* 判断依据：（端口直接搜到）
+
+  * DOH:是否通过RFC8484制定的经过TLS 加密的http 链接提供DNS解析。
+
+  * DOT:是否通过RFC7858制定的经过TLS 加密的TCP 连接提供DNS解析。
+
+  * [阿里云公共DNS](https://developer.aliyun.com/article/757592)
+
+  * 使用Zmap 或Nmap 扫描网络端口后，找到853开放的服务器，向他们发送DoT,能够从853端口正常返回值，则表示该服务器支持DoT
+
+  * DOT: DNSserver 能在默认853端口监听和接收TCP 连接，能够从853端口接收TCP 连接的默认为支持DOT。[若使用853以外的端口，需要在DOT client 中增加设定，默认使用853端口]。
+
+    3) DOH：443 端口同时和HTTPS 数据流访问共享，单独定位解析相对困难，通过当前已知的模板扫描全网所有的URL得到服务器是否支持DOH。
+
+#### 判断DNS服务器是否支持随机化端口号、DNSSEC、TXID、0X20
+
+从端口号、transaction ID、域名上增加随机过程提高DNS缓存中毒过程中猜测的难度。
+
+* [随机化端口号1](https://mohen.blog.csdn.net/article/details/110558422)、[随机化端口号2](https://zhuanlan.zhihu.com/p/92899876?utm_source=wechat_session)：微软提出的基于2008年卡明斯基发现的DNS漏洞的缓解方案。DNS服务每次通信时都在1024-65536端口号中随机选一个和对方建立通信连接（端口号，QueryID，域名同时匹配才接收对方的消息，增加攻击信息加塞的猜测难度---攻击信息必须赶在真实信息返回之前猜对端口号、QueryID进行加塞【请求有顺序，域名可以直接从问题中得到，故实际需要猜测的仅仅是端口号】。攻击信息加塞成功后，原本真实的信息就会被抛弃。）
+  * 测信道攻击(side-channel attack)：利用主信道传输加密信息以外的透露出的其他情况（功耗、声音、热量、辐射等等）来得到主信道当中可能存在的敏感信息。
+  * Conclusion: 随机化端口号和其他基于随机化的防御措施主要用抵抗缓存信息加塞带来的缓存污染问题，只要保证加塞的攻击信息在真实信息之后返回即可视为防御成功。
+
+* TXID(transaction ID) :[随机化产生TXID保证DNS信息和请求的安全](https://msrc-blog.microsoft.com/2008/04/09/ms08-020-how-predictable-is-the-dns-transaction-id/):16bit entity primarily used as a synchronization mechanism between DNS servers and client. (Can be consider as an intial Sequence number for DNS query/ response exchange. )
+  * TXID:通过算法随机生成来增加TXID猜测难度，防止DNS的入侵和破坏。
+  * 随机生成TXID的算法主要是PRNG算法生成，但攻击者可以根据连续的状态估计后面的TXID（上面的10001，10002后面就是10003，10004）
+  *  PRNG 算法----可以看出TXID大概率可估计（或至少可以大概率缩小真实TXID搜索空间,同时发送几千个不同TXID的DNS反馈，很大概率能够直接猜中。）
+
+
+
+* 0X20 encoding(Georiga Tech ccs 2008)-----随机大小写域名
+
+DNS-0X20是一种未被标准化的防伪机制。基于本身存在的transaction ID 容易被猜测伪造的情况下，考虑：将DNS请求包中的域名随机大小写，加上DNS server 需要遵守RFC1034的规范，按照回应的域名需要按照请求的域名原样返回，这就增大了DNS缓存投毒难度。【攻击者如果想记录发出去的包中域名是大写还是小写就需要一致维持一个session】
+
+在ASCII码表中，大写字母从0X41开始，小写字母从0X61开始，刚好相差OX20.
+
+Google 在构建public server（8.8.8.8）时，仅仅将在白名单中的DNSserver使用0X20 encoding，即使在这样的情况下，这样的请求也占了近70%（ https://developers.google.com/speed/public-dns/docs/security））
+
+ 
+
+4）DNScookie----RFC7873（https://kb.isc.org/docs/aa-01387）
+
+ DNS cookie是DNS的扩展选项。它允许客户机检测并忽略偏离路径的欺骗响应，并允许服务器确定客户机的地址没有被欺骗。( DNS cookie is an extended DNS option. It allows the client to detect and ignore off-path spoofed responsed, and the server to determine that a client’s address is not spoofed.)
+
+ DNS cookie 在client 和 server 之间都生成，并在发起DNS请求的时候将两者产生的DNScookie不断交换。
+
+ Pros：【1】cookies are a low-cost, light-weight way to ensure that both parties(client/servers) know who they are talking to. Since cookie are well deployed in https connection for decades, EDNS cookie can also be consider as a good choice.
+
+ The reference above, shows how bind9 use and config cookie.
+
+ 
+
+5) DNSSEC（domain name system security extensions）
+
+ 主要用于验证对域名查找的相应，不会为这些查找提供隐私保护，但会阻止攻击者操控对DNS请求的相应或在该响应中投毒。
+
+ 主要做法：在DNS请求过程的各个阶段信息中增加一段信息用于验证，并在整段DNS请求过程中
 
 ## dig 命令
 
@@ -444,7 +575,7 @@ Step3: 建立BGP 拓扑图
 
 Step4: python 抓TCP包
 
-
+# 
 
 
 
