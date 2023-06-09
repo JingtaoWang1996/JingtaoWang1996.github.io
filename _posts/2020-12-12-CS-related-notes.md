@@ -282,35 +282,11 @@ proxy_pass http://dns-backend/dns-query ;
   * 随机生成TXID的算法主要是PRNG算法生成，但攻击者可以根据连续的状态估计后面的TXID（上面的10001，10002后面就是10003，10004）
   *  PRNG 算法----可以看出TXID大概率可估计（或至少可以大概率缩小真实TXID搜索空间,同时发送几千个不同TXID的DNS反馈，很大概率能够直接猜中。）
 
+* 0X20 encoding(Georiga Tech ccs 2008)-----随机大小写域名: DNS-0X20是一种未被标准化的防伪机制。基于本身存在的transaction ID 容易被猜测伪造的情况下考虑：将DNS请求包中的域名随机大小写，加上DNS server 需要遵守RFC1034规范，按照回应的域名需要按照请求的域名原样返回，增大了DNS缓存投毒难度。【攻击者如果想记录发出去的包中域名是大写还是小写就需要一致维持一个session】在ASCII码表中，大写字母从0X41开始，小写字母从0X61开始，刚好相差OX20.
+* Google 在构建public server（8.8.8.8）时，仅仅将在白名单中的DNSserver使用0X20 encoding，即使在这样的情况下，这样的请求也占了近70%[参考](https://developers.google.com/speed/public-dns/docs/security)
+* DNScookie----RFC7873[ref](https://kb.isc.org/docs/aa-01387)：DNS cookie is an extended DNS option. It allows the client to detect and ignore off-path spoofed responsed, and the server to determine that a client’s address is not spoofed.
 
-
-* 0X20 encoding(Georiga Tech ccs 2008)-----随机大小写域名
-
-DNS-0X20是一种未被标准化的防伪机制。基于本身存在的transaction ID 容易被猜测伪造的情况下，考虑：将DNS请求包中的域名随机大小写，加上DNS server 需要遵守RFC1034的规范，按照回应的域名需要按照请求的域名原样返回，这就增大了DNS缓存投毒难度。【攻击者如果想记录发出去的包中域名是大写还是小写就需要一致维持一个session】
-
-在ASCII码表中，大写字母从0X41开始，小写字母从0X61开始，刚好相差OX20.
-
-Google 在构建public server（8.8.8.8）时，仅仅将在白名单中的DNSserver使用0X20 encoding，即使在这样的情况下，这样的请求也占了近70%（ https://developers.google.com/speed/public-dns/docs/security））
-
- 
-
-4）DNScookie----RFC7873（https://kb.isc.org/docs/aa-01387）
-
- DNS cookie是DNS的扩展选项。它允许客户机检测并忽略偏离路径的欺骗响应，并允许服务器确定客户机的地址没有被欺骗。( DNS cookie is an extended DNS option. It allows the client to detect and ignore off-path spoofed responsed, and the server to determine that a client’s address is not spoofed.)
-
- DNS cookie 在client 和 server 之间都生成，并在发起DNS请求的时候将两者产生的DNScookie不断交换。
-
- Pros：【1】cookies are a low-cost, light-weight way to ensure that both parties(client/servers) know who they are talking to. Since cookie are well deployed in https connection for decades, EDNS cookie can also be consider as a good choice.
-
- The reference above, shows how bind9 use and config cookie.
-
- 
-
-5) DNSSEC（domain name system security extensions）
-
- 主要用于验证对域名查找的相应，不会为这些查找提供隐私保护，但会阻止攻击者操控对DNS请求的相应或在该响应中投毒。
-
- 主要做法：在DNS请求过程的各个阶段信息中增加一段信息用于验证，并在整段DNS请求过程中
+* DNSSEC（domain name system security extensions）:用于验证对域名查找的相应，不会为这些查找提供隐私保护，但会阻止攻击者操控对DNS请求的相应或在该响应中投毒。【在DNS请求过程的各个阶段信息中增加一段信息用于验证，并在整段DNS请求过程中】
 
 ## dig 命令
 
