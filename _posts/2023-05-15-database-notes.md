@@ -126,7 +126,7 @@ RDMS 基本概念
 
 * 参照完整性：参照的完整性要求关系**中不允许引用不存在的实体**，与实体的完整性是关系模型必须满足的完整性约束条件，目的是保证数据一致性。
 
-  ![mysql示例图](./img/mysql示例图.png)
+  <img src='/images/img/mysql示例图.png'>
 
  例子如图：
 
@@ -185,7 +185,7 @@ ubuntu 安装mysql，[参考](https://blog.csdn.net/hwx865/article/details/90287
 
 * 测试mysql：systemctl status mysql.service [以下为正常状态]
 
-  ![mysql正常运行示例图](./img/mysql正常运行示例图.png)
+  <img src='/images/img/mysql正常运行示例图.png'>
 
 ## 服务操作---命令结尾加上：；
 
@@ -341,6 +341,7 @@ PS: 如果使用UNION ALL 则集合之后的结果可能会有重复
   2） 数据库和数据库对象操作：对某个数据增删改查操作，也包括对数据库中的表、索引或者试图的增删改查操作。
 
 * 权限授予：grant : GRANT INSERT,UPDATE,XXXX ON customer.address TO 'root@localhost'
+
 * 权限撤销：revoke ：REMOVE INSERT,UPDATE,XXXX ON customer.address from 'root@localhost'
 
 # Mongo
@@ -353,7 +354,7 @@ PS: 如果使用UNION ALL 则集合之后的结果可能会有重复
 
 * 进入[下载地址](https://www.mongodb.com/try/download/community)后，选择适合版本然后wget下载
 
-  <img src="./img/mongo下载图.png" alt="mongo下载图" style="zoom:75%;" />
+  <img src='/images/img/mongo下载图'>
 
   **PS: cat/etc/red-hat release** **进行查询centos****版本号**
 
