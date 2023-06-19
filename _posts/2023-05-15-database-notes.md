@@ -489,7 +489,7 @@ my_col.update_many() # 更新多个
 [官方网站](https://www.sqlite.org/index.html)
 
 * [极限参考](https://www.sqlite.org/limits.html)：最大支持256TB,256000GB
-* 查询速度：
+* 查询速度：有索引的情况下可达到ms级
 
 ## 安装配置
 
