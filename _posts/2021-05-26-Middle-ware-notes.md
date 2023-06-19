@@ -8,11 +8,7 @@ tags:
   - category2
 ---
 
-Some usage experience collection：
-
-* Automated Tools:  Docker、Supervisor、Ansible
-
-* Middle-ware: Kafka、ZK、Nignx、Postman
+Some usage experience collection：Docker、Supervisor、Ansible、Kafka、ZK、Nignx、Postman
 
 # Docker
 
