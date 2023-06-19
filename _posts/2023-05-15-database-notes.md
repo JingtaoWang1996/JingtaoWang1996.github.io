@@ -94,6 +94,8 @@ Possible solution2: redis_maxIdle 和 maxtotal参数值大小是否合适，可�
 
 所有操作命令都需要加------**“；”**
 
+mysql5.7 版本之后开始支持json格式数据
+
 ## 关系型数据库（RDBMS) & NoSql
 
 相关[参考](https://www.runoob.com/mysql/mysql-tutorial.html)
