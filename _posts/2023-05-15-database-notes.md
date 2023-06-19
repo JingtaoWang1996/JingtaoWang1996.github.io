@@ -511,3 +511,6 @@ my_col.update_many() # 更新多个
 ​       优化显示: .header on   |   . mode column
 
 * 写入数据命令: insert into 表名 values(v1,”v2”,….) # 字符串用“”，数字直接写
+
+---
+
