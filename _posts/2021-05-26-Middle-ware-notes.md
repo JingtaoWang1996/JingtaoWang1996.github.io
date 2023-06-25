@@ -8,7 +8,11 @@ tags:
   - category2
 ---
 
-Some usage experience collection：Docker、Supervisor、Ansible、Kafka、ZK、Nignx、Postman
+Some usage experience collection：
+
+* Automated Tools:  Docker、Supervisor、Ansible
+
+* Middle-ware: Kafka、ZK、Nignx、Postman
 
 # Docker
 
@@ -316,9 +320,8 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 
   * nohup ./bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
 
-  * ps -ef|grep kafka 
+  * ps -ef\|grep kafka 
 
-* 
 
 ## producer 参数调优
 
