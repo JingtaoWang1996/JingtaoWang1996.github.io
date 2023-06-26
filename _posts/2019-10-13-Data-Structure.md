@@ -584,13 +584,36 @@ PS: dp动态规划也是同样的思路。
 
 * 查找第一个值等于给定值的元素
 
-  
+  更新：mid>value, high = mid -1;  mid< value low = mid +1；mid=value, 确定是否为第一个（mid=0 or mid -1 ！=value），若不是，则high = mid -1
 
 * 查找最后一个值等于给定值的元素
 
+  更新：mid>value, high = mid -1;  mid< value low = mid +1；mid=value, 确定是否为最后一个（mid=n or mid+1<n &mid +1 ！=value），若不是，则 low = mid +1
+
 * 查找第一个值大于给定值的元素
 
+  更新：mid<=value,low=mid+1;mid>value: (mid =0 or mid-1<=value) 否: high = mid -1
+
 * 查找最后一个值小于于给定值的元素
+
+  更新：mid>=value,high=mid-1;mid<value: (mid =n or mid+1>=value) 否: low = mid +1
+
+# 跳表Skip list
+
+链表改造后用于二分法查找的数据结构
+
+* 动态数据结构：支持快速插入、删除、查找。
+* Redis 中 Sorted Set 就是通过跳表实现。
+
+对于单链表：查找 O(n)
+
+**跳表：将链表增加索引层，减少遍历次数**
+
+<img src='/images/img/跳表.jpg'>
+
+
+
+
 
 
 ------
