@@ -1120,6 +1120,16 @@ Multiprocessing 模块不仅支持多进程，其中的managers 子模块还支�
 
 PS：manager 模块封装较好，可以直接使用，编写分布式多进程程序。
 
+### 事件循环loop 使用注意问题
+
+* 在loop.start 前添加任务，可以使用loop.create_task(add_task) 添加任务，**若loop已经启动，则需要按照如下方式进行任务添加，“<u>否则会出现任务丢失的情况</u>”：**
+
+```python
+loop.call_soon_threadsafe(asyncio.ensure_future, add_task(task, producer, sem, dns_conf.ip2domain, loop, dict(), dict()))
+```
+
+call_soon_threadsafe 在loop启动后添加任务，ensure future 将任务包装成异步对象，防止await问题
+
 ## 协程
 
 协程又称微线程，纤程，一种用户态的轻量级线程。[参考](https://www.cnblogs.com/yuanchenqi/articles/6755717.html)
