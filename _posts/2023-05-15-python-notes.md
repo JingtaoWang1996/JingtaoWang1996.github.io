@@ -913,6 +913,20 @@ loop.call_soon_threadsafe(asyncio.ensure_future, add_task(task, producer, sem, d
 
 call_soon_threadsafe 在loop启动后添加任务，ensure future 将任务包装成异步对象，防止await问题
 
+* loop 在上述情况仍然可能导致任务丢失，下述链接中搜索“disappering”[参考](https://docs.python.org/3/library/asyncio-task.html#coroutines)
+
+  解决方式 # 将任务在set中添加reference，防止上述文档中执行到一半丢失
+
+```
+background_tasks = set() 
+bgt = asyncio.run_coroutine_threadsafe(add_task(task, producer, sem, ip2domain, loop, root_a, key_a),
+                                       loop)
+background_tasks.add(bgt)
+bgt.add_done_callback(background_tasks.discard)
+```
+
+**使用asyncio.run_coroutine_threadsafe替换call_soon_threadsafe**
+
 ## 协程
 
 协程又称微线程，纤程，一种用户态的轻量级线程。[参考](https://www.cnblogs.com/yuanchenqi/articles/6755717.html)
