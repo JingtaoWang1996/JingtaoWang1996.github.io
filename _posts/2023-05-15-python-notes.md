@@ -695,24 +695,6 @@ Run -> Edit Configurations -> 选择脚本后，右侧“parameters“ 中添加
 
 # 数据结构
 
-## 堆heapq
-
-* 小根堆：父节点**小于等于**所有子节点
-* 大根堆：父节点**大于等于** 所有子节点
-* **python实现：默认为小根堆 == 最小值为父节点，根堆list第一个元素永远最小**
-
-```
-import heapq
-
-nums, k = list(), 10
-q = [(-nums[i], i) for i in range(k)] # 初始化k窗口大小的list
-print(q)
-heapq.heapify(q) # list 转为堆，默认小根堆
-print(q)
-# 入队：heapq.happush(q, (-nums[i], i))  # 入队新的元素
-# 出队：heapq.heappop(q)
-```
-
 ## hash-dict
 
 * 将字典中单引号修改为双引号：json.dumps()
