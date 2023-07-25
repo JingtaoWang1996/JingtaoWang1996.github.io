@@ -80,7 +80,287 @@ Enjoy these worth try reading books！
   </tbody>
 </table>
 </details>
+<details>
+    <summary>其他</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《长安十二时辰》</td>
+    </tr>
+    <tr>
+      <td>《将夜》</td>
+    </tr>
+    <tr>
+      <td>《听雪楼》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
 
+# Imagination
+
+<details>
+    <summary>Harry Potter</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《哈利波特与魔法石》</td>
+    </tr>
+    <tr>
+      <td>《哈利波特与密室》</td>
+    </tr>
+    <tr>
+      <td>《哈利波特与阿茨卡班的囚徒》</td>
+    </tr>  
+    <tr>
+      <td>《哈利波特与火焰杯》</td>
+    </tr>
+     <tr>
+      <td>《哈利波特与凤凰社》</td>
+    </tr>
+    <tr>
+      <td>《哈利波特与混血王子》</td>
+    </tr>
+    <tr>
+      <td>《哈利波特与死亡圣器》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>九州</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《九州-羽传说》</td>
+    </tr>
+    <tr>
+      <td>《九州-斛珠夫人》</td>
+    </tr>
+    <tr>
+      <td>《九州-缥缈录》</td>
+    </tr>  
+    <tr>
+      <td>《九州-刺客王朝*葵》</td>
+    </tr>
+    <tr>
+      <td>《九州-海上牧云记》</td>
+    </tr>
+    <tr>
+      <td>《九州-商博良》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>江南</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《龙族-火之晨曦》</td>
+    </tr>
+    <tr>
+      <td>《龙族-悼亡者之瞳》</td>
+    </tr>
+    <tr>
+      <td>《龙族-黑月之潮》</td>
+    </tr>
+        <tr>
+      <td>《龙族-奥丁之渊》</td>
+    </tr>
+    <tr>
+      <td>《龙族-悼亡者的归来》</td>
+    </tr>
+    <tr>
+      <td>《上海堡垒》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>刘慈欣</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《三体》</td>
+    </tr>
+    <tr>
+      <td>《流浪地球》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>其他</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《古董局中局1-4》</td>
+    </tr>
+    <tr>
+      <td>《斗破苍穹》</td>
+    </tr>
+    <tr>
+      <td>《吞噬星空》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+# 推理
+
+<details>
+    <summary>东野圭吾</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《嫌疑人X的献身》</td>
+    </tr>
+    <tr>
+      <td>《解忧杂货店》</td>
+    </tr>
+    <tr>
+      <td>《白金数据》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>其他</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《必须找到阿历克斯》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+# 历史
+
+<details>
+    <summary>外传</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《明朝那些事》</td>
+    </tr>
+    <tr>
+      <td>《曹操》</td>
+    </tr>
+    <tr>
+      <td>《宋朝原来是这样》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+# 心理学
+
+<details>
+    <summary>犯罪心理学</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《心理罪全集》</td>
+    </tr>
+    <tr>
+      <td>《坏小孩》</td>
+    </tr>
+    <tr>
+      <td>《暗黑者四部曲》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
+# 其他
+
+<details>
+    <summary>值得一读</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《追风筝的人》</td>
+    </tr>
+    <tr>
+      <td>《小王子》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
 
 
 
