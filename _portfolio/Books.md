@@ -1,5 +1,5 @@
 ---
-title: "Worth Shoot Book list"
+title: "Worth Reading Book list"
 collection: portfolio
 ---
 
