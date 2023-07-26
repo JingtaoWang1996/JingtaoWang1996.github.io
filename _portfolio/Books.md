@@ -3,7 +3,7 @@ title: "Worth Reading Book list"
 collection: portfolio
 ---
 
-Enjoy these worth try reading books！
+Enjoy these worth reading books！
 
 
 
