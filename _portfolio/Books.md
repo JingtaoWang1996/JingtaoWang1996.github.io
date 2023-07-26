@@ -89,6 +89,9 @@ Enjoy these worth reading books！
   </thead>
   <tbody>
     <tr>
+      <td>《水浒传》</td>
+    </tr>
+    <tr>
       <td>《长安十二时辰》</td>
     </tr>
     <tr>
@@ -105,7 +108,8 @@ Enjoy these worth reading books！
 </details>
 
 
-# Imagination
+
+# 想象
 
 <details>
     <summary>Harry Potter</summary>
@@ -202,7 +206,6 @@ Enjoy these worth reading books！
   </tbody>
 </table>
 </details>
-
 <details>
     <summary>刘慈欣</summary>
     <table>
@@ -218,9 +221,6 @@ Enjoy these worth reading books！
     <tr>
       <td>《流浪地球》</td>
     </tr>
-    <tr>
-      <td>《》</td>
-    </tr>  
   </tbody>
 </table>
 </details>
@@ -235,6 +235,12 @@ Enjoy these worth reading books！
   </thead>
   <tbody>
     <tr>
+      <td>《西游记》</td>
+    </tr>
+    <tr>
+      <td>《聊斋志异》</td>
+    </tr>
+    <tr>
       <td>《古董局中局1-4》</td>
     </tr>
     <tr>
@@ -246,6 +252,7 @@ Enjoy these worth reading books！
   </tbody>
 </table>
 </details>
+
 
 # 推理
 
@@ -283,15 +290,11 @@ Enjoy these worth reading books！
       <td>《风声》</td>
     </tr>
     <tr>
-      <td>《》</td>
+      <td>《黎明之街》</td>
     </tr>
-    <tr>
-      <td>《》</td>
-    </tr>  
   </tbody>
 </table>
 </details>
-
 
 <details>
     <summary>其他</summary>
@@ -305,16 +308,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《必须找到阿历克斯》</td>
     </tr>
-    <tr>
-      <td>《》</td>
-    </tr>
-    <tr>
-      <td>《》</td>
-    </tr>  
   </tbody>
 </table>
 </details>
-
 
 # 历史
 
@@ -339,10 +335,30 @@ Enjoy these worth reading books！
     <tr>
       <td>《三国演义》</td>
     </tr>  
+    <tr>
+      <td>《说岳全传》</td>
+    </tr>  
   </tbody>
 </table>
 </details>
 
+# 权谋
+
+<details>
+    <summary>海晏</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《琅琊榜》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
 
 # 心理学
 
@@ -398,14 +414,21 @@ Enjoy these worth reading books！
       <td>《海底两万里》</td>
     </tr>
     <tr>
-      <td>《》</td>
+      <td>《文化苦旅》余秋雨</td>
     </tr> 
     <tr>
-      <td>《》</td>
-    </tr>    
+      <td>《围城》钱钟书</td>
+    </tr> 
+    <tr>
+      <td>《边城》沈从文</td>
+    </tr>   
+    <tr>
+      <td>《瓦尔登湖》沈从文</td>
+    </tr>  
   </tbody>
 </table>
 </details>
+
 
 
 
