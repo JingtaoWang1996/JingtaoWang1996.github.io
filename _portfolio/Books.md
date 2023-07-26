@@ -64,7 +64,6 @@ Enjoy these worth try reading books！
   </tbody>
 </table>
 </details>
-
 <details>
     <summary>古龙</summary>
     <table>
@@ -97,10 +96,14 @@ Enjoy these worth try reading books！
     </tr>
     <tr>
       <td>《听雪楼》</td>
-    </tr>  
+    </tr> 
+    <tr>
+      <td>《三侠五义》</td>
+    </tr> 
   </tbody>
 </table>
 </details>
+
 
 # Imagination
 
@@ -267,6 +270,28 @@ Enjoy these worth try reading books！
   </tbody>
 </table>
 </details>
+<details>
+    <summary>麦家</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《风声》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>
+    <tr>
+      <td>《》</td>
+    </tr>  
+  </tbody>
+</table>
+</details>
+
 
 <details>
     <summary>其他</summary>
@@ -290,6 +315,7 @@ Enjoy these worth try reading books！
 </table>
 </details>
 
+
 # 历史
 
 <details>
@@ -310,9 +336,13 @@ Enjoy these worth try reading books！
     <tr>
       <td>《宋朝原来是这样》</td>
     </tr>  
+    <tr>
+      <td>《三国演义》</td>
+    </tr>  
   </tbody>
 </table>
 </details>
+
 
 # 心理学
 
@@ -356,11 +386,27 @@ Enjoy these worth try reading books！
       <td>《小王子》</td>
     </tr>
     <tr>
+      <td>《谁动了我的奶酪》</td>
+    </tr>
+    <tr>
+      <td>《蝇王》</td>
+    </tr> 
+    <tr>
+      <td>《岛上书店》</td>
+    </tr>
+    <tr>
+      <td>《海底两万里》</td>
+    </tr>
+    <tr>
       <td>《》</td>
-    </tr>  
+    </tr> 
+    <tr>
+      <td>《》</td>
+    </tr>    
   </tbody>
 </table>
 </details>
+
 
 
 
