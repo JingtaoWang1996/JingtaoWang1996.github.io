@@ -206,6 +206,14 @@ Some performance related development notes.
 * 合并&批处理：flink
 * 算法设计、数据结构优化
 
+**SSD损耗**
+
+* 每个SSD都有固定数量的擦除周期，若在短时间内写到SSD太多数据，就会导致SSD损耗太快。
+
+**最大可接受延迟**
+
+* 200ms
+
 
 ------
 
