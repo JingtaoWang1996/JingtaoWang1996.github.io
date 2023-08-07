@@ -383,7 +383,6 @@ Enjoy these worth reading books！
   </tbody>
 </table>
 </details>
-
 # 其他
 
 <details>
@@ -428,7 +427,21 @@ Enjoy these worth reading books！
   </tbody>
 </table>
 </details>
-
+<details>
+    <summary>金融</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《货币战争1-5》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
 
 
 
