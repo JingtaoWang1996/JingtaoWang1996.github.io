@@ -1,3 +1,16 @@
+---
+title: 'Database-notes'
+date: 2023-05-15
+permalink: /posts/2023/05/Database-notes/
+tags:
+  - cool posts
+  - category1
+  - category2
+
+---
+
+Database related notes.
+
 # 数据库
 
 * 数据库重点是：以SQL为代表的关系型数据库（Oracle，MySQL,Postgres），noSQL代表的非关系型数据库
@@ -523,6 +536,14 @@ my_col.update_many() # 更新多个
 ​       优化显示: .header on   |   . mode column
 
 * 写入数据命令: insert into 表名 values(v1,”v2”,….) # 字符串用“”，数字直接写
+
+
+
+
+
+
+
+
 
 ---
 
