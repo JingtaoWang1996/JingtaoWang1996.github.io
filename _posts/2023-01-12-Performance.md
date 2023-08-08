@@ -242,12 +242,6 @@ Some performance related development notes.
 
 * 对于未来可能增加的流量---通过消费队列进行缓冲。
 
-## 多程序互相干扰
-
-可能出现多个代码在一台服务器上运行导致性能干扰极大。
-
-
-
 
 
 
