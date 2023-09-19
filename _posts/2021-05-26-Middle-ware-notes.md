@@ -423,27 +423,52 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * **接口测试转发工具，可以模拟用户发起各类HTTP**请求，将请求数据发送到服务端，获取对应的响应结果。[get、post、delete、put类请求]
 * Postman 与浏览器的区别在于浏览器不能输出Json格式，而postman可以更直观看到接口返回结果。
 
-# Nignx
+# Nginx
 
 * 高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。
 * 内存占有率小、并发能力强、可在大多数Linux上编译运行，同时也是优秀的邮件代理服务器。
 
 ## 安装配置
 
+**windows**
+
 * 下载对应版本的压缩包 D:\173\nginx-1.22.1\：
 * nginx 相关配置
   * 配置文件：conf 目录下的nginx.conf
   * 默认监听端口：80
   * 查看端口是否被占用：netstat –ano| findstr 0.0.0.0：80
-
 * 启动nginx：
   * 运行 nginx.exe, 黑色弹窗一闪而过就完成了
   * win+R 切到nginx 目录后 start nginx
   * 查看nginx 是否成功启动：浏览器输入: localhost：80
-
 * 停止 nginx：
   * 快速停止：nginx –s stop
   * 正常退出nginx –s quit 
+
+**Linux**
+
+* apt-get install nginx |  yum install nginx
+* 查看版本确认nginx 是否安装成功：nginx -v
+* 配置文件：nginx.conf 
+  * 确认nginx 安装路径：whereis nginx
+  * vim /etc/nginx/nginx.conf
+* 
+
+# gunicorn
+
+高性能 python Wsgi http server，只支持在Unix 系统上运行。【不能在windows环境下使用】
+
+可指定多个工作进程，有多种工作模式可以选择，默认是sync工作模式。
+
+* 安装配置：pip3 install gunicorn
+
+* 启动app.py 文件：gunicorn -w 4 -b 0.0.0.0:port app：app
+
+  PS: 第一个app指的是app.py 文件；第二个app指的是flask应用的名称。
+
+* 以配置文件方式启动：以配置文件方式启动【config.py--[参见](https://www.jianshu.com/p/386ecd6a94ef)】
+
+  gunicorn -c config.py app:app
 
 # supervisor 
 
