@@ -520,24 +520,20 @@ error_page 404 /404.html;
 
 ## 反向代理后端接口
 
-在正常启动nginx之后：vim /etc/nginx/nginx.conf，修改nginx配置，主要部分如下：[参考](https://juejin.cn/post/7042696043108139016)
+在正常启动nginx之后：vim /etc/nginx/nginx.conf，修改nginx配置。
+
+配置代理仅需修改s主要部分如下：[参考](https://juejin.cn/post/7042696043108139016)
 
 ```
-{
-   server {
-      listen 3000; # 与后端服务端口一致
-      server_name localhost; # 与后端服务部署主机一致
-    
-      location / {
-          root /var/www/mainApp; ###配置应用的文件夹
-          index index.html index.htm;
-          try_files $uri $uri/ /index.html;
-      }
-    
-      #代理后端API的配置
-      location /api/ { #用于转发的路径标记
-          proxy_pass http://localhost:8080/;#被代理的API地址
-      }
+server {
+  listen 8080; # 此处修改为对应的端口
+  server_name localhost; # 此处修改为运行nginx服务的主机名
+
+  location / { # location 这里后面跟的部分不能重复
+    proxy_pass http://127.0.0.1:8000 
+    # 请求路径:http://127.0.0.1:8080/getUser 
+    # 实际代理：http://127.0.0.1:8000/getUser
+  }
 }
 ```
 
@@ -545,7 +541,16 @@ error_page 404 /404.html;
 
 * nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动
 
-* 第二个location块将所有请求url包含:http://localhost:3000/api/的，转发到proxy_pass 指定的http://localhost:8080/地址上
+* location块将所有请求url包含:http://127.0.0.1:8080 的，转发到proxy_pass 指定的 http://127.0.0.1:8000
+* 从默认配置文件开始修改： cp /etc/nginx/nginx.conf.default  /etc/nginx/nginx.conf
+* 配置文件正确性：nginx -t -c /etc/nginx/nginx.conf【successful 为正确】
+* 配置文件正确性检查完成后执行：service nginx restart 重启服务
+* 启
+
+## 相关命令
+
+* 查看nginx 状态：systemctl status nginx.service
+* 重启nginx服务：service nginx restart
 * 
 
 ## 问题记录
@@ -554,6 +559,7 @@ error_page 404 /404.html;
   * 报错信息：nginx: [error] invalid PID number "" in "/run/nginx.pid"
   * 原因：此命令仅在nginx启动的时候执行，停止时直接执行 nginx[参考](https://stackoverflow.com/questions/7646972/nginx-invalid-pid-number)
   * 补充：systemctl status nginx 查看nginx 是否启动
+* 
 
 # gunicorn
 
