@@ -494,15 +494,66 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
    <u>**server块**</u>
 
 * **listen指令**：listen port default_server; 【仅在server块可配置，其他指令格式查询获得】
+
   * default_server:通过host没匹配到对应的虚拟机主机，则通过这台虚拟主机处理。
+
 * **server_name指令**：server_name xxxxx xxxxxx 【可以1个名称，也可以多个名称，之间用空格隔开。】
+
+* **root指令**：用于设置请求寻找资源的根目录：root path
+
+* **location块**：基于Nginx收到的请求字符串，对除虚拟主机名称之外的字符串进行匹配，主要匹配location后的请求字符串，可以仅为：/
+
+  ```
+  location /xxx/xxxx  {
+  }
+  ```
+
+​      PS: location 块主要是对具体指向的接口进行配置，主机和port在前面listen和server name统一配置。
+
+* **error_page指令**：
+
+```
+error_page 404 /404.html;
+    location = /40x.html{ 
+}
+```
 
 ## 反向代理后端接口
 
-在正常启动nginx之后：
+在正常启动nginx之后：vim /etc/nginx/nginx.conf，修改nginx配置，主要部分如下：[参考](https://juejin.cn/post/7042696043108139016)
 
-* vim /etc/nginx/conf.d/
+```
+{
+   server {
+      listen 3000; # 与后端服务端口一致
+      server_name localhost; # 与后端服务部署主机一致
+    
+      location / {
+          root /var/www/mainApp; ###配置应用的文件夹
+          index index.html index.htm;
+          try_files $uri $uri/ /index.html;
+      }
+    
+      #代理后端API的配置
+      location /api/ { #用于转发的路径标记
+          proxy_pass http://localhost:8080/;#被代理的API地址
+      }
+}
+```
+
+说明：
+
+* nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动
+
+* 第二个location块将所有请求url包含:http://localhost:3000/api/的，转发到proxy_pass 指定的http://localhost:8080/地址上
 * 
+
+## 问题记录
+
+* nginx 配置完成后，执行：nginx -s reload重载配置后报错：
+  * 报错信息：nginx: [error] invalid PID number "" in "/run/nginx.pid"
+  * 原因：此命令仅在nginx启动的时候执行，停止时直接执行 nginx[参考](https://stackoverflow.com/questions/7646972/nginx-invalid-pid-number)
+  * 补充：systemctl status nginx 查看nginx 是否启动
 
 # gunicorn
 
