@@ -46,11 +46,11 @@ Ubuntu、centos、windows具体安装参见：[安装配置](https://www.runoob.
 
 ​        * 下载：目前15机器上有
 
-​        * tar xzvf /path/to/<FILE>.tar.gz
+​        * tar xzvf /path/to/\<FILE>.tar.gz
 
 ​        * sudo cp docker/* /usr/bin/
 
-​        * sudo dockerd &
+​        * sudo dockerd &    【sudo dockerd相当于命令手动启动守护进程】
 
 ​        * docker –version 验证
 
@@ -236,7 +236,7 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
   * docker start 容器名称
   * docker exec -it 容器id /bin/bash -c '容器内路径及命令'
 
-* docker进入exit的容器中
+* docker进入exit的容器中【先启动再进入】
 
   * 启动docker：docker ID start
   * 进入docker：docker exec -it 容器ID /bin/bash
@@ -451,7 +451,57 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * 查看版本确认nginx 是否安装成功：nginx -v
 * 配置文件：nginx.conf 
   * 确认nginx 安装路径：whereis nginx
-  * vim /etc/nginx/nginx.conf
+  * vim **/etc/nginx/nginx.conf[此路径为配置文件]**
+* 检查配置：nginx -t 【检查/etc/nginx/nginx.conf配置文件是否正确，若显示successful & ok表示】
+* 启动nginx：systemctl start nginx
+* 尝试访问：ip:80 [配置文件中,server的listen行 80端口可以直接访问]
+  * 显示：Welcome to nginx! 【表示正常启动】
+
+## 配置文件解析-http块最重要
+
+* 配置文件路径：/etc/nginx/nginx.conf 【以22上为例】
+* 一共由3部分组成：全局块、events块、http块
+
+**全局块（一般不用修改）**
+
+​        默认配置文件从开始到events块之间的内容，主要影响nginx服务器整体运行的配置指令，因此这些指令作用域是nginx服务器全局。
+
+​        通常包括：
+
+* **user**-配置运行Ngnix服务器的用户组
+* **work-process**：允许生成的work-process数
+* **pid**-Ngnix 进程PID存放路径
+* **error_log**-日志存放路径
+* **include**-配置文件引入
+
+**events块（根据实际情况配置）**
+
+涉及的指令主要影响Nginx服务器与用户的网络连接。常用到的设置:
+
+* **worker_connections-**每个worker process可同时支持的最大连接数。
+
+**http块(配置中最重要部分)**
+
+代理、缓存和日志定义等绝大多数功能和第三方模块的配置位置。包含：http全局块（server块以外的东西）、多个server块（每个server块可以包含server全局块和多个location块）。**同一配置块中嵌套的配置块，各个之间不存在次序关系。**
+
+   <u>http全局块</u>：（部分内容如下）
+
+* **include**-文件引入
+* **log_format、access_log**-日志定义
+* **sendfile**-是否使用sendfile传输文件
+* **keepalive_timeout**-连接超时时间
+
+   <u>**server块**</u>
+
+* **listen指令**：listen port default_server; 【仅在server块可配置，其他指令格式查询获得】
+  * default_server:通过host没匹配到对应的虚拟机主机，则通过这台虚拟主机处理。
+* **server_name指令**：server_name xxxxx xxxxxx 【可以1个名称，也可以多个名称，之间用空格隔开。】
+
+## 反向代理后端接口
+
+在正常启动nginx之后：
+
+* vim /etc/nginx/conf.d/
 * 
 
 # gunicorn
