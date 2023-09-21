@@ -448,6 +448,9 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 **Linux**
 
 * apt-get install nginx |  yum install nginx
+  * 若error.log 报错【worker process 1015255 exited with fatal code 2 and cannot be respawned】
+    * 通过命令安装，并在./configure 步骤执行 $./configure
+      --without-file-aio.
 * 查看版本确认nginx 是否安装成功：nginx -v
 * 配置文件：nginx.conf 
   * 确认nginx 安装路径：whereis nginx
@@ -456,6 +459,24 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * 启动nginx：systemctl start nginx
 * 尝试访问：ip:80 [配置文件中,server的listen行 80端口可以直接访问]
   * 显示：Welcome to nginx! 【表示正常启动】
+
+**编译安装步骤【报错不推荐】**
+
+为了解决error_log 报错work process xxx exited with fatal code 2 and cannot be respawned
+
+* wget http://nginx.org/download/nginx-1.14.0.tar.gz 
+
+* tar -xzf nginx-1.14.0.tar.gz cd nginx-1.14.0
+
+* cd nginx-1.14.0
+
+* 安装编译环境：
+
+  * yum update
+
+  * yum -y install gcc pcre pcre-devel zlib zlib-devel openssl openssl-devel
+
+* 配置并增加步骤：./configure --without-file-aio【命令不存在】
 
 ## 配置文件解析-http块最重要
 
@@ -539,19 +560,18 @@ server {
 
 说明：
 
-* nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动
+* **error_log 配置一定要打开，方便排查错误。**
+* nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动。
 
 * location块将所有请求url包含:http://127.0.0.1:8080 的，转发到proxy_pass 指定的 http://127.0.0.1:8000
 * 从默认配置文件开始修改： cp /etc/nginx/nginx.conf.default  /etc/nginx/nginx.conf
 * 配置文件正确性：nginx -t -c /etc/nginx/nginx.conf【successful 为正确】
 * 配置文件正确性检查完成后执行：service nginx restart 重启服务
-* 启
 
 ## 相关命令
 
 * 查看nginx 状态：systemctl status nginx.service
 * 重启nginx服务：service nginx restart
-* 
 
 ## 问题记录
 
@@ -559,7 +579,12 @@ server {
   * 报错信息：nginx: [error] invalid PID number "" in "/run/nginx.pid"
   * 原因：此命令仅在nginx启动的时候执行，停止时直接执行 nginx[参考](https://stackoverflow.com/questions/7646972/nginx-invalid-pid-number)
   * 补充：systemctl status nginx 查看nginx 是否启动
-* 
+* nginx 启动后，浏览器无法访问，50x的错，error日志显示 too many open file
+  * 原因：配置文件中最开头新增 worker_rlimit_nofile  4096【limits.conf系统配置需要打开】     
+* worker process 1015255 exited with fatal code 2 and cannot be respawned，[参考](https://forum.nginx.org/read.php?2,152995,153221)
+  * 现象：能正常启动，接口能正常访问，但在报alert
+  * 原因：centos 系统上 nginx installed was a binary pre-compiled with ”-with-file-aio“ option【aio library was not installed】
+  * 解决方式：Install Ngnix by downloading the latest source and **recompiling it without “-with-file-aio” option。**
 
 # gunicorn
 
