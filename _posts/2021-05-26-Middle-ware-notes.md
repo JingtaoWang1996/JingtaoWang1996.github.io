@@ -539,7 +539,7 @@ error_page 404 /404.html;
 }
 ```
 
-## 反向代理后端接口
+## 配置：代理后端接口
 
 在正常启动nginx之后：vim /etc/nginx/nginx.conf，修改nginx配置。
 
@@ -567,6 +567,31 @@ server {
 * 从默认配置文件开始修改： cp /etc/nginx/nginx.conf.default  /etc/nginx/nginx.conf
 * 配置文件正确性：nginx -t -c /etc/nginx/nginx.conf【successful 为正确】
 * 配置文件正确性检查完成后执行：service nginx restart 重启服务
+
+## 配置：负载均衡
+
+​        前后端分离的项目中：nginx作为路由进行转发。流量较大的项目，为应对高并发场景，后端服务器多采用集群部署【至少两个后端服务配置】
+
+* server块添加location并配置proxy_pass 转发到负载服务上
+
+* 配置upstream块，指向后端服务：
+
+  ```
+  upstream webservers {
+        server 192.168.9.134:8081 weight = 8;
+        server 192.168.9.134:8082 weight = 2;
+        fair;
+  }
+  ```
+
+  说明：
+
+  * upstream模块主要用于配置负载请求的几个后端 host：port; weight 参数可配置，权重越高，被请求的机会越大。
+  * 可配置的后端服务可以为多个。
+  * fair: 后端服务器谁响应时间越短就分配给谁
+  * 分配过程包含轮询：若upstream当中任何一台后端服务器down掉，就从中剔除。
+
+  
 
 ## 相关命令
 

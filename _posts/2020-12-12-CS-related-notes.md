@@ -292,6 +292,8 @@ proxy_pass http://dns-backend/dns-query ;
 
 [参考1]( [https://ww w.jianshu.com/p/18359188f3e4](https://www.jianshu.com/p/18359188f3e4)),[参考2](https://www.cnblogs.com/ginvip/p/6365605.html)
 
+dig 命令调试网络情况：dig **-debug** baidu.com
+
 ### 常见记录
 
 * A：域名的ipv4地址
@@ -774,6 +776,8 @@ bitcoin挖矿
    区块hash算法中，需要确保上述公式成立。区块头中唯一可以更改的就是Nonce，其他可以修改的：timestampe时间字段Merkle root交易信息。要找到某个数字让整个的hash小于target（决定了计算出来的hash前面有多少个0）因此，hash本身就是一个随机数，要让它满足一定的规律（前几个都是0）只能暴力破解。【hash碰撞】---0越多，难度越大
 
 * 一般的挖矿流程: 获取之前的区块链信息—>从“待记账区”获取一组交易数据->形成区块头—>穷举Nonce并计算区块头hash是否满足条件—>一旦某矿工成功打包一个区块，他就会告诉其他矿工。收到消息的矿工会停下手上的工作，开始验证，验证后，广播给其他矿工。
+
+
 
 
 ------
