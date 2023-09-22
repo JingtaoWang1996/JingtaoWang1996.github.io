@@ -55,6 +55,7 @@ Ubuntu、centos、windows具体安装参见：[安装配置](https://www.runoob.
 ​        * docker –version 验证
 
 ## 打包python项目到docker
+     **每个docker打包运行时需要对每个docker能使用的资源进行限制，否则一个docker就会拖垮整台机器。**
 
 **Docker 每次装完基本环境都commit一下，方便后续回溯**
 
