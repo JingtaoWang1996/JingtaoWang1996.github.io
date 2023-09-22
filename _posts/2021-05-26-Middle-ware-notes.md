@@ -613,19 +613,61 @@ server {
 
 # gunicorn
 
-高性能 python Wsgi http server，只支持在Unix 系统上运行。【不能在windows环境下使用】
+高性能 python Wsgi http server。
 
-可指定多个工作进程，有多种工作模式可以选择，默认是sync工作模式。
+* **只支持在Unix 系统，不支持windows环境。**
 
-* 安装配置：pip3 install gunicorn
+**安装配置**
 
-* 启动app.py 文件：gunicorn -w 4 -b 0.0.0.0:port app：app
+pip3 install gunicorn
 
-  PS: 第一个app指的是app.py 文件；第二个app指的是flask应用的名称。
+**启动命令**
 
-* 以配置文件方式启动：以配置文件方式启动【config.py--[参见](https://www.jianshu.com/p/386ecd6a94ef)】
+以main.py 文件为例：**gunicorn -w 4 -b 127.0.0.1:4000 main:app**
 
-  gunicorn -c config.py app:app
+* -w: 4 预定定义工作进程数。
+* -b: 127.0.0.1:4000 绑定的地址和端口
+* run: 指的是flask的main.py 文件
+* app：flask的app实例。
+
+**配置文件config.py**
+
+```python
+# 是否开启debug模式
+debug = True
+# 访问地址
+bind = "0.0.0.0:6000"
+# 工作进程数
+workers = 2
+# 工作线程数
+threads = 2
+# 超时时间
+timeout = 600
+# 输出日志级别
+loglevel = 'debug'
+# gunicorn存放日志路径
+pidfile = "log/gunicorn.pid"
+# 登录日志路径
+accesslog = "log/access.log"
+# error日志路径
+errorlog = "log/debug.log"
+# gunicorn + apscheduler场景下，解决多worker运行定时任务重复执行的问题
+preload_app = True
+```
+
+* 以配置文件方式启动：**gunicorn -c config.py main:app**
+
+
+## gunicorn 部署Flask
+
+* flask 自带web服务器可用于开发环境调试，无法满足线上的性能要求。
+* 使用`app.run(host = '0.0.0.0',port=6000)`启动时，flask框架会有一段报错WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+
+### WSGI server部署
+
+* WSGI：Web Server Gateway Interface(web 服务器网关接口)。web服务器与web应用程序之间的接口。
+* uwsgi: 传输协议，定义传输信息的类型。
+* uWSGI: 实现了uwsgi协议WSGI的web服务器。
 
 # supervisor 
 
