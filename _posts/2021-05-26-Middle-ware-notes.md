@@ -543,21 +543,24 @@ error_page 404 /404.html;
 }
 ```
 
+![nginx配置文件实例](.\img\nginx配置文件.png)
+
 ## 配置：代理后端接口
 
 在正常启动nginx之后：vim /etc/nginx/nginx.conf，修改nginx配置。
 
-配置代理仅需修改s主要部分如下：[参考](https://juejin.cn/post/7042696043108139016)
+配置代理仅需修改主要部分如下：[参考](https://juejin.cn/post/7042696043108139016)
 
 ```
 server {
-  listen 8080; # 此处修改为对应的端口
+  listen 80; #default_server; #改为对应端口& 注释default server
   server_name localhost; # 此处修改为运行nginx服务的主机名
-
+  # root /usr/share/nginx/html; # 此行注释掉
+  
   location / { # location 这里后面跟的部分不能重复
-    proxy_pass http://127.0.0.1:8000 
-    # 请求路径:http://127.0.0.1:8080/getUser 
-    # 实际代理：http://127.0.0.1:8000/getUser
+    proxy_pass http://172.16.151.22:5000 
+    # 请求路径:http://172.16.151.22:80/static_info 
+    # 实际代理：http://172.16.151.22:5000/static_info
   }
 }
 ```
@@ -565,12 +568,12 @@ server {
 说明：
 
 * **error_log 配置一定要打开，方便排查错误。**
-* nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动。
-
+* nginx 服务器listen的端口与实际后端服务启动的端口不能一致，否则无法启动 &  **去掉listen  port 后面的default_server**
 * location块将所有请求url包含:http://127.0.0.1:8080 的，转发到proxy_pass 指定的 http://127.0.0.1:8000
 * 从默认配置文件开始修改： cp /etc/nginx/nginx.conf.default  /etc/nginx/nginx.conf
-* 配置文件正确性：nginx -t -c /etc/nginx/nginx.conf【successful 为正确】
+* 配置文件正确性：nginx -t -c /etc/nginx/nginx.conf【successful 为正确】--- 或直接 nginx -t
 * 配置文件正确性检查完成后执行：service nginx restart 重启服务
+* 修改配置后重载：nginx -s reload
 
 ## 配置：负载均衡
 
@@ -581,19 +584,26 @@ server {
 * 配置upstream块，指向后端服务：
 
   ```
+  # upstream 块配置多个后端服务，执行负载均衡
   upstream webservers {
         server 192.168.9.134:8081 weight = 8;
         server 192.168.9.134:8082 weight = 2;
         fair;
   }
+
+  location / {
+   proxy_pass http://webservers; # 此处对应upstream部分名称。
+  }
+  
   ```
-
+  
   说明：
-
+  
   * upstream模块主要用于配置负载请求的几个后端 host：port; weight 参数可配置，权重越高，被请求的机会越大。
   * 可配置的后端服务可以为多个。
   * fair: 后端服务器谁响应时间越短就分配给谁
   * 分配过程包含轮询：若upstream当中任何一台后端服务器down掉，就从中剔除。
+  * location 中 proxy_pass 的http://+upstream部分的名称。
 
 
 ## 相关命令
@@ -613,6 +623,9 @@ server {
   * 现象：能正常启动，接口能正常访问，但在报alert
   * 原因：centos 系统上 nginx installed was a binary pre-compiled with ”-with-file-aio“ option【aio library was not installed】
   * 解决方式：Install Ngnix by downloading the latest source and **recompiling it without “-with-file-aio” option。**
+* open xxxx /usr/nginx/html/static_info no such file or directory
+  * 原因：/etc/nginx/nginx.conf 配置文件server部分指定了具体的root
+  * 解决方式：注释掉 root开头这一行即可。
 
 # gunicorn
 
