@@ -55,7 +55,8 @@ Ubuntu、centos、windows具体安装参见：[安装配置](https://www.runoob.
 ​        * docker –version 验证
 
 ## 打包python项目到docker
-     **每个docker打包运行时需要对每个docker能使用的资源进行限制，否则一个docker就会拖垮整台机器。**
+
+​     **每个docker打包运行时需要对每个docker能使用的资源进行限制，否则一个docker就会拖垮整台机器。**
 
 **Docker 每次装完基本环境都commit一下，方便后续回溯**
 
@@ -249,6 +250,8 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 * 删除镜像：docker rmi 镜像id
 
 * 查看docker 内存占用：docker stats
+
+* 显示容器状态：docker inspect 容器名称
 
 ## 问题记录
 
@@ -592,7 +595,6 @@ server {
   * fair: 后端服务器谁响应时间越短就分配给谁
   * 分配过程包含轮询：若upstream当中任何一台后端服务器down掉，就从中剔除。
 
-  
 
 ## 相关命令
 
