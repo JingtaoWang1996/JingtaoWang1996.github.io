@@ -8,7 +8,7 @@ tags:
   - category2
 ---
 
-Some usage experience collection：
+Some usage experience collection
 
 * Automated Tools:  Docker、Supervisor、Ansible
 
@@ -543,7 +543,7 @@ error_page 404 /404.html;
 }
 ```
 
-![nginx配置文件实例](.\img\nginx配置文件.png)
+![nginx配置文件实例](.\images\img\nginx配置文件.png)
 
 ## 配置：代理后端接口
 
