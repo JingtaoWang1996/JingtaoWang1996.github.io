@@ -36,6 +36,13 @@ w^Tx_i+b≥1, y_i = +1 \\
 w^Tx_i+b≤1, y_i = -1
 $$
 
+## 支持向量
+
+**特征空间中，两类样本中距离划分超平面最近的点【这类点能让上式取等号】**
+
+PS：详见[西瓜书](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://jingyuexing.github.io/Ebook/Machine_Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_%E5%91%A8%E5%BF%97%E5%8D%8E.pdf)
+
+* **两个不同类支持向量**到超平面的距离之和为： 2/||w||。
 
 # 深度广度优先搜索
 
