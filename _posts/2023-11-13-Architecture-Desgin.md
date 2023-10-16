@@ -1,5 +1,5 @@
 ---
-title: 'CS-related-notes'
+title: 'Architecture-desgin-notes'
 date: 2023-11-13
 permalink: /posts/2023/11/architecture-Design-notes/
 tags:
@@ -72,11 +72,12 @@ System architecture notes lists.
 **任务分配**
 
 * 每台机器都可以处理完整的业务任务，不同的任务分配到不同的机器上执行。
-* 从1台增加到2台的过程，见下图【按照逻辑进行任务分配、负载均衡】。
+* 从1台增加到2台的过程，需要增加【按照逻辑进行任务分配、负载均衡】。
+  * 1台任务分配器：硬件网络设备（F5、交换机等）or 软件设备
 
 <img src='/images/img/单机到2台扩展.png'>
 
-​      
+​      PS：需要增加：1）1台任务分配器
 
 * 
 
