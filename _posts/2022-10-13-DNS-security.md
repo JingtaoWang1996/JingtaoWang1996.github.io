@@ -43,7 +43,12 @@ DNS security related notes：DOH.
 [DNS over HTTPS ](https://datatracker.ietf.org/doc/html/rfc8484)
 
 * DOH 将DNS请求和响应数据包用HTTPS加密，阻止第三方对明文DNS数据包的窃听和篡改。
+* 能良好融合HTTP生态，网络应用对DoH支持也相对容易。
 * 已得到Cloudflare、Google、Quad9、Alibaba 等公开DNS解析商&主流浏览器的支持。
+
+# DOH 工作方式
+
+DoH允许服务端先发地把DNS响应push给客户端（早于客户端发起DNS请求），降低了DNS服务的时延，改善网络应用的性能。DoH将DNS请求和响应封装到HTTP请求的主体，客户端跟递归服务器之间建立一个TLS会话，通过HTTPS协议传输封装了DNS请求的HTTP请求
 
 # Ref 
 
