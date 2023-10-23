@@ -48,11 +48,21 @@ DNS security related notes：DOH.
 
 # DOH 工作方式
 
-DoH允许服务端先发地把DNS响应push给客户端（早于客户端发起DNS请求），降低了DNS服务的时延，改善网络应用的性能。DoH将DNS请求和响应封装到HTTP请求的主体，客户端跟递归服务器之间建立一个TLS会话，通过HTTPS协议传输封装了DNS请求的HTTP请求
+<img src="/images/img/DOH工作方式.png">
+
+* DoH允许服务端先把DNS响应push给客户端（早于客户端发起DNS请求），降低DNS服务时延，改善网络应用的性能。【以上图DOH工作方式为例，若DOH为代理，可早于client查询请求到代理443之前现象DOH解析服务器发送请求，不必等待第一步。】
+* **DoH将DNS请求和响应封装到HTTP请求的主体**。
+* 客户端跟递归服务器之间建立一个**TLS会话，通过HTTPS协议传输封装了DNS请求的HTTP请求**。
+
+## 与传统DNS解析相比
+
+* DOH 通过443端口的加密HTTPS连接接收DNS查询将其发送到兼容DOH的DNS解析服务器，不是在53端口发送纯文本。【DOH在常规HTTPS流量中隐藏DNS查询】
+* 
 
 # Ref 
 
-
+* [ref1](https://www.shangyexinzhi.com/article/6844502.html)
+* 
 
 
 ------
