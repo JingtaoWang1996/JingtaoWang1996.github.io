@@ -110,15 +110,16 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 [Encrypted Covert DNS Queries for Botnets: Challenge and Countermeasures](https://arxiv.org/abs/1909.07099)
 
-* Patsakis,2019,key point: traffic analysis
-* Assumption: DNS query performed by a compromised device are **transparent** to the network administrator and therefore can be monitored,analysed, and blocked.
-
-
+* Patsakis,2019,key point: traffic analysis【基于DNS隧道的DGA和僵尸网络检测】
+* **Assumption**: DNS query performed by a compromised device are **transparent** to the network administrator and therefore can be monitored,analysed, and blocked.
+* **Focus**：The adversary uses DGA generates millions of pseudo-ramdom domains
+* **Contribution**：
+  * 之前的工作假设：被控机需要使用生成域名连接C&C server，因此在此过程可以阻断DNS请求，阻断之后不断尝试请求且解析失败的机器即为被控机。【**攻击者dns请求信道不会加密**】
+  * 本文：botnet使用**DNS加密机制**和C&C server 通过注册白名单域名通信的可能性  & 可能的检测方式。
+    * 实验证明：traffic analysis on the exchanged packets can led to very efficient detection.
+    * **Hodrick-Prescotter filter**(HP滤波) can accurately classify botnet based on DoH using a small amount of samples.
 
 * SANS Hjelm*： 识别DoH行为模式的RITA框架，不采用网络流量，采用Zeek IDS 的用户日志【Zeek-开源网络流量安全监控平台】？结果无法复现
-* Patsakis*：[基于DNS隧道的DGA和僵尸网络检测](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://eprints.bournemouth.ac.uk/33197/1/DGAs__SoA_and_Road_ahead.pdf)
-  * Hodrick-Prescott【HP滤波】检测出基于DOH、DOT的僵尸网络行为模式
-  * 仅关注基于僵尸网络的行为模式，能够取得较好效果，未关注通用场景。
 * Bushart*：识别DoH流量
   * 局限于仅仅通过已知DoH服务商的ip地址进行识别
   * 当前支持DoH服务的DNS服务商都使用统一ip地址，使得上述方法不再有效。
