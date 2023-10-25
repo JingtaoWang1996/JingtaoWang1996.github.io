@@ -51,15 +51,6 @@ DNS security related notes：DOH.
   | 编码方式 | Base64       | Hex16                   | Base32、Base64、Base128等      |
   | 特点     | 无周期性轮询 | 灵活交互                | 支持edns扩展协议。             |
 
-基于DoH协议构建隐蔽隧道，可实现：
-
-* 通信内容可**基于HTTPS协议加密**。
-* **与高可信DoH服务通信**（非本地DNS服务器）不会引发异常行为，**避免基于DNS的恶意行为检测机制**。
-
-*基于DOH和**
-
-利用DoH隧道实施数据外传的首款恶意软件Godlua在2019年被披露[6]；利用DoH实施数据外传的APT组织（APT34）在2020年被披露[7]；其他利用DoH隧道技术进行攻击的研究和开源项目参考[8][9][10]。
-
 # DNS加密方案
 
 ## DNSSEC
@@ -97,22 +88,68 @@ DNS security related notes：DOH.
 * **DoH将DNS请求和响应封装到HTTP请求的主体**。
 * 客户端跟递归服务器之间建立一个**TLS会话，通过HTTPS协议传输封装了DNS请求的HTTP请求**。
 
+基于DoH协议构建隐蔽隧道，可实现：
+
+* 通信内容可**基于HTTPS协议加密**。
+* **与高可信DoH服务通信**（非本地DNS服务器）不会引发异常行为，**避免基于DNS的恶意行为检测机制**。
+
 ## 与传统DNS解析相比
 
 * DOH 通过443端口的加密HTTPS连接接收DNS查询将其发送到兼容DOH的DNS解析服务器，不是在53端口发送纯文本。【DOH在常规HTTPS流量中隐藏DNS查询】
 * 基于上述从443端口发出，DOH就会在常规HTTPS流量中隐藏DNS查询，避免**第三方监听者嗅探流量**。
 
-## DOH&隐蔽隧道攻击
+# DOH&隐蔽隧道攻击
 
 DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐，也由于 **DoH被用于隐蔽隧道攻击而遭到政府机构和安全机构的警惕关注** 。
 
+* 利用DOH的首款恶意软件：[Godlua](https://www.jianshu.com/p/8d573b0987c7)
+
+* 利用DOH实施数据外传的APT组织apt34
+
+## DOH流量识别论文小结
+
+[Encrypted Covert DNS Queries for Botnets: Challenge and Countermeasures](https://arxiv.org/abs/1909.07099)
+
+* Patsakis,2019,key point: traffic analysis
+* Assumption: DNS query performed by a compromised device are **transparent** to the network administrator and therefore can be monitored,analysed, and blocked.
 
 
 
+* SANS Hjelm*： 识别DoH行为模式的RITA框架，不采用网络流量，采用Zeek IDS 的用户日志【Zeek-开源网络流量安全监控平台】？结果无法复现
+* Patsakis*：[基于DNS隧道的DGA和僵尸网络检测](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://eprints.bournemouth.ac.uk/33197/1/DGAs__SoA_and_Road_ahead.pdf)
+  * Hodrick-Prescott【HP滤波】检测出基于DOH、DOT的僵尸网络行为模式
+  * 仅关注基于僵尸网络的行为模式，能够取得较好效果，未关注通用场景。
+* Bushart*：识别DoH流量
+  * 局限于仅仅通过已知DoH服务商的ip地址进行识别
+  * 当前支持DoH服务的DNS服务商都使用统一ip地址，使得上述方法不再有效。
+
+## DOH隧道攻击检测技术
+
+基于上述DOH流量识别方法，将DoH流量从HTTPS加密流量识别出来后，还需进一步区分这些流量是否为隐蔽隧道攻击。
+
+### 传统明文DNS数据包发起的隧道攻击检测-带*均为未确认的论文
+
+* Paxson *：[DNS检测工具]()计算DNS请求和响应数据包传递的信息量。
+* Liu*：DNS 数据包的时间间隙、请求包大小等4个特征训练分类器，实现对DNS隧道的检测。
+* Byte-level* CNN 检测
+* Luo*：基于A &AAAA 记录的隧道攻击
+* Wu*：半监督学习的自编码器实现流量特征自动提取并检测隧道攻击。
+
+## DOH流量特征分析
+
+* **TLS指纹技术【实现DoH识别、DoH隧道检测的基础性技术】**：在https客户端和服务端握手阶段，对**明文**数据包进行识别得到什么应用发起的https连接。
+
+  * Cisco：通过对大规模TLS流量分析，得到恶意软件
+  * 考虑到互联网实际场景的复杂性、客户端到递归服务链路多样性，基于TLS指纹分类器性能会下降。
+  * 从攻击者视角，会想办法逃逸检测，需要找到DOH检测性能下界限，若攻击者需要极大代价才能进行逃逸，就说明DoH隧道检测有效。
+
+* stage2：加密传输DNS应答请求
+
+  
 
 # Ref 
 
-* [ref1](https://www.shangyexinzhi.com/article/6844502.html)：DOH、隐蔽隧道工具等。
+* [Brief Intro1](https://www.shangyexinzhi.com/article/6844502.html)：DOH、隐蔽隧道工具等综述类介绍。
 * 
 
 
