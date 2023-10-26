@@ -113,6 +113,10 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 [Encrypted Covert DNS Queries for Botnets: Challenge and Countermeasures](https://arxiv.org/abs/1909.07099)
 
+### 源码
+
+[仅包含shell脚本](https://github.com/kpatsakis/covert_dns_queries)
+
 **背景+假设+focus**
 
 * Patsakis,2019,key point: traffic analysis【基于DNS隧道的DGA和僵尸网络检测】
@@ -126,6 +130,30 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
     * 实验证明：traffic analysis on the exchanged packets can led to very efficient detection.
     * **Hodrick-Prescotter filter**(HP滤波) can accurately classify bot-net based on DoH using a small amount of samples.
 
+**数据集**
+
+* synthetic dataset：[Alexa top1000 ](https://github.com/andrewaeva/DGA) registered domain+ [10类 DGA]((https://github.com/andrewaeva/DGA)) 生成的各1k non-registered domain。
+
+  * 数据特征表：各个数据集名称、domain长度的min、max、average、stdev
+
+    PS: unique value = max-min+1 【域名数据可以存在的长度最大数量】
+
+  | dataset      | min  | max  | average | stdev | unique values |
+  | ------------ | ---- | ---- | ------- | ----- | ------------- |
+  | Alexa        | 4    | 28   | 11.349  | 3.237 | 22            |
+  | Conflicker   | 8    | 16   | 11.755  | 1.983 | 9             |
+  | CryptoLocker | 15   | 21   | 17.783  | 1.424 | 7             |
+  | GOZ          | 20   | 35   | 28.241  | 2.431 | 16            |
+  | Matsnu       | 28   | 40   | 30.527  | 2.038 | 13            |
+  | new GOZ      | 26   | 32   | 29.885  | 1.087 | 7             |
+  | Pushdo       | 11   | 11   | 11      | 0     | 1             |
+  | Ramdo        | 20   | 20   | 20      | 0     | 1             |
+  | Rovnix       | 24   | 38   | 26.794  | 2.622 | 15            |
+  | Tinba        | 16   | 16   | 16      | 0     | 1             |
+  | Zeus         | 26   | 32   | 29.878  | 1.038 | 7             |
+
+  * Alexa 和 各类DGA，均取前1k个域名【共11000 domains of existing and non-existing domain】
+
 **实验步骤**
 
 * **pydig**: 模拟DOH 请求(隐藏后的DNS请求)。
@@ -134,13 +162,15 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 * 特征提取：parse pcap file and perform feature  extraction on each packet.
 * **特征：sourceIP、targetIP、size of  each packet、protocol、tshark info**
 
-**数据集**
+* 
 
-* Alexa top 1k + 10类 DGA 生成的各1k数据。
 
-**源码+数据**
 
-https://github.com/kpatsakis/covert_dns_queries
+
+
+
+
+
 
 
 
