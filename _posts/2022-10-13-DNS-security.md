@@ -106,23 +106,40 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * 利用DOH实施数据外传的APT组织apt34
 
-## DOH流量识别论文小结
+## DNS流量识别+隧道
 
 [Encrypted Covert DNS Queries for Botnets: Challenge and Countermeasures](https://arxiv.org/abs/1909.07099)
 
 * Patsakis,2019,key point: traffic analysis【基于DNS隧道的DGA和僵尸网络检测】
+* **Many malware use DGA to hide actual C&C server**:  大量失败的DNS请求（请求随机域名）会被安全机制检测到。
 * **Assumption**: DNS query performed by a compromised device are **transparent** to the network administrator and therefore can be monitored,analysed, and blocked.
+  * 本文假设：**<u>已有被控主机</u>**，控制主机向被控主机**通过其他协议的tunnel传输加密后包含想要传输的信息部分的DNS请求**。
 * **Focus**：The adversary uses DGA generates millions of pseudo-ramdom domains
 * **Contribution**：
   * 之前的工作假设：被控机需要使用生成域名连接C&C server，因此在此过程可以阻断DNS请求，阻断之后不断尝试请求且解析失败的机器即为被控机。【**攻击者dns请求信道不会加密**】
   * 本文：botnet使用**DNS加密机制**和C&C server 通过注册白名单域名通信的可能性  & 可能的检测方式。
     * 实验证明：traffic analysis on the exchanged packets can led to very efficient detection.
     * **Hodrick-Prescotter filter**(HP滤波) can accurately classify botnet based on DoH using a small amount of samples.
-
-* SANS Hjelm*： 识别DoH行为模式的RITA框架，不采用网络流量，采用Zeek IDS 的用户日志【Zeek-开源网络流量安全监控平台】？结果无法复现
-* Bushart*：识别DoH流量
-  * 局限于仅仅通过已知DoH服务商的ip地址进行识别
-  * 当前支持DoH服务的DNS服务商都使用统一ip地址，使得上述方法不再有效。
+* **Related works**：【除1以外都是通过DNS检测DGA的】
+  * Fast Flux approach 模拟CDN改变解析到自控DNS解析服务器的域名对应的ip信息防止被封【同时降低记录TTL，强制被控机定时进行请求改变对应ip】[ref1](T. Holz, C. Gorecki, K. Rieck, F. C. Freiling, Measuring and detecting fast-flux service networks, in: Proceedings of the Network and Dis-
+    tributed System Security Symposium, 2008.) [ref2](O. Katz, R. Perets, G. Matzliach, Digging deeper - an in-depth analysis of a fast flux network, https://www.akamai.com/us/en/multimedia/
+    documents/white-paper/digging-deeper-in-depth-analysis-of-fast-flux-network.pdf (2016))
+  * 判定域名是否属于DGA生成特征：entropy、length、lexical characteristics、whois、DNS 流量分析观察异常响应。[DNS traffic detect DGA](Y. Zhou, Q.-S. Li, Q. Miao, K. Yim, DGA-based botnet detection using DNS traffic, J. Internet Serv. Inf. Secur. 3 (2013) 116-123.) [Using DNS failure graph analysis to identify suspicious activity](N. Jiang, J. Cao, Y. Jin, L. E. Li, Z. Zhang, Identifying suspicious activities through dns failure graph analysis, in: The 18th IEEE International Conference on Network Protocols, 2010, pp. 144-153.) [throw-away traffic to bots](M. Antonakakis, R. Perdisci, Y. Nadji, N. Vasiloglou, S. Abu-Nimeh,W. Lee, D. Dagon, From throw-away trac to bots: detecting the rise of DGA-based malware, in: Proceedings of the 21st USENIX conference on Security symposium, USENIX Association, 2012, pp. 24-24.)
+  * 图推断检测问题：construct a host-domain graph from **proxy logs** to classify domains into benign or malicious with probability。[ref](P. K. Manadhata, S. Yadav, P. Rao, W. Horne, Detecting malicious domains via graph inference, in: M. Kuty lowski, J. Vaidya (Eds.),Computer Security - ESORICS 2014, Springer International Publishing, Cham, 2014, pp. 1-18.)
+  * 基于时间序列的信息进行聚类：[ref](Y. Gong, S. Qitian, Z. Zhang, A DGA odyssey PDNS driven DGA analysis, https://pc.nanog.org/static/published/meetings/NANOG71/1444/20171004_Gong_A_Dga_Odyssey__v1.pdf (2017))
+  * Detect APT malware infection based on malicious DNS and traffic analysis [ref](G. Zhao, K. Xu, L. Xu, B. Wu, Detecting APT malware infections based on malicious DNS and trac analysis, IEEE Access 3 (2015) 1132-1142.)
+  * [domain shadowing](D. Liu, Z. Li, K. Du, H. Wang, B. Liu, H. Duan, Don't let one rotten
+    apple spoil the whole barrel: Towards automated detection of shadowed domains, in: Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security, CCS '17, ACM, New York, NY, USA, 2017, pp. 537-552.):based on previously hacked domain.
+* **DGA检测方法**：【无法检测加密通信】
+  * [binary classification: LSTM+raw domain names as features](D. Tran, H. Mac, V. Tong, H. A. Tran, L. G. Nguyen, A lstm based framework for handling multiclass imbalance in dga botnet detection, Neurocomputing 275 (2018) 2401-2413.)
+  * [GAN](): 基于GAN生成的域名能够骗过之前的检测模型，同时生成器生成的域名能优化模型检测准确度。
+  * [smashword score](R. R. Curtin, A. B. Gardner, S. Grzonkowski, A. Kleymenov, A. Mos-
+    quera, Detecting DGA domains with recurrent neural networks and side
+    information, arXiv preprint arXiv:1810.02023): n-gram overlapping + whois lookup info 
+  * [恶意域名检测综述](Y. Zhauniarovich, I. Khalil, T. Yu, M. Dacier, A survey on malicious do-
+    mains detection through DNS data analysis, ACM Computing Surveys 51 (4) (2018) 67:1{67:36.)：
+* **DNS tunnel**：数据加密成DNS请求和响应绕过检测。
+  * [Feederbot](C. J. Dietrich, C. Rossow, F. C. Freiling, H. Bos, M. Van Steen,N. Pohlmann, On botnets that use DNS for command and control, in: 2011 seventh european conference on computer network defense, IEEE,2011, pp. 9-16.) & [Morto](3https://www.symantec.com/connect/blogs/morto-worm-sets-dns-record) 使用TXT记录传输加密后的数据和命令。
 
 ## DOH隧道攻击检测技术
 
@@ -151,7 +168,6 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 # Ref 
 
 * [Brief Intro1](https://www.shangyexinzhi.com/article/6844502.html)：DOH、隐蔽隧道工具等综述类介绍。
-* 
 
 
 ------
