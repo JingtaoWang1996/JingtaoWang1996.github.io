@@ -117,7 +117,7 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 [仅包含shell脚本](https://github.com/kpatsakis/covert_dns_queries)
 
-**背景+假设+focus**
+### 背景+假设+focus
 
 * Patsakis,2019,key point: traffic analysis【基于DNS隧道的DGA和僵尸网络检测】
 * **之前的工作假设**：被控机需要使用生成域名连接C&C server【真实C&C server 被藏在大量生成域名之中】，因此在此过程可以阻断DNS请求，阻断之后不断尝试请求且解析失败的机器即为被控机。【**攻击者dns请求信道不会加密**】
@@ -130,9 +130,9 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
     * 实验证明：traffic analysis on the exchanged packets can led to very efficient detection.
     * **Hodrick-Prescotter filter**(HP滤波) can accurately classify bot-net based on DoH using a small amount of samples.
 
-**数据集**
+### 数据集
 
-* synthetic dataset：[Alexa top1000 ](https://github.com/andrewaeva/DGA) registered domain+ [10类 DGA]((https://github.com/andrewaeva/DGA)) 生成的各1k non-registered domain。
+* synthetic dataset：[Alexa top1000 ](https://github.com/andrewaeva/DGA) registered domain+ [10类 DGA](https://github.com/andrewaeva/DGA) 生成的各1k non-registered domain。
 
   * 数据特征表：各个数据集名称、domain长度的min、max、average、stdev
 
@@ -154,15 +154,15 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
   * Alexa 和 各类DGA，均取前1k个域名【共11000 domains of existing and non-existing domain】
 
-**实验步骤**
+### 实验步骤
 
-* **pydig**: 模拟DOH 请求(隐藏后的DNS请求)。
+**数据集模拟**
+
+* **pydig**: 获取上述11个dataset的域名后，模拟DOH 请求(隐藏后的DNS请求)。
 * tcpdump：产生模拟流量的pcap文件，包含所有的流量包。
 * tshark：过滤所有pcap文件中DOH相关的packet.
 * 特征提取：parse pcap file and perform feature  extraction on each packet.
 * **特征：sourceIP、targetIP、size of  each packet、protocol、tshark info**
-
-* 
 
 
 
