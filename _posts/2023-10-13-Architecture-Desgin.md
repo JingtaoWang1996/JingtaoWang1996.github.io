@@ -338,7 +338,7 @@ System architecture notes lists.
   
 * prethread：提前创建线程来处理请求。
 
-# 可扩展架构
+# 高可用架构
 
 
 
