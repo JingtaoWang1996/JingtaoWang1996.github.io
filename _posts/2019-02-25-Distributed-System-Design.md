@@ -8,7 +8,7 @@ tags:
   - category2
 ---
 
-Distributed computing related notes included.
+Distributed System Design related notes.
 
 # 对比传统单体部署
 
@@ -64,7 +64,7 @@ Distributed computing related notes included.
 * **一致性Consistency**：所有节点同一时间具有相同的数据【要么获得最近写入的数据，要么获得一个错误。】
 * **可用性Availability**：保证每个请求不管成功或失败都有响应。【每次请求都能获得一个非错误的响应，但不保证返回是最新写入的数据。】
 * **分隔容忍Partition tolerance**：系统任意信息的丢失或失败不会影响系统运行操作【尽管任意数量的消息被节点间的网络丢失或延迟，系统仍然继续运行。】
-* CAP 定理表明，存在网络分区的情况下，一致性和可用性必须二选一。没有发生故障的时候，一致性和可用性可以被同时满足，当网络出现故障情况时，需要维持系统按照正常情况进行运行。【CAP定理的一致性和ACID数据库事务一致性不同】
+* CAP 定理表明，**存在网络分区的情况下，一致性C和可用性A必须二选一,P 必选**。没有发生故障的时候，一致性和可用性可以被同时满足，当网络出现故障情况时，需要维持系统按照正常情况进行运行。【CAP定理的一致性和ACID数据库事务一致性不同】
 
 <img src='/images/img/CAP.png'>
 
