@@ -166,11 +166,28 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 
 
+**时序分析-Hodrick-Prescott(HP) filter**
 
+* 通过短期价格波动的重要性来确定时间序列长期增长趋势。【最终目标，获得时序情况下的数据集特征的趋势】
+* HP 滤波实验容易，但只有在严苛条件下才能做出最优估计：
+  * 时间序列是二阶整合，否则HP滤波会得到偏离实际情况的趋势项。
+  * 如果发生了单次的永久性冲击（permanent shock）或存在稳定的趋势增长率，HP滤波得到的周期项也会扭曲。
+  * 样本中的周期项是白噪音，或者趋势项和周期项中的随机变化机制相同。
+* **python实现：d-table** 
 
+### 目标
 
+构建high quality Indicator of compromise(失陷指示器) IoC 来实现利用DOH传递被控信息的bot检测。
 
+### 结果
 
+* By running ARMA(AutoRegressive Moving Average) estimation over all series. 获得当前时刻及之前4个时刻，1类正常+10类DGA的 coefficients
+* Use ARMA coefficients as IoC，after prove each tuple can uniquely identify the bot。【Testing whether statistical difference between the different coefficients exis】
+
+**ARMA-自回归移动平均**
+
+* 时间序列预测&分类。
+* python库：from statsmodels.tsa.arima.model import ARIMA
 
 
 
