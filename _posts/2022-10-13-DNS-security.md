@@ -107,7 +107,7 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * 利用DOH实施数据外传的APT组织apt34
 
-# DOH&隐蔽隧道攻击
+# DOH Convert Channel Detection
 
 ## paper1：DNS流量识别+隧道+BOTNET检测
 
@@ -158,13 +158,11 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 **数据集模拟**
 
-* **pydig**: 获取上述11个dataset的域名后，模拟DOH 请求(隐藏后的DNS请求)。
+* **pydig**: 获取上述11个dataset的域名后，模拟DOH 请求(隐藏后的DNS请求)。【pydig测试完成】
 * tcpdump：产生模拟流量的pcap文件，包含所有的流量包。
 * tshark：过滤所有pcap文件中DOH相关的packet.
 * 特征提取：parse pcap file and perform feature  extraction on each packet.
 * **特征：sourceIP、targetIP、size of  each packet、protocol、tshark info**
-
-
 
 **时序分析-Hodrick-Prescott(HP) filter**
 
@@ -189,9 +187,34 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 * 时间序列预测&分类。
 * python库：from statsmodels.tsa.arima.model import ARIMA
 
+## paper2：基于时序的DOH隧道检测
+
+[An Anomaly Detection Framework forDOH Tunnel Using Time-series Analysis](https://unbscholar.lib.unb.ca/items/494d0c85-2a33-45bf-ad7a-557532dd8779)
+
+### 背景&假设
+
+* 2018, DOH was released 【enhance DNS performance + 】
+
+* **simulate DOH tunnel**：simulated environment covers : DOH within an application、DOH proxy on the name server in the local network、DoH proxy on a local system。
+
+* **two-layer approach**：
+  
+  capture malicious and benign DoH traffic 
+  
+  * layer1：classify bengin & malicious traffic.
+  * layer2：characterize DOH traffic.
+  
+* Statistical feature: **Random Forest & Decision Tree** give the best classification and characterization results among prominent machine learning and deep learning classifiers at 2 layers.
+
+* Time-series feautures: **LSTM** turns out to be the best classifier for DoH traffic classification and characterization at 2 layers.
 
 
-**Related works**：【除1以外都是通过DNS检测DGA的】
+
+
+
+
+
+**DGA detection Related works**：【除1以外都是通过DNS检测DGA的】
 
 * Fast Flux approach 模拟CDN改变解析到自控DNS解析服务器的域名对应的ip信息防止被封【同时降低记录TTL，强制被控机定时进行请求改变对应ip】[ref1](T. Holz, C. Gorecki, K. Rieck, F. C. Freiling, Measuring and detecting fast-flux service networks, in: Proceedings of the Network and Dis-
   tributed System Security Symposium, 2008.) [ref2](O. Katz, R. Perets, G. Matzliach, Digging deeper - an in-depth analysis of a fast flux network, https://www.akamai.com/us/en/multimedia/
@@ -216,31 +239,14 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 * **DNS tunnel**：数据加密成DNS请求和响应绕过检测。
   * [Feederbot](C. J. Dietrich, C. Rossow, F. C. Freiling, H. Bos, M. Van Steen,N. Pohlmann, On botnets that use DNS for command and control, in: 2011 seventh european conference on computer network defense, IEEE,2011, pp. 9-16.) & [Morto](3https://www.symantec.com/connect/blogs/morto-worm-sets-dns-record) 使用TXT记录传输加密后的数据和命令。
 
+## 实验步骤小结
 
-
-## DOH隧道攻击检测技术
-
-基于上述DOH流量识别方法，将DoH流量从HTTPS加密流量识别出来后，还需进一步区分这些流量是否为隐蔽隧道攻击。
-
-### 传统明文DNS数据包发起的隧道攻击检测-带*均为未确认的论文
-
-* Paxson *：[DNS检测工具]()计算DNS请求和响应数据包传递的信息量。
-* Liu*：DNS 数据包的时间间隙、请求包大小等4个特征训练分类器，实现对DNS隧道的检测。
-* Byte-level* CNN 检测
-* Luo*：基于A &AAAA 记录的隧道攻击
-* Wu*：半监督学习的自编码器实现流量特征自动提取并检测隧道攻击。
-
-## DOH流量特征分析
-
-* **TLS指纹技术【实现DoH识别、DoH隧道检测的基础性技术】**：在https客户端和服务端握手阶段，对**明文**数据包进行识别得到什么应用发起的https连接。
-
-  * Cisco：通过对大规模TLS流量分析，得到恶意软件
-  * 考虑到互联网实际场景的复杂性、客户端到递归服务链路多样性，基于TLS指纹分类器性能会下降。
-  * 从攻击者视角，会想办法逃逸检测，需要找到DOH检测性能下界限，若攻击者需要极大代价才能进行逃逸，就说明DoH隧道检测有效。
-
-* stage2：加密传输DNS应答请求
-
-  
+* 模拟DOH 请求  * 
+* 获取域名数据集
+* 抓包doh请求获得流量pcap包
+* 完成doh流量识别后，进一步区分这些DOH流量是否为隐蔽隧道攻击
+  * TLS 指纹技术：实现DOH识别及隧道检测基础技术【在https客户端和服务端握手阶段，对**明文**数据包进行识别得到什么应用发起的https连接。】
+    * CISCO 通过大规模TLS流量分析得到恶意软件；实际情况下的复杂场景，TLS分类器性能会下降。
 
 
 ------
