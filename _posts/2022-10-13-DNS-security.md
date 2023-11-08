@@ -81,7 +81,32 @@ DNS security related notes：DOH.
 * 能良好融合HTTP生态，网络应用对DoH支持也相对容易。
 * 已得到Cloudflare、Google、Quad9、Alibaba 等公开DNS解析商&主流浏览器的支持。
 
-# DOH 工作方式
+# DOH
+
+## 相关背景
+
+* 2018, DOH was released 【enhance DNS performance + improve user privacy】
+* DoH wraps DNS records(both requests and responses) in an HTTPS connection, providing 
+
+### 与传统DNS解析相比
+
+* DOH 通过443端口的加密HTTPS连接接收DNS查询将其发送到兼容DOH的DNS解析服务器，不是在53端口发送纯文本。【DOH在常规HTTPS流量中隐藏DNS查询】
+* 基于443端口发出，DOH就会在常规HTTPS流量中隐藏DNS查询，避免**第三方监听者嗅探流量**。
+
+### 三大使用方式
+
+* 本地系统安装DOH代理：installing a proxy on a local system
+* 应用加装DOH:implementing DOH within an application
+* 本地DNS服务器加装doh代理：installing a proxy on the local name server
+
+### DOH 恶意行为
+
+DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐，也由于 **DoH被用于隐蔽隧道攻击而遭到政府机构和安全机构的警惕关注** 。
+
+* 利用DOH的首款恶意软件：[Godlua](https://www.jianshu.com/p/8d573b0987c7)
+* 利用DOH实施数据外传的APT组织apt34
+
+## 工作方式
 
 <img src="/images/img/DOH工作方式.png">
 
@@ -93,19 +118,6 @@ DNS security related notes：DOH.
 
 * 通信内容可**基于HTTPS协议加密**。
 * **与高可信DoH服务通信**（非本地DNS服务器）不会引发异常行为，**避免基于DNS的恶意行为检测机制**。
-
-## 与传统DNS解析相比
-
-* DOH 通过443端口的加密HTTPS连接接收DNS查询将其发送到兼容DOH的DNS解析服务器，不是在53端口发送纯文本。【DOH在常规HTTPS流量中隐藏DNS查询】
-* 基于上述从443端口发出，DOH就会在常规HTTPS流量中隐藏DNS查询，避免**第三方监听者嗅探流量**。
-
-## DOH 恶意行为
-
-DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐，也由于 **DoH被用于隐蔽隧道攻击而遭到政府机构和安全机构的警惕关注** 。
-
-* 利用DOH的首款恶意软件：[Godlua](https://www.jianshu.com/p/8d573b0987c7)
-
-* 利用DOH实施数据外传的APT组织apt34
 
 # DOH Convert Channel Detection
 
@@ -193,8 +205,6 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 ### 背景&假设
 
-* 2018, DOH was released 【enhance DNS performance + 】
-
 * **simulate DOH tunnel**：simulated environment covers : DOH within an application、DOH proxy on the name server in the local network、DoH proxy on a local system。
 
 * **two-layer approach**：
@@ -208,11 +218,24 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * Time-series feautures: **LSTM** turns out to be the best classifier for DoH traffic classification and characterization at 2 layers.
 
+* 本文回顾所有DNS攻击并关注与DOH相关的攻击，重点在于DOH三大使用方式的区别。
+
+## Covert channel simulation
+
+[Simulation ref2 paper2](https://unbscholar.lib.unb.ca/items/494d0c85-2a33-45bf-ad7a-557532dd8779): upgraded version of the traditional DNS tunnels that are already abused by malware as a convert method of communication.
 
 
 
+## 实验步骤小结
 
+* 模拟DOH 请求  * 
+* 获取域名数据集
+* 抓包doh请求获得流量pcap包
+* 完成doh流量识别后，进一步区分这些DOH流量是否为隐蔽隧道攻击
+  * TLS 指纹技术：实现DOH识别及隧道检测基础技术【在https客户端和服务端握手阶段，对**明文**数据包进行识别得到什么应用发起的https连接。】
+    * CISCO 通过大规模TLS流量分析得到恶意软件；实际情况下的复杂场景，TLS分类器性能会下降。
 
+## related works conclusion
 
 **DGA detection Related works**：【除1以外都是通过DNS检测DGA的】
 
@@ -238,15 +261,6 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * **DNS tunnel**：数据加密成DNS请求和响应绕过检测。
   * [Feederbot](C. J. Dietrich, C. Rossow, F. C. Freiling, H. Bos, M. Van Steen,N. Pohlmann, On botnets that use DNS for command and control, in: 2011 seventh european conference on computer network defense, IEEE,2011, pp. 9-16.) & [Morto](3https://www.symantec.com/connect/blogs/morto-worm-sets-dns-record) 使用TXT记录传输加密后的数据和命令。
-
-## 实验步骤小结
-
-* 模拟DOH 请求  * 
-* 获取域名数据集
-* 抓包doh请求获得流量pcap包
-* 完成doh流量识别后，进一步区分这些DOH流量是否为隐蔽隧道攻击
-  * TLS 指纹技术：实现DOH识别及隧道检测基础技术【在https客户端和服务端握手阶段，对**明文**数据包进行识别得到什么应用发起的https连接。】
-    * CISCO 通过大规模TLS流量分析得到恶意软件；实际情况下的复杂场景，TLS分类器性能会下降。
 
 
 ------
