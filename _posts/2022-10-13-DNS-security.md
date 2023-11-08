@@ -211,8 +211,8 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
   
   capture malicious and benign DoH traffic 
   
-  * layer1：classify bengin & malicious traffic.
-  * layer2：characterize DOH traffic.
+  * layer1：characterize DOH traffic from all traffic.
+  * layer2：classify bengin & malicious traffic.
   
 * Statistical feature: **Random Forest & Decision Tree** give the best classification and characterization results among prominent machine learning and deep learning classifiers at 2 layers.
 
@@ -220,7 +220,25 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * 本文回顾所有DNS攻击并关注与DOH相关的攻击，重点在于DOH三大使用方式的区别。
 
-## Covert channel simulation
+### DOH making DNS tunnels harder to detect * Page3
+
+* DNS 将DNS traffic 放入 HTTPS中，使得DNS traffic在网络基础设施(如：防火墙)中难以被识别，导致之前的**“基于防火墙检测DNS packet中是否含有恶意域名、恶意信息等 ”**的方法过时。【防火墙不检验DNS内容和访问频率】
+* DOH 推荐使用HTTP/2作为最小版本，malware 能使用http/2 **“一次连接传输多个doh请求和响应，隐藏frequency of DNS resolution",**  进一步减少探测DNS tunnel的方法。
+
+### Contributions * 
+
+* [Labeled dataset]():Including Bengin-DOH、Malicious-DOH、Non-DOH
+
+* feature-based DOH anomaly detection framework: using time-series representation of traffic flow.
+
+### Convert DNS Channel page12
+
+**信息传入传出**
+
+* **向外传输**的信息：采用一定的加密方式（如base32）加密后放入请求域名的sub-domain，传到被控DNS resolver中【**每次长度不超过253字节，域名的最大长度**】。多个请求合并后得到完整信息。
+* **向内传输信息or命令**：通过base64或类似加密方式，放入DNS response的 TXT记录中.
+
+**Simulation**
 
 [Simulation ref2 paper2](https://unbscholar.lib.unb.ca/items/494d0c85-2a33-45bf-ad7a-557532dd8779): upgraded version of the traditional DNS tunnels that are already abused by malware as a convert method of communication.
 
