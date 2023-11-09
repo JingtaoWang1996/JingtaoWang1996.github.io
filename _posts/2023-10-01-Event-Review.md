@@ -3,9 +3,8 @@ title: 'Event-Review-notes'
 date: 2023-10-01
 permalink: /posts/2023/10/Event-Review-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
+  - Review
 ---
 
 How to do a Good Event Review(复盘).
