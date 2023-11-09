@@ -3,12 +3,10 @@ title: 'Middle-ware-notes'
 date: 2021-05-26
 permalink: /posts/2021/05/Middle-ware-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Technical Refer notes
 ---
 
-Some usage experience collection
+Some usage experience collection：
 
 * Automated Tools:  Docker、Supervisor、Ansible
 
@@ -402,6 +400,9 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 
 * Connection to node -1 (/127.0.0.1:9092) could not be established. Broker may not be available
   * kafka server 配置 & kafka 服务是否还在正常运行
+* Kafka.errors.NodeNotReadyError: NodeNotReadyError
+  * 可能原因 /etc/hosts 文件当中为空，没有配ip & hosts 对应关系。
+  * 解决方法：
 
 # Zookeeper
 

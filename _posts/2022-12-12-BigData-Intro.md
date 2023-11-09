@@ -1,0 +1,16 @@
+---
+title: 'BigData-Intro'
+date: 2022-12-12
+permalink: /posts/2022/12/BigData-Intro/
+tags:
+  - Theoretical Ground
+  - System Optimization
+---
+
+CS related notes lists.
+
+
+
+
+------
+

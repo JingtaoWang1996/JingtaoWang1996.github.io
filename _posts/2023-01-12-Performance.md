@@ -3,9 +3,8 @@ title: 'Performance-related-notes'
 date: 2023-01-12
 permalink: /posts/2023/01/Performance-related-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
+  - System Optimization
 ---
 
 Some performance related development notes.

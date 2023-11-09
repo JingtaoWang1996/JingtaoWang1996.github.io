@@ -3,9 +3,7 @@ title: 'Algorithm-notes'
 date: 2022-08-15
 permalink: /posts/2022/08/Algo-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
 ---
 
 Algorithms related notes.

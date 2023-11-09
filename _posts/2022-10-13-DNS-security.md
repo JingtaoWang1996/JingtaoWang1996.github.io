@@ -3,9 +3,7 @@ title: 'DNS-security-related-notes'
 date: 2022-10-13
 permalink: /posts/2022/10/DNS-security-related-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - DNS Related
 ---
 
 DNS security related notes：DOH.
