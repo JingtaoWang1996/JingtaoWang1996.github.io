@@ -1,11 +1,9 @@
 ---
-title: 'Online-learning-notes'
+title: 'Online-learning'
 date: 2020-01-06
 permalink: /posts/2020/01/Online-learning-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
 ---
 
 Online learning notes：coursera, etc.

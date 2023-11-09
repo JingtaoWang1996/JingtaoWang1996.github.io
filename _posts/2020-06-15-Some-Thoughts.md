@@ -3,9 +3,7 @@ title: 'Some thoughts'
 date: 2020-06-15
 permalink: /posts/2020/06/Some-thoughts/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Thoughts conclusion
 ---
 
 Some thoughts.

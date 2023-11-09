@@ -3,9 +3,8 @@ title: 'Distributed-System-Design'
 date: 2019-02-25
 permalink: /posts/2019/02/Distributed-System-Design/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
+  - Technical Refer notes
 ---
 
 Distributed System Design related notes.
