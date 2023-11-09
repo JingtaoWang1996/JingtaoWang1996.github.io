@@ -3,9 +3,8 @@ title: 'Architecture-desgin-notes'
 date: 2023-10-13
 permalink: /posts/2023/10/architecture-Design-notes/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - Theoretical Ground
+  - System Optimization
 ---
 
 System architecture notes lists.
