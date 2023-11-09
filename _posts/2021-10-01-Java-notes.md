@@ -1,5 +1,5 @@
 ---
-title: 'Java-notes'
+title: 'Java'
 date: 2021-10-01
 permalink: /posts/2021/10/Java-notes/
 tags:

@@ -1,5 +1,5 @@
 ---
-title: 'Project-develop-notes'
+title: 'Project-develop'
 date: 2022-03-14
 permalink: /posts/2022/03/Project-develop-notes/
 tags:

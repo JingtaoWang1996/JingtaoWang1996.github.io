@@ -1,5 +1,5 @@
 ---
-title: 'DNS-security-related-notes'
+title: 'DNS-security'
 date: 2022-10-13
 permalink: /posts/2022/10/DNS-security-related-notes/
 tags:

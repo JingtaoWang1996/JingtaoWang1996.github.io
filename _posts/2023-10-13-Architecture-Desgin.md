@@ -1,5 +1,5 @@
 ---
-title: 'Architecture-desgin-notes'
+title: 'Architecture-desgin'
 date: 2023-10-13
 permalink: /posts/2023/10/architecture-Design-notes/
 tags:

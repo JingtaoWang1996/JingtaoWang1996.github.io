@@ -1,5 +1,5 @@
 ---
-title: 'Event-Review-notes'
+title: 'Event-Review'
 date: 2023-10-01
 permalink: /posts/2023/10/Event-Review-notes/
 tags:

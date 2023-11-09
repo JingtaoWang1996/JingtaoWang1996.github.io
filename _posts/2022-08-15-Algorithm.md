@@ -1,5 +1,5 @@
 ---
-title: 'Algorithm-notes'
+title: 'Algorithm'
 date: 2022-08-15
 permalink: /posts/2022/08/Algo-notes/
 tags:

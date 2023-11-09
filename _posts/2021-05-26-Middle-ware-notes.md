@@ -1,5 +1,5 @@
 ---
-title: 'Middle-ware-notes'
+title: 'Middle-ware'
 date: 2021-05-26
 permalink: /posts/2021/05/Middle-ware-notes/
 tags:

@@ -1,5 +1,5 @@
 ---
-title: 'Performance-related-notes'
+title: 'Performance-related'
 date: 2023-01-12
 permalink: /posts/2023/01/Performance-related-notes/
 tags:
