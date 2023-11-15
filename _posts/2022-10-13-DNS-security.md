@@ -219,10 +219,12 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * 本文回顾所有DNS攻击并关注与DOH相关的攻击，重点在于DOH三大使用方式的区别。
 
-### DOH making DNS tunnels harder to detect * Page3
+* Possible Detection Tools: [snort](https://www.snort.org/).
 
-* DNS 将DNS traffic 放入 HTTPS中，使得DNS traffic在网络基础设施(如：防火墙)中难以被识别，导致之前的**“基于防火墙检测DNS packet中是否含有恶意域名、恶意信息等 ”**的方法过时。【防火墙不检验DNS内容和访问频率】
-* DOH 推荐使用HTTP/2作为最小版本，malware 能使用http/2 **“一次连接传输多个doh请求和响应，隐藏frequency of DNS resolution",**  进一步减少探测DNS tunnel的方法。
+* **DOH making DNS tunnels harder to detect * Page3**
+
+  * DNS 将DNS traffic 放入 HTTPS中，使得DNS traffic在网络基础设施(如：防火墙)中难以被识别，导致之前的**“基于防火墙检测DNS packet中是否含有恶意域名、恶意信息等 ”**的方法过时。【防火墙不检验DNS内容和访问频率】
+  * DOH 推荐使用HTTP/2作为最小版本，malware 能使用http/2 **“一次连接传输多个doh请求和响应，隐藏frequency of DNS resolution",**  进一步减少探测DNS tunnel的方法。
 
 ### Contributions * 
 
@@ -248,13 +250,18 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 * [Random forest + traffic captured at devices of an enterpise network](https://xueshu.baidu.com/usercenter/paper/show?paperid=6689d7a60a2e0ac23af8cbc565d9227c&site=xueshu_se): 是否可以基于网关流量检测DNS tunnel ？
 * [Flow-based DNS tunnel traffic detection](https://xueshu.baidu.com/usercenter/paper/show?paperid=1v1v0mt0vm7x08f0sq0m0c003s755465&site=xueshu_se)：
 * [Packet-based method of classification](): gain importance since 2019.
-  * turning DNS packet to an ASCII vector,removing features depends on the test platform.
+  * [Packet2vector](https://ieeexplore.ieee.org/document/8958731)：turning DNS packet to an ASCII vector,removing features depends on the test platform. 【perfect precision and recall？】
+  * [byte-level](提高度不大):divided each packets into 300 bytes, each bytes encoded using a one-hot method into 257values, then turn into 64 features.[final suggestions: CNN +3,4,5 window size+64 features.]
+
+### Proposed Framework
+
+#### DOH tunnel detection
 
 
 
+## Possible Dataset
 
-
-
+* [ISCX VPN-non VPN dataset](https://www.unb.ca/cic/datasets/vpn.html)：network traffic characterization and identify end-user application.
 
 ## 实验步骤小结
 
