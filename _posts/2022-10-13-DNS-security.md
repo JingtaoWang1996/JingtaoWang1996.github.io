@@ -95,6 +95,7 @@ DNS security related notes：DOH.
 
 * 本地系统安装DOH代理：installing a proxy on a local system
 * 应用加装DOH:implementing DOH within an application
+  * [chrome Secure DNS extension](https://chromestory.com/2019/06/dns-over-https/): chrome 浏览器加装doh服务，2020年已默认支持DOH。
 * 本地DNS服务器加装doh代理：installing a proxy on the local name server
 
 ### DOH 恶意行为
@@ -239,6 +240,19 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 **Simulation**
 
 [Simulation ref2 paper2](https://unbscholar.lib.unb.ca/items/494d0c85-2a33-45bf-ad7a-557532dd8779): upgraded version of the traditional DNS tunnels that are already abused by malware as a convert method of communication.
+
+### DNS Tunnel Detection
+
+* [bigram based DNS tunnel detection](https://www.sciencedirect.com/science/article/pii/S1877050913002421)：a scoring system for domain names to demonstrate the frequency of their bigrams in real domains.
+  * use a dataset of real domains to find the frequency of each bigram and create online classifier.
+* [Random forest + traffic captured at devices of an enterpise network](https://xueshu.baidu.com/usercenter/paper/show?paperid=6689d7a60a2e0ac23af8cbc565d9227c&site=xueshu_se): 是否可以基于网关流量检测DNS tunnel ？
+* [Flow-based DNS tunnel traffic detection](https://xueshu.baidu.com/usercenter/paper/show?paperid=1v1v0mt0vm7x08f0sq0m0c003s755465&site=xueshu_se)：
+* [Packet-based method of classification](): gain importance since 2019.
+  * turning DNS packet to an ASCII vector,removing features depends on the test platform.
+
+
+
+
 
 
 
