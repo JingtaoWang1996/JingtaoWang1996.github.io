@@ -253,11 +253,23 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
   * [Packet2vector](https://ieeexplore.ieee.org/document/8958731)：turning DNS packet to an ASCII vector,removing features depends on the test platform. 【perfect precision and recall？】
   * [byte-level](提高度不大):divided each packets into 300 bytes, each bytes encoded using a one-hot method into 257values, then turn into 64 features.[final suggestions: CNN +3,4,5 window size+64 features.]
 
-### Proposed Framework
+### Proposed Framework-DOHlyzer
 
-#### DOH tunnel detection
+[ahlashkari-DOHlyzer framework](https://github.com/ahlashkari/DOHlyzer/)
 
+* **DoH DataCollector**：use automation tools such as: Fabric library & SSH to control serveral virtual machines for data collection. 【chapter4 details the HTTPS traffic capture process】
 
+* **DoHMeter**：extracts neccesary  **time-series features** from the collected traffic 。
+
+  In github project,this module responsible for： 【网络上抓取数据or接收pcap文件数据；根据端口和地址聚合；提取time-series based features】--- 前两个合并在一步
+
+  * capturing https packets from network interface OR  input PCAP files.
+  * Grouping packets into flows by their source and destination addresses and ports.
+  * Extracting features for traffic analysis, including statistical and time-series features.
+
+* **DoHAnalyzer**: uses the extracted time-series features from the traffic dataset to create and test deep learning model of time-series input.
+
+* **DoHVisualizer**: graphical representation.
 
 ## Possible Dataset
 
