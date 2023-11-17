@@ -259,7 +259,7 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * **DoH DataCollector**：use automation tools such as: Fabric library & SSH to control serveral virtual machines for data collection. 【chapter4 details the HTTPS traffic capture process】
 
-* **DoHMeter**：extracts neccesary  **time-series features** from the collected traffic 。
+* **DoHMeter**：extracts neccesary  **time-series features** from the collected traffic.
 
   In github project,this module responsible for： 【网络上抓取数据or接收pcap文件数据；根据端口和地址聚合；提取time-series based features】--- 前两个合并在一步
 
@@ -270,6 +270,42 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 * **DoHAnalyzer**: uses the extracted time-series features from the traffic dataset to create and test deep learning model of time-series input.
 
 * **DoHVisualizer**: graphical representation.
+
+#### Meter Module
+
+28 statistical features used in the experiment   -Table 3.1   page37
+
+| Parameter | Feature                                                      |
+| --------- | ------------------------------------------------------------ |
+| F1        | Number of flow bytes sent                                    |
+| F2        | Rate of flow bytes sent                                      |
+| F3        | Number of flow bytes received                                |
+| F4        | Rate of flow bytes received                                  |
+| F5-12     | Package Length (5-12:mean-Median-Mode-Variance-Standard deviation-Coefficient of variantion-Skew from median- Skew from mode) |
+| F13-20    | Package Time (13-20:mean-Median-Mode-Variance-Standard deviation-Coefficient of variantion-Skew from median- Skew from mode) |
+| F21-F28   | Request/response time difference (21-28:mean-Median-Mode-Variance-Standard deviation-Coefficient of variantion-Skew from median- Skew from mode) |
+
+* meter从pcap文件中提取**statistical feature** 为csv文件：python3 dohlyzer.py -f ./input.pcap -c ./output.csv 
+
+5 features of each  clump C (size,pktCout,direction,duration,interarrivalTime)
+
+| Parameter | Features                                                     |
+| --------- | ------------------------------------------------------------ |
+| F1        | Size of the clump(sum of packet size in bytes)               |
+| F2        | Number of packets in the clumps                              |
+| F3        | Direction of the clumps（incoming or outgoing）              |
+| F4        | Duration of the clump(time difference between the 1st and last clump) |
+| F5        | Internal-arrival time (time-difference between current and previous clump) |
+
+* meter从pcap文件中提取**time-series feature**为 csv文件：python3 dohlyzer.py -f ./input.pcap -s ./output.csv 
+
+  **PS: 输出文件区分数据为doh和Non-doh**
+
+* 相当于时序拆解为离散序列包进行分析。【sliding window algorithm】
+
+#### Classifier Module
+
+对于Statistical feature & Time-series feature，使用不同的classifier. [两类特征分别对应离线pcap流量文件 & online 流量区分的情况]
 
 ## Possible Dataset
 
