@@ -303,9 +303,14 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 * 相当于时序拆解为离散序列包进行分析。【sliding window algorithm】
 
-#### Classifier Module
+#### Analyzer Module
 
 对于Statistical feature & Time-series feature，使用不同的classifier. [两类特征分别对应离线pcap流量文件 & online 流量区分的情况]
+
+* Weka 构建基于监督学习的 statistical classifier.
+* Analyzer module 建立 time-series classifier.
+  * 4-hidden layers: LSTM at 2nd hidden layer to create model. **[DNN 模型见原文43页]**
+* LSTM model inanalyzer Module.
 
 ## Possible Dataset
 
