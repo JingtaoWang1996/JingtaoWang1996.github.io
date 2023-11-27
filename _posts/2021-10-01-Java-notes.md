@@ -57,6 +57,14 @@ Some Java usage experience.
 
       PS：空行或者有注释的行，java编译器都会忽略掉
 
+## 工程导入
+
+* git 拉取代码
+* IJ 配置Maven：file->setting ->Build,Execution,Development->Build Tools ->Maven
+  * Maven Home Path：写到Maven路径的bin层【eg：E:/apache-maven-3.6.3-bin/apache-maven-3.6.3/bin/..】
+  * User settings file：明确settings.xml 文件路径 【**mirrors换源更新到国内源，可以拷贝正常运行的工程的该文件到本地替换**】
+  * Local repository：本地仓库位置，下载Maven的时候配置。
+
 # 基本语法
 
 * **java 文件名和主函数所在的类名一定要一致，否则无法运行**
@@ -167,6 +175,23 @@ public class UserService{
 <img src="./img/springboot创建示例.png" alt="springboot创建示例" style="zoom: 67%;" />
 
 上述内容选择好后直接generate，然后用开发工具打开
+
+## 查看spring-boot 版本
+
+* pom.xml 文件中搜索“org.springframework.boot”, 找到类似的部分中的version即为springboot版本
+
+  ```xml
+  <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.0.3.RELEASE</version>
+      <relativePath/>
+  </parent>
+  ```
+
+*  对应springboot 与 springboot-plugin 插件情况
+
+* 
 
 ## spring-boot项目结构 
 
