@@ -229,8 +229,6 @@ public class UserService{
 
   实际开发过程中，经常划分业务模块，因为在书写controller时，会为controller里所有方法定义一个父级RequestMapping，如下图的 /test 模块，项目当中是API模块，
 
-  ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image008.jpg)
-
 * Service层：业务层/服务层，所有内部的业务逻辑，都在service层，比如：用户增删改查、验证码等等，业务层由数据进行支持，实现controller的所有接口
 
 * Dao层：数据库持久化层，与数据库交互，常用框架：JPA（springboot官方）、MyBatis
