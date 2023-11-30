@@ -233,7 +233,7 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 
 ### Contributions * 
 
-* [Labeled dataset]():Including Bengin-DOH、Malicious-DOH、Non-DOH
+* [Labeled dataset](http://205.174.165.80/CICDataset/DoHBrw-2020/Dataset/):Including Bengin-DOH、Malicious-DOH、Non-DOH
 
 * feature-based DOH anomaly detection framework: using time-series representation of traffic flow.
 
@@ -320,6 +320,7 @@ DoH虽然具备绝佳的隐私保护能力和安全能力获得用户的青睐�
 ## Possible Dataset
 
 * [ISCX VPN-non VPN dataset](https://www.unb.ca/cic/datasets/vpn.html)：network traffic characterization and identify end-user application.
+* [CIC-DoHBrw-2020 dataset](http://205.174.165.80/CICDataset/DoHBrw-2020/Dataset/):  https://www.unb.ca/cic/datasets/dohbrw-2020.html 模拟doh常规，恶意流量等，paper2的最全数据集。
 
 ## 实验步骤小结
 
