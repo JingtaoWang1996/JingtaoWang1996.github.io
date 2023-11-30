@@ -432,6 +432,7 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 
 * 高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。
 * 内存占有率小、并发能力强、可在大多数Linux上编译运行，同时也是优秀的邮件代理服务器。
+* nginx 是目前最好用的负载均衡工具。
 
 ## 安装配置
 
