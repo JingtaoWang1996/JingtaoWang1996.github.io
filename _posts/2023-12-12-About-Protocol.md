@@ -275,6 +275,133 @@ A-发送端； B-接收端
 
 **[TCP状态机](https://blog.csdn.net/zwl1584671413/article/details/110472714)**：通过状态机能够准确理解，TCP建立连接和断开连接的具体时序。
 
+### SOCKET编程
 
+* 在网络层，socket函数需要指定到底是IPV4-AF_INET & IPV6-AF_INET6。
+* 同时还需要指定：TCP-SOCK_STREAM   UDP-SOCK_DGRAM。
+
+#### 基于TCP的Socket调用过程
+
+* 两端创建了Socket。
+
+* TCP调用bind函数监听一个端口，给这个socket赋予一个IP地址和端口。【有了ip和地址才能将网卡的包进行监听和获取。】
+
+* 服务端有了IP和端口号，就可以调用listen函数进行监听。有了listen状态，服务端就可以接收由客户端发起的连接了。
+
+* 内核中，为每个Socket维护两个队列：
+
+  * 服务端和客户端已建立连接的队列：此时三次握手已完毕，处于establish状态。
+  * 服务端和客户端未完全建立连接的队列，三次握手未完成，处于syn_rcvd状态。
+
+* 服务端调用accept函数，拿出一个已经完成的连接进行处理，如果已经完成的队列里没有，就一直等待。
+
+* 服务端等待的过程中，客户端可以通过connect发起连接（参数中指明要连接的IP地址和端口号），开始3次握手。**此时内核会给客户端分配一个临时的端口用于监听**，一旦握手成功，**服务端的accept就会返回另一个Socket**。
+
+  **<u>PS: 监听的socket和真正传数据的是2个socket</u>**
+
+* 连接成功后，双方开始通过read和write函数读写数据，类似于向一个文件流中写东西。
+
+#### 基于UDP的Socket调用过程
+
+* 两端创建Socket
+* 通过bind获取ip和端口号用于交互。【因为UDP无连接，所以不需要listen和connect】
+* 无连接状态的UDP不需要对每对连接建立一组socket，只要有一个socket就能和多客户端通信。
+* 因为没有连接状态，每次通信的时候，都调用**sendto和recvfrom**传入ip地址和端口即可开始通信。
+
+## 5th-应用层
+
+### http
+
+* 统一资源定位符-url：eg：http://www.163.com
+* 目前http协议大部分是：1.1 默认开启Keep-alive, 这样建立的TCP连接，可在请求中多次复用。
+
+* http报文：主要分为3大部分-请求行、请求首部、请求正文实体。
+* 访问方法：GET、POST、PUT、DELETE。
+* 首部字段：key-value格式存储的字段。可以获得最重要的信息：Accept-Charset-客户端可接受的字符集；Content-Type-正文格式；缓存 ...
+
+* HTTP请求的发送：基于TCP协议，通过Stream的二进制流的形式传给对方。在TCP层，会把二进制流文件变成一个报文发送给服务器。
+
+**http2.0**
+
+* 在1.1的基础上，对http的头进行压缩，将原来每次都要携带的大量key-value在两端建立索引表，对相同的头只发送索引表中的索引。
+
+* 将1个TCP连接切分成多个流，每个流有自己的id，且流有优先级，只是虚拟通道。
+
+### https
+
+相比于http，进行了加密操作。
+
+**对称加密**
+
+* 为了确保密钥的安全性，只能通过线下进行密钥沟通。
+* 仅支持1对1的场景，多用户情况无法支持。
+
+**非对称加密**
+
+* 公钥可以随意传输，私钥在网站进行保存。
+* 服务端和客户端之间的发送方采用对方的公钥加密，接收方采用私钥进行解密。
+* 问题：普通用户如何确认获得的公钥是正确的
+
+**Digital Certificate**
+
+* 解决公钥可信度的问题：证书中包含-公钥、证书所有者、证书颁发机构、证书有效期。
+* **证书生成：向权威机构CA-certificate Authority发起证书生成请求。**
+  * 权威机构通过**签名算法**，使用自己的私钥给网站公钥进行前面，认证可靠性。
+
+```shell
+# 创建私钥
+openssl genrsa -out cliu8siteprivate.key 1024
+# 根据私钥创建公钥
+openssl rsa -in cliu8siteprivate.key -pubout -outcliu8sitepublic.pem
+# 生成证书请求
+openssl req -key cliu8siteprivate.key -new -out cliu8sitecertificate.req
+# CA 给证书签名
+openssl x509 -req -in cliu8sitecertificate.req -CA cacertificate.pem -CAkey caprivate.key -out cliu8sitecertificate.pem
+# 查看证书内容
+openssl x509 -in cliu8sitecertificate.pem -noout -text 
+```
+
+PS: **各大CA机构的公钥默认安装在操作系统当中。因此，尽量不要安装来路不明的操作系统。**
+
+### 流媒体协议
+
+视频数据的传输
+
+**基本定义**
+
+- **编码后二进制文件格式**：AVI、MPEG、RMVB、**MP4**、MOV、FLV、WebM、WMV、ASF、MKV。
+
+- **ITU标准**：H.261、 H.262、H.263、**H.264**、H.265。
+
+- **ISO标准**：MPEG-1、MPEG-2、MPEG-4、MPEG-7。
+
+- 视频的实质：快速播放一串连续的图片，每张图片称为1帧，只要每帧的数据足够多，人眼就无法区分是单独的图片【人眼：每秒24帧】
+
+  * 每张图片由像素组成，假设1024*768；每个像素由RGB组成，每个8位，共24位。
+  * 每秒视频大小：30帧\*1024\*768\*24 = 566231040Bits = 70778880Bytes；1min-4G
+
+- 视频编码：解决视频传输数据过大的问题。【使用尽量少的Bit数保存视频】
+
+  视频中图片能够压缩的原因：
+
+  * **空间冗余**：一张图片相邻像素往往是渐变的，不是突变的，没必要每个像素都完整地保存，可以隔几个保存一个，中间的用算法计算出来。
+  * **时间冗余**：一个视频中连续出现的图片也不是突变的，可根据已有图片预测和推断。
+  * **视觉冗余**：视觉对某些细节不敏感，不会每个细节都注意到，允许丢失一些数据。
+  * **编码冗余**：不同像素值出现的概率不同，**概率高的用的字节少，概率低的用的字节多**。
+
+  **视频编码两大流派**
+
+  * International Telecommunications Union的**VCEG(video Coding Experts Group)**: 国际电连下的VCEG，主要侧重传输。
+  * International Standards Organization的 **MPEG(Moving Picture Experts Group)**，主业做视频存储，后续逐渐关注视频传输。
+
+  * 后来两者联合制定H.264/MPEG-4 AVC，作为最重要标准。
+
+经过视频编码后，图像变成了一串二进制数据，按一定格式保存起来。【所支持主流格式均已列在上方。】
+
+**直播方式**
+
+* 网络协议将编码后的二进制视频流，从主播端推送到服务器端。
+* 接流：服务器上有一个运行了同样协议的服务端来接收这些网络包，获取其中的视频流。
+* 服务端接到视频流后对这些数据进行处理，如：转码。确保观众使用的客户端不同都能看到直播。
 
 ****
