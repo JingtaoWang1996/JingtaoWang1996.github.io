@@ -485,6 +485,37 @@ CDN适合缓存的数据类型：
 * 路由配置组件Felix：解决容器不断创建、删除等变化的情况导致路由配置复杂的问题。使用Felix作为agent，执行docker不断变化的操作。
 * 路由广播组件BGP speaker：基于BGP路由协议实现。Calico中每个Node运行BIRD，作为BGP客户端，确保所有节点收到广播信息。
 
+**BGP全连接复杂性与规模的问题**
+
+* BGP speaker在节点数量过多时，无法保证全部连它。因此通过BGP Router Reflector进行连接。【多个BGP Router Reflector进行负载均衡，确保效率】
+
+# 微服务相关协议
+
+## RPC
+
+Bruce Jay Nelson《Implementing Remote Procedure calls》定义了RPC标准。
+
+* 最早的RPC实现方式称为Sun RPC(网络文件系统NFS协议中使用) 或 ONC RPC。
+
+* 当客户端应用想发起远程调用时，实际通过本地调用本地调用方的Stub，将调用的接口、方法和参数通过约定的协议规范进行编码，通过本地RPCRuntime进行传输，将调用网络包发送到服务器。
+* 服务器端的RPCRuntime收到请求后，交给提供方Stub进行编码，然后调用服务端的方法，服务端执行方法后返回结果，提供方Stub将返回结果编码后，发送给客户端，客户端RPCRuntime收到结果，发给调用方Stub解码得到结果返回给客户端。
+* 无论是什么RPC，底层都是Socket编程。
+* RPC传输一般需要一个状态机，需要另一个进程，专门做服务发现。
+
+## SOAP
+
+* 基于XML的soap协议：文本类方式传输，无论哪个客户端获得这个文本，都能明确直到其含义。
+  * **SOAP: Simple Object Access Protocol 简单对象访问协议**。【使用XML编写简单的请求和回复消息，通过HTTP协议进行传输。】
+
+## RESTful接口协议
+
+RESTful：[Representational State Transfer 表述性状态转移](《Architectureal Styles and the Desgin of Network-based Software Architectures》)
+
+* RESTful 不是一种严格标准，而是一种设计风格。
+* 基于http实现协议传输。
+* 基于Json实现协议约定。
+* 基于注册中心来实现服务发现。
+
 # 其他
 
 ## VPN
