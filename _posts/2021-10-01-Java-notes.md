@@ -77,7 +77,7 @@ Some Java usage experience.
 
 * ij打jar包
 
-  <img src="/img/springboot打jar包.png"  />
+  <img src='/images/img/springboot打jar包.png'>
 
 # 基本语法
 
@@ -185,6 +185,8 @@ public class UserService{
 ## 创建spring-boot项目
 
 官方推荐：[参考](https://start.spring.io/)
+
+<img src='/images/img/springboot创建示例.png'>
 
 <img src="./img/springboot创建示例.png" alt="springboot创建示例" style="zoom: 67%;" />
 
