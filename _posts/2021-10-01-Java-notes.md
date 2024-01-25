@@ -65,6 +65,20 @@ Some Java usage experience.
   * User settings file：明确settings.xml 文件路径 【**mirrors换源更新到国内源，可以拷贝正常运行的工程的该文件到本地替换**】
   * Local repository：本地仓库位置，下载Maven的时候配置。
 
+## linux服务器配置java环境
+
+* root登录
+
+* 安装java JDK
+
+  * 更新包软件库：sudo apt-get update。
+  * 安装jdk：sudo apt-get install default-jdk [此命令无需单独配置环境变量。]
+  * 查看是否安装成功：java -version.
+
+* ij打jar包
+
+  <img src="/img/springboot打jar包.png"  />
+
 # 基本语法
 
 * **java 文件名和主函数所在的类名一定要一致，否则无法运行**
