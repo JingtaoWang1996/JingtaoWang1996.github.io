@@ -68,16 +68,11 @@ Some Java usage experience.
 ## linux服务器配置java环境
 
 * root登录
-
 * 安装java JDK
 
   * 更新包软件库：sudo apt-get update。
   * 安装jdk：sudo apt-get install default-jdk [此命令无需单独配置环境变量。]
   * 查看是否安装成功：java -version.
-
-* ij打jar包
-
-  <img src='/images/img/springboot打jar包.png'>
 
 # 基本语法
 
@@ -289,6 +284,18 @@ public class UserService{
 * F12, google 浏览器查看传参情况，调用具体接口的情况
 
 ​       F12->network ->看具体请求接口的header（参数）、payload、response
+
+## springboot后端服务打jar包后运行
+
+见下方**IJ打jar包**
+
+* jar包上传服务器后：java -jar xxxx.jar [尝试前端运行是否报错。]
+
+### 运行jar包时指定外部配置文件：xxx.properties
+
+java -jar your-app.jar --spring.config.location=file:/path/to/external/application.properties
+
+* 方便直接修改相关配置
 
 # IJ
 
