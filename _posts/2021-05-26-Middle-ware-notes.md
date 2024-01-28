@@ -613,6 +613,37 @@ server {
 * 查看nginx 状态：systemctl status nginx.service
 * 重启nginx服务：service nginx restart
 
+## nginx部署前端代码页面
+
+* linux服务器上：whereis nginx
+
+* cd 到 /usr/share/nginx/html 【大概率是这个目录，主要看是否有html】
+
+* **将前段dist.zip 文件解压，并将其中的所有文件考到html目录下**
+
+* 修改配置文件的base_url和port
+
+* 修改nginx配置文件：vim /etc/nginx/nginx.conf 【增加一个server 段】
+
+  ```
+   server {
+                   listen 9002; 
+  
+                   location / {
+                           #proxy_pass http://127.0.0.1:9002;
+                           proxy_send_timeout 1;
+                           proxy_read_timeout 1;
+                    }
+  
+            }
+  ```
+
+  PS: listen 后的端口需要和前端代码中配置一致
+
+* 重启ngnix服务：service nginx restart
+
+* 浏览器访问即可。
+
 ## 问题记录
 
 * nginx 配置完成后，执行：nginx -s reload重载配置后报错：
