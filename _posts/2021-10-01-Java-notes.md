@@ -297,6 +297,10 @@ java -jar your-app.jar --spring.config.location=file:/path/to/external/applicati
 
 * 方便直接修改相关配置
 
+PS: 若工程包含lombok，则--spring之后的参数配置会被认为是lombok的，导致失效，需修改为为：
+
+**java -jar -Dspring.config.location=file:/cyd/application.properties /cyd/middleProcess-0.0.1-SNAPSHOT.jar**
+
 # IJ
 
 打jar包
