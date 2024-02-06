@@ -23,7 +23,8 @@ Current research topic include:
   
 News!
 ======
-* Jun 2020, Start to work at CETC as a Research Engineer!
+* Jan 2024, Got a promotion as a Research Engineer!
+* Jun 2020, Start to work at CETC as an associate Engineer!
 * Jan 2020, Passed my Master's thesis defence and got the M.S degree. Always graceful of the time Prof. Zou has spend on me!
 * Sep 2018, Started my Master academic journey at UB!
 * Jun 2018, Graduated from CQUPT with Honor! (Outstanding Student Scholarship of CQUPT for four consecutive years)
