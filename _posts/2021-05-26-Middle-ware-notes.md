@@ -267,6 +267,9 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 
 ​        使用命令：docker exec –it 容器ID /bin/sh
 
+* 现象：执行dockerd报错---failed to start daemon: error while opening volume store metadata database: timeout。
+  * 解决方案：
+
 # kafka
 
 ## 概述
@@ -402,7 +405,9 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
   * kafka server 配置 & kafka 服务是否还在正常运行
 * Kafka.errors.NodeNotReadyError: NodeNotReadyError
   * 可能原因 /etc/hosts 文件当中为空，没有配ip & hosts 对应关系。
-  * 解决方法：
+  * 解决方法：重启确认客docker守护进程是否正常运行。
+* **如果遇到docker守护进程无法启动或systemctl status docker 超过1min处于deactivating状态**
+  * 重启服务器。
 
 # Zookeeper
 
