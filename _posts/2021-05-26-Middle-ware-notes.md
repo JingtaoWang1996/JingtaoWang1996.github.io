@@ -620,6 +620,8 @@ server {
 
 ## nginx部署前端代码页面
 
+**说明：1、nginx中的listen是浏览器访问界面的端口； 2、base_url_config 的port是后台代码配置文件中的server.port**
+
 * linux服务器上：whereis nginx
 
 * cd 到 /usr/share/nginx/html 【大概率是这个目录，主要看是否有html】
@@ -629,6 +631,8 @@ server {
 * 修改配置文件的base_url和port
 
 * 修改nginx配置文件：vim /etc/nginx/nginx.conf 【增加一个server 段】
+
+  **此处nginx的port是浏览器访问的地址**
 
   ```
    server {
