@@ -8,6 +8,15 @@ tags:
 
 CS related notes lists.
 
+# Windows Tricks
+
+## 快速删除.txt的上万行
+
+* 光标放在要删除部分的结尾位置。
+* 拖动右侧上下滑动条到要删除的开头位置。
+* 按住shift后鼠标点击要删除开头位置。【此时要删除部分已全部变为蓝色】
+* 删除后保存即可。
+
 # 硬件相关
 
 ## 网线头颜色排列
@@ -41,6 +50,10 @@ CS related notes lists.
 ## 交换机配置
 
 * 以huawei交换机为例，在PC上将ip配置到同一网段后按照说明书quick start 进行处理。
+
+### 交换机镜像服务器流量
+
+
 
 ## windows 系统配多个ip及删除
 
