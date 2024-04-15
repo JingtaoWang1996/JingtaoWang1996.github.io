@@ -247,6 +247,9 @@ Enjoy these worth reading books！
       <td>《西出玉门》</td>
     </tr>
     <tr>
+      <td>《从红月开始》</td>
+    </tr>  
+    <tr>
       <td>《斗破苍穹》</td>
     </tr>
     <tr>
