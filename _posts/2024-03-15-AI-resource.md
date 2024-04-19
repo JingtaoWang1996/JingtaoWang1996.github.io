@@ -6,7 +6,7 @@ tags:
   - Real Work Practice
 ---
 
-Mark Some useful AI model、community、dataset、resource here
+Mark Some useful AI model、community、dataset、resource、Info here.
 
 # Hugging Face
 
@@ -204,9 +204,9 @@ Mark Some useful AI model、community、dataset、resource here
   * 每一轮采样都有一个参数采样流程，这决定了汤普森采样是一个随机流程。
   * 后验概率中选取的优势：当样本足够大时，样本的均值也是区域分布均值【Law of large number】
 
-# 推荐系统评测
+## 推荐系统评测
 
-## 线下评测
+### 线下评测
 
 * 基于评分：衡量评分的准确性（均方差Mean Square Error、方差Root MSE）
   * RMSE在推荐系统评分中的问题：
@@ -218,7 +218,7 @@ Mark Some useful AI model、community、dataset、resource here
   * 假定某个系统针对某个关键字，从测试数据集中提取一定量的文档而不是返回所有文档，我们就可以根据这个提取的文档子集来定义一系列的指标。
   * 基于precision & recall 来评测推荐系统：**推荐相关度评分**。
 
-## 线上评测
+### 线上评测
 
 * 线上评测核心：在线可控实验-希望能够利用在线实验来对推荐系统的某一个部分进行检测看是否对交互系统产生影响。
 
@@ -231,7 +231,7 @@ Mark Some useful AI model、community、dataset、resource here
   * **相邻两次访问中的间隔时间（Absence Time**）：这个指标是越短越好，当重复访问间隔越短，用户越依赖于你的服务。
 
 
-# 现代推荐架构
+## 现代推荐架构
 
 * 推荐架构需要解决的问题：
   * 在1-200ms内给用户提供当前的推荐结果。【用户端：推荐结果**实时呈现**】
