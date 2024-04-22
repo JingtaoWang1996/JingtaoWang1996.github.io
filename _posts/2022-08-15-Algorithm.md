@@ -855,15 +855,9 @@ AdaBoost迭代算法，相同训练集训练不同的弱分类器，最终合成
 
 RNN & LSTM
 
-## RNN-Recurrent NN
-
-### 时序信息建模
-
-* 之前的推荐模型都没有考虑时间的因素，很多
-
 ## 问题记录
 
-* 时序模型一般情况不使用dropout，因为RNN存在累乘效应，使用dropout会破坏学习过程。需要使用的话只能在RNN or LSTM之外使用。
+* **时序模型一般情况不使用dropout，**因为RNN存在累乘效应，使用dropout会破坏学习过程。需要使用的话只能在RNN or LSTM之外使用。
 
 ## Markov Model
 
