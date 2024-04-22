@@ -879,6 +879,19 @@ supervisor运行python脚本，默认情况下是后台运行。
 * 报错信息：“msg“: “Invalid/incorrect password: Permission denied, please try again.“，[参考](https://blog.51cto.com/u_15233520/5222515)
   解决方案：若提示密码错误，则将密码加双引号
 
+# grafana
+
+[官方下载网站](https://grafana.com/grafana/download)
+
+## centos 安装grafana
+
+* sudo yum install -y https://dl.grafana.com/enterprise/release/grafana-enterprise-10.4.2-1.x86_64.rpm
+* 安装完成后配置自动启动grafana：
+  * sudo systemctl daemon-reload
+  * sudo systemctl enable grafana-server.service
+* 启动 grafana-server:sudo /bin/systemctl start grafana-server.service
+* 查看grafana服务是否启动：systemctl status grafana-server
+
 # logstash
 
 [官网](https://www.elastic.co/cn/logstash/) 
