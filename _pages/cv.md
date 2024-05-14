@@ -23,6 +23,20 @@ Work experience
 
 Project experiences （Selected）
 ======
+* **10/2022-04/2023: Backend development based on Springboot**
+   * Collect real attack events (Nimda/Slammer/CodeRed) time sequential update message data from RIPE.
+   * Data preprocess and select 7 features (Based on attack relevance) as the model input. 
+   * By testing, LSTM can gain 93.7% accuracy with both 3k of normal and anomaly sequential data.
+* **Backend development based on Springboot by project**
+   * 10/2022-03/2023: Learn springboot and get started with basic development work by BC project.
+   * 11/2023-04/2023: Mainly responsible for backend development and detailed communication and modification among all parties by CYD project.
+* **06/2022-09/2022: Malicious Domain Detection: DGA data & Collected open source threat info based**
+   * Pre-collected 8 type of malicious domain & ip with total 223w+ data nums.
+   * Pre-processed DGA model training data: normal domains(10% alexa top 1million---10w) & 8 type of different dga domains(1w each).
+     * 5 selected domain features：length、entropy、n-gram in normal domains、n-gram in dga domains、diff in previous two n-gram。
+     * Benchmark: with random selected 36000 test data, Logistic regression can obtain 88.6% accuracy.
+     * Ensemble model Based: Using voting classifier with Logistic Regression、RF、Naive Bayes can imporve the accuracy up to 93% with same test data.
+   * Modularize the above datas & models and successfully deploy them to multiple projects.
 * **02/2022-04/2022: Anomaly Detection: BGP data based**
    * Collect real attack events (Nimda/Slammer/CodeRed) time sequential update message data from RIPE.
    * Data preprocess and select 7 features (Based on attack relevance) as the model input. 
