@@ -23,13 +23,13 @@ Work experience
 
 Project experiences （Selected）
 ======
-* **10/2022-04/2023: Backend development based on Springboot**
-   * Collect real attack events (Nimda/Slammer/CodeRed) time sequential update message data from RIPE.
-   * Data preprocess and select 7 features (Based on attack relevance) as the model input. 
-   * By testing, LSTM can gain 93.7% accuracy with both 3k of normal and anomaly sequential data.
+* **04/2024-now: Starlink network info analysis**
+   * Research background information related to starlink and collect DNS, ntp and other basic service IPs.
+   * Finish 20w4k+ nums of AS14593 network basic services with DNS(172 ipv4 recursive server)、NTP(85+ ipv4 ntp server) & other infos(location、whois etc.,)
+   * Other network basic infrastructure security related research topics.
 * **Backend development based on Springboot by project**
    * 10/2022-03/2023: Learn springboot and get started with basic development work by BC project.
-   * 11/2023-04/2023: Mainly responsible for backend development and detailed communication and modification among all parties by CYD project.
+   * 11/2023-03/2024: Mainly responsible for backend development and detailed communication and modification among all parties by CYD project.
 * **06/2022-09/2022: Malicious Domain Detection: DGA data & Collected open source threat info based**
    * Pre-collected 8 type of malicious domain & ip with total 223w+ data nums.
    * Pre-processed DGA model training data: normal domains(10% alexa top 1million---10w) & 8 type of different dga domains(1w each).
@@ -50,7 +50,7 @@ Project experiences （Selected）
    * Best QCD peformance on 10D Gaussian/KDD/SWAT datasets compared with some popular QCD alogrithms. 
 * **03/2018-05/2018: BPNN based Transformer Fault Detection （B.S thesis）**
    * Establish BPNN a transformer fault detection model with IEC three ratio processed transformer gas data.
-   * Optimize BPNN model with GA & PSO algorithms and gain the optimal detection accuracy: 95%± 2%
+   * Optimize BPNN model with GA & PSO algorithms and gain the optimal detection accuracy: 95%± 2%.
   
   
 <!-- Skills
