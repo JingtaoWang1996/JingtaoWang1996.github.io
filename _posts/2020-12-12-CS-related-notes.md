@@ -51,9 +51,45 @@ CS related notes lists.
 
 * 以huawei交换机为例，在PC上将ip配置到同一网段后按照说明书quick start 进行处理。
 
-### 交换机镜像服务器流量
+## 忘记密码的情况
 
+* [通过console 口重置密码](https://baijiahao.baidu.com/s?id=1786808074819409427&wfr=spider&for=pc)
 
+  * COM口，通过moba-session-series-COM---设置9600波特率。
+
+  * **在BootROM/BootLoad下配置清除Console口密码启动后，修改Console口密码**
+    如果您记得BootROM/BootLoad菜单密码，能正常进入BootROM/BootLoad菜单，则可以通过BootROM/BootLoad菜单清除Console口登录密码，并在交换机重新启动后设置新的Console口登录密码，然后保存配置（因涉及重启设备，会中断当前业务，请在业务允许的情况下操作，且设备启动过程中不要对设备进行下电操作）。请按照如下步骤进行配置：
+
+    * 准备一根Console线缆并通过设备的Console口连接交换机，连接成功后重启交换机（Console登录设备方法请参考[S交换机如何通过Console口登录](https://app.huawei.com/weiknow#)）。
+
+    * 当界面出现以下打印信息时，及时按下快捷键“**Ctrl+B**”或“**Ctrl+E**”并输入BootROM密码，进入BootROM主菜单。
+      * S系列框式交换机打印信息： 
+        Press Ctrl+B to enter boot menu ... 1 
+        Password: //输入BootROM密码
+        E系列和S系列盒式交换机打印信息： 
+        Press Ctrl+B or Ctrl+E to enter BootROM menu ... 2 
+        password: //输入BootROM密码 
+
+    * 在BootROM/BootLoad主菜单下选择“**Clear password for console user**”清除Console口登录密码。
+
+    * 根据交换机的提示，在BootROM/BootLoad主菜单下选择“**Boot with default mode**”启动设备（此处不要选择“**Reboot**”选项，否则此次清除密码将失效）。 
+    * 完成系统启动后，通过Console口登录时不需要认证，登录后按照系统提示配置验证密码（V200R009及之后版本，完成系统启动后，通过Console口登录时认证方式为None，系统启动后不会提示配置验证密码 ）。
+
+    * 登录交换机后，用户可以根据需要配置Console用户界面的认证方式及密码。修改Console口登录的密码请参考方法一的步骤2。
+
+    * 为了防止重启后配置丢失，保存配置。
+
+      <HUAWEI> **save**
+
+    ​       The current configuration will be written to the device.
+
+    ​       Are you sure to continue?[Y/N] **y**
+
+    ​       Now saving the current configuration to the slot 0.
+
+    ​       Save the configuration successfully.
+
+* [ref2-配置http](https://www.cnblogs.com/fyy-hhzzj/p/7810542.html)
 
 ## windows 系统配多个ip及删除
 
