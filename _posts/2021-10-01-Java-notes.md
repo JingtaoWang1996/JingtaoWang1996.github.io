@@ -74,6 +74,10 @@ Some Java usage experience.
   * 安装jdk：sudo apt-get install default-jdk [此命令无需单独配置环境变量。]
   * 查看是否安装成功：java -version.
 
+## java在不同版本中切换
+
+* [基于环境变量切换](https://blog.csdn.net/ZZZZhaoYiDing/article/details/136532959)
+
 # 基本语法
 
 * **java 文件名和主函数所在的类名一定要一致，否则无法运行**
