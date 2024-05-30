@@ -31,8 +31,9 @@ DNS 各类服务信息的扫描、收集。
 # 转发器
 
 * 定义：这台DNS发现非本机负责的查询请求时，不再向根域发起请求，而是直接转发给**指定的**一台或者多台服务器。自身并不缓存查询结果。[参考](https://www.cnblogs.com/kebibuluan/p/15033442.html)
-  * **此定义需要相对于某个域名来说，而非单独的是否是递归服务器，间接解析器也需要针对特定的域名来说**
-
+  
+* **此定义需要相对于某个域名来说，而非单独的是否是递归服务器，间接解析器也需要针对特定的域名来说**
+  
 * 准确判断方式
 
   * vim /etc/named.conf 中是否配置了forwarders, 如果有则该DNS服务器被配置为转发器。
@@ -92,10 +93,30 @@ DNS 各类服务信息的扫描、收集。
 
     <img src="/images/img/dig查询bind版本结果.png">
 
+```
+    def check_bind_version(ips):
+    bind_version_query = dns.message.make_query('VERSION.BIND', dns.rdatatype.TXT, dns.rdataclass.CHAOS)
+        for ip in ips:
+            # 发送 DNS 查询请求到指定的 DNS 服务器
+            response = dns.query.udp(bind_version_query, ip)
+            # 打印查询结果
+            if response.answer:
+                print("Response:")
+                for rrset in response.answer:
+                    for rr in rrset:
+                        print(rr)
+            else:
+                print("No answer received.")
+```
+
+
+
 # dns服务器是否配置了dnssec
 
-* dnsrecon库
-  * 安装：pip3 install dnsrecon
+## dnsrecon库
+
+* 安装：pip3 install dnsrecon
+
 * 
 
 
