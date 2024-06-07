@@ -78,6 +78,14 @@ Some Java usage experience.
 
 * [基于环境变量切换](https://blog.csdn.net/ZZZZhaoYiDing/article/details/136532959)
 
+## 前端文件打包在springboot当中同时启动
+
+**springboot启动的同时启动前端页面**，[ref](https://blog.csdn.net/Mrzhang567/article/details/125527153)
+
+* 在springboot的resource目录下创建static文件夹。
+* 将前段打包后的dist文件夹下的所有文件全部拷贝到static文件夹下。
+* 启动springboot，访问8080端口来检查前端文件是否被正常加载。
+
 # 基本语法
 
 * **java 文件名和主函数所在的类名一定要一致，否则无法运行**
