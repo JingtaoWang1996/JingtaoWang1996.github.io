@@ -44,6 +44,50 @@ About Full Stack Engineers
   - 支持多路复用：允许客户端同时在一个连接中同时传输多组请求响应的方法。
   - 服务端将网页必要资源一次性 push 到客户端，而不是每次客户端确认缺什么再来索取，节约加载时间。
 
+# HTTPS
+
+* https出现的原因---基于http无法满足复杂的需求：数据加密传输的安全性需求、服务器消息即时推送的交互模式需求等。【因此，需要引入其他协议来：增强、填补HTTP协议所不擅长的空白领域；】
+
+## SSL（Secure Socket Layer）/TLS（Transport Layer Security）
+
+* 解决HTTP明文传输过程中存在的：拦截、伪装、篡改问题。
+* HTTP + SSL/TLS = HTTPS
+* 事实上一开始只有SSL，后来在SSL3.0之后，其被标准化并通过RFC2246以SSL为基础建立了TLS的第一个版本。
+
+## 对称性和非对称性加密
+
+* 对称性Symmetric Cryptograph：加解密使用相同的密钥。
+  * 优点：简单、加解密速度快。
+  * 缺点：加解密使用相同密钥，如何安全传递密钥是一个问题。
+* 非对称性加密Asymmetric Cryptograph：数据加解密使用不同的密钥---**公钥public Key+私钥 private Key**。
+  * 公钥、私钥同时生成：公钥可以公开和传播，私钥不能。
+  * 经过公钥加密的数据需要私钥才能解密，反之亦然。
+* 性能较差，但加解密的密钥相对独立，可以放心传播。
+
+## TLS 连接建立原理
+
+**TLS通过非对称加密技术来保证握手过程的可靠性；通过对称加密技术来保证传输过程的可靠性。**
+
+* step1-Client Hello：客户端向服务端打招呼，并携带信息：**客户端产生的随机数A**、**客户端支持的加密方法列表**。
+
+* step2-Server Hello：服务端向客户端回复，并携带信息：**服务端产生的随机数B**、**服务端根据客户端的支持情况确定出的加密方法组合Cipher Suite。**
+
+* step3-Certificate，Server Key Exchange，Server Hello Done：服务端在打完招呼之后紧接着告知：
+
+  * Certificate，证书信息（包含服务端生成的公钥）。
+  * 客户端收到信息，验证证书有效后，公钥也就同样可信。接着客户端再生成一个**随机数C**（Pre-master Secret），此时共有的随机数A、B、C根据约好的加密方法组合生成**新的密钥X（Master Secret）**而由 X 可继续生成真正用于后续数据进行加密和解密的对称密钥。因为它是在本次 TLS 会话中生成的，所以也被称为会话密钥（Session Secret）。简言之：
+    * 客户端随机数 A + 服务端随机数 B + 客户端 Pre-master Secret C → 会话密钥
+
+* Step4-Client Key Exchange、Change Cipher Spec、Encrypted Handshake Message：接着客户端告诉服务端：
+
+  - Client Key Exchange，本质上它就是上面说的这个 C，但使用了**服务端通过证书发来的公钥加密（上面是客户端发来的证书）**；
+  - Change Cipher Spec，客户端同意正式启用约好的加密方法和密钥了，后面的数据传输全部都使用密钥 X 来加密；
+  - Encrypted Handshake Message，快速验证：这是客户端对于整个对话进行摘要并加密得到的串，如果经过服务端解密，和原串相等，就证明整个握手过程是成功的。
+
+  服务端收到消息后，用自己私钥解密上面的 Client Key Exchange，得到了 C，这样它和客户端一样，也得到了 A、B 和 C，继而到 X，以及最终的会话密钥。
+
+* 于是，客户端和服务端都得到了能够加密解密传输数据的对称密钥——会话密钥。
+
 
 ------
 
