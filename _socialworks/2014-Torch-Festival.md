@@ -2,7 +2,7 @@
 title: "Liangshan Yi Autonomous Prefecture International Torch Festival"
 collection: teaching
 type: "Volunteer"
-permalink: /teaching/2014-the-Torch-Festival
+permalink: /socialworks/2014-the-Torch-Festival
 venue: "XiChang,Sichuan,China"
 date: 2014-07-20
 location: "XiChang,Sichuan,China"
