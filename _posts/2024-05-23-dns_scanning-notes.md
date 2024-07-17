@@ -1,12 +1,12 @@
 ---
-title: 'Git-command'
+title: 'DNS scanning'
 date: 2024-05-23
 permalink: /posts/2024/05/dns-scanning/
 tags:
   - Real Work Practice
 ---
 
-DNS 各类服务信息的扫描、收集。
+DNS 各类服务信息的扫描、收集。【转发器探测】
 
 # 本地测试环境
 
@@ -68,6 +68,33 @@ DNS 各类服务信息的扫描、收集。
 
 * 是否提前配置了转发目标来确定，配置了就是转发器，没配置就是间接解析器。
 
+## 转发器探测方式
+
+[参考](https://www.cnblogs.com/xiannong/p/17989486)
+
+**实验配置**
+
+* vim /etc/named.conf 中：
+  * 有转发器，有递归 = recursion yes；   +   forwarders {223.5.5.5；}： 
+  * 无转发器，有递归 = recursion yes；   +   #forwarders {223.5.5.5；}： 
+  * 有转发器，无递归 = recursion no；   +   forwarders {223.5.5.5；}： 
+* 41上仅配置域名：yumaozdy.com
+  * 即：41对于yumaozdy.com 有权威解释，对于其他DNS请求无权威解释；
+
+**实验结果截图**
+
+* 无转发有递归 & 有转发有递归
+
+<img src="/images/img/转发器实验结果.png">
+
+* 有转发，无递归：【请求转发不出去】
+
+<img src="/images/img/转发器实验结果_有转发无递归.png">
+
+**实验结论**
+
+* 若目标ip为请求域名的权威服务器，
+
 # 间接解析器
 
 ## 间接解析器的定义
@@ -113,11 +140,10 @@ DNS 各类服务信息的扫描、收集。
 
 # dns服务器是否配置了dnssec
 
-## dnsrecon库
+dig example.com +dnssec @ip  
 
-* 安装：pip3 install dnsrecon
-
-* 
+* example.com: 确认支持dnssec
+* 若输出结果包含：+RRSIG则表示该ip配置了dnssec.
 
 
 
