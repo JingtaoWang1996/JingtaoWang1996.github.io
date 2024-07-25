@@ -748,7 +748,7 @@ supervisor运行python脚本，默认情况下是后台运行。
 
 ## 运行启动
 
-* 修改或更新配置后需先运行：supervisorctl update（出现 dnspython: add to group xxxx 表示dnspython 添加成功并开始运行）
+* **修改或更新配置后需先运行：supervisorctl update**（出现 dnspython: add to group xxxx 表示dnspython 添加成功并开始运行）
 * supervisorctl restart/start/stop xxxxx：重启、启动、停止xxxx任务
 * supervisorctl status：确认运行状态
 
