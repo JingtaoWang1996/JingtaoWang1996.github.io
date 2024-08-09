@@ -373,10 +373,33 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 ### consumer停止消费topic【代码还在运行，但不消费了】
 
 * 现象：DNS信息采集时，消费者消费一段时间后会报错：socket close，然后导致消费组rebalance，重复消费消息。
+
 * 参考：https://blog.csdn.net/goodluck_mh/article/details/79840331
+
   * 命令查看消费者消费情况：bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group groupid名称
-* 原因：原来是在 kafka consumer 运行时，要和kafka集群的协调节点做心跳交流，这也是kafka集群给consumer做负载均衡的条件。但是但是consumer内部也会有一个计时器，记录上一次向 kafka 集群 poll 的时间，另外心跳线程会检测该现在距上一次poll的时间，如果该时间差超过了设定时间(kafka consumer默认的是 5分钟)，就会想kafka集群发出leaveGroup，这时kafka集群会注销掉该consumer 的信息
-  ————————————————
+
+* 原因：kafka consumer 运行时，要和kafka集群的协调节点做心跳交流，这也是kafka集群给consumer做负载均衡的条件。
+
+  * **consumer内部也会有一个计时器，记录上一次向 kafka 集群 poll 的时间**。
+  * **心跳线程会检测现在距上一次poll的时间，如果该时间差超过了设定时间max_poll_interval_ms,默认5min**，就会向kafka集群发送leaveGroup，这时kafka集群会注销掉该consumer的信息。
+
+* **解决方案**：**<u>kafka消费时，不要使用阻塞方法（blockqueue、网络发送设置超时时间等）</u>**
+
+* **In conclusion：上下两次poll的时间间隔不要超过max_poll_interval_ms的时间**
+
+* ```
+  # 消费者配置参考
+  consumer_config = {
+      'bootstrap_servers': config["kafka"]["host"],
+      'group_id': "basic_info" + topic,
+      'auto_offset_reset': 'latest',  # 从最早的消息开始消费
+      'max_poll_interval_ms': 3600000,  # 两次poll允许的时间间隔，否则出发重平衡，单位ms，当前测试360wms=1h，
+      # 'session_timeout_ms': 60000,  # 消费者组重平衡的时间
+      # 测试这两个部分有没有效果
+      'enable_auto_commit': True,
+      'auto_commit_interval_ms': 10000,  # 每10s提交一次偏移量，
+  }
+  ```
 
 ## 操作命令
 
