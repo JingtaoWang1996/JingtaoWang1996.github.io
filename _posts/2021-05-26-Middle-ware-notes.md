@@ -370,7 +370,13 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 * 增加数据标识符
 * 消费重试机制--spring-kafka 有，但kafka-python 只能通过代码逻辑实现
 
-### 单机kafka broker的
+### consumer停止消费topic【代码还在运行，但不消费了】
+
+* 现象：DNS信息采集时，消费者消费一段时间后会报错：socket close，然后导致消费组rebalance，重复消费消息。
+* 参考：https://blog.csdn.net/goodluck_mh/article/details/79840331
+  * 命令查看消费者消费情况：bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group groupid名称
+* 原因：原来是在 kafka consumer 运行时，要和kafka集群的协调节点做心跳交流，这也是kafka集群给consumer做负载均衡的条件。但是但是consumer内部也会有一个计时器，记录上一次向 kafka 集群 poll 的时间，另外心跳线程会检测该现在距上一次poll的时间，如果该时间差超过了设定时间(kafka consumer默认的是 5分钟)，就会想kafka集群发出leaveGroup，这时kafka集群会注销掉该consumer 的信息
+  ————————————————
 
 ## 操作命令
 
