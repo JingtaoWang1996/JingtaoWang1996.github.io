@@ -358,6 +358,29 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 * fetch_max_bytes=10485760, # 设置每次拉取的最大数据量为 100MB，server端可返回给consumer的大小
 * max_partition_fetch_bytes=5242880 # 设置单个分区的最大数据量5MB=1024*1024*5
 
+### 消费者参数配置说明
+
+[消费者参数配置说明](https://blog.csdn.net/weixin_43632687/article/details/126520164)
+
+| 参数名                | 含义                       | 默认值 | 备注                                                         |
+| --------------------- | -------------------------- | ------ | ------------------------------------------------------------ |
+| max.poll.interval.ms  | 拉取时间间隔               | 300s   | 每次拉取的记录必须在该时间内消费完                           |
+| max.poll.records      | 每次拉取条数               | 500条  | 这个条数一定要结合业务背景合理设置                           |
+| fetch.max.wait.ms     | 每次拉取最大等待时间       |        | 时间达到或者消息大小谁先满足条件都触发，没有消息但时间达到返回空消息体 |
+| fetch.min.bytes       | 每次拉取最小字节数         |        | 时间达到或者消息大小谁先满足条件都触发                       |
+| heartbeat.interval.ms | 向协调器发送心跳的时间间隔 | 3s     | 建议不超过session.timeout.ms的1/3                            |
+| session.timeout.ms    | 心跳超时时间               | 30s    | 配置太大会导致真死消费者检测太慢                             |
+
+当拉取数据，消费时间过长，就会出现leave group的情况
+
+上面6个参数：
+
+**1）1、2配置使用，告诉kafka集群，消费者的处理能力。**
+
+2）3,4配合使用，告诉kafka集群，多久拉取一次数据。
+
+3）5,6配合使用，告诉kafka集群，什么情况可以认为消费者挂了，触发rebalance
+
 ### 重复消费的问题
 
 出现重复消费的场景
@@ -394,7 +417,7 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
       'group_id': "basic_info" + topic,
       'auto_offset_reset': 'latest',  # 从最早的消息开始消费
       'max_poll_interval_ms': 3600000,  # 两次poll允许的时间间隔，否则出发重平衡，单位ms，当前测试360wms=1h，
-      # 'session_timeout_ms': 60000,  # 消费者组重平衡的时间
+      # 'session_timeout_ms': 60000,  # 消费者组重平衡的时间，没用
       # 测试这两个部分有没有效果
       'enable_auto_commit': True,
       'auto_commit_interval_ms': 10000,  # 每10s提交一次偏移量，
