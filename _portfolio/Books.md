@@ -255,6 +255,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《吞噬星空》</td>
     </tr>  
+    <tr>
+      <td>《我在精神病院学斩神》</td>
+    </tr>  
   </tbody>
 </table>
 </details>
