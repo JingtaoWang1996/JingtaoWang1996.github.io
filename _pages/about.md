@@ -18,7 +18,7 @@ Research interests:
 My research interests include DNS security, intrusion detection and analysis
 
 Current research topic include:
-* DNS-security
+* DNS detection and security
 * DGA detection and analysis
   
 News!
