@@ -424,6 +424,26 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
   }
   ```
 
+## kafka集群跨网段通信问题解决
+
+### 问题场景
+
+* 实际生产环境中一定存在kafka集群跨网段消费的问题（eg：172.16.2.10 网卡生产的数据需要被192.168.1.10消费等）
+
+### 解决方案
+
+* 在kafka配置文件中，自定义listener及protocol
+  * listerns=INTERNAL_LIS://192.168.1.128:9092,**EXTERNAL_LIS://10.15.1.7:9093**  #黑色加粗部分为新增的外部listener，指向目标网段的本机ip，多个listener之间逗号分隔]
+  * advertised.listeners=INTERNAL_LIS://192.168.1.128:9092,**EXTERNAL_LIS://10.15.1.7:9093** # advertised.listeners处也注册上这个external_lis
+  * listener.security.protocol.map=INTERNAL_LIS **PLAINTEXT,EXTERNAL_LIS:PLAINTEXT** #在listener.security.protocol.map中注册该监听使用的协议，plaintext表示普通文本，不使用ssl加密等。
+  * inter.broker.listerner.name = INTERNAL_LIS # 内部监听器只写一个就行
+* 说明:
+  * **不同listener之间使用不同端口号**
+  * **listener名称是自定义的，没有固定的**
+  * 需要跨多网段监听，按照上述步骤添加多个listener即可。
+
+
+
 ## 操作命令
 
 cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](https://blog.csdn.net/ytp552200ytp/article/details/119914474)
