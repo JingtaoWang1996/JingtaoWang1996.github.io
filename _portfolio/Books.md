@@ -226,6 +226,25 @@ Enjoy these worth reading books！
 </details>
 
 <details>
+    <summary>马伯骞</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《古董局中局1-4》</td>
+    </tr>
+    <tr>
+      <td>《长安的荔枝》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
     <summary>其他</summary>
     <table>
   <thead>
@@ -239,9 +258,6 @@ Enjoy these worth reading books！
     </tr>
     <tr>
       <td>《聊斋志异》</td>
-    </tr>
-    <tr>
-      <td>《古董局中局1-4》</td>
     </tr>
     <tr>
       <td>《西出玉门》</td>
