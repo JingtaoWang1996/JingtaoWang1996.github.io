@@ -226,7 +226,7 @@ Enjoy these worth reading books！
 </details>
 
 <details>
-    <summary>马伯骞</summary>
+    <summary>马伯庸</summary>
     <table>
   <thead>
     <tr>
