@@ -424,7 +424,7 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
   }
   ```
 
-## kafka集群跨网段通信问题解决
+## kafka集群跨网段通信问题
 
 ### 问题场景
 
@@ -442,7 +442,19 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
   * **listener名称是自定义的，没有固定的**
   * 需要跨多网段监听，按照上述步骤添加多个listener即可。
 
+## 实例：阿里云服务器跨网段通信 & 集群部署配置
 
+| 服务器名称 | ip             | 提供的服务 | 补充信息 |
+| ---------- | -------------- | ---------- | -------- |
+| node1      | 106.14.104.148 | zk、kafka  | java1.8  |
+| node2      | 120.79.184.116 | zk、kafka  | java1.8  |
+| node3      | 47.104.176.132 | zk、kafka  | java1.8  |
+
+
+
+* 机器1：  39.104.17.234【成都】     机器2：8.134.143.28 【广州】      机器3：47.104.176.132【青岛】
+* 目标：机器1作为生产者构建topic-task，机器2和3分别消费其2个replica
+* 
 
 ## 操作命令
 
@@ -497,6 +509,13 @@ cd 到kafka解压后bin目录的上一级：eg /opt/wjt/kafkaxxxxx/，[参考](h
 * 单机启动：参见kafka linux 安装配置步骤
 * 集群启动: 【待测试】
 * [可视化客户端配置]([https://issues.apache.org/jira/secure/attachment/12436620/ZooInspector.zip](https://links.jianshu.com/go?to=https%3A%2F%2Fissues.apache.org%2Fjira%2Fsecure%2Fattachment%2F12436620%2FZooInspector.zip)) 解压后进入build目录执行命令：java -jar zookeeper-dev-ZooInspector.jar
+
+## zk集群部署
+
+* 集群部署所有节点均需支持jdk1.8
+  * [centos](https://ken.io/note/centos-java-setup)
+  * [ubuntu]()
+* 
 
 # Postman
 
@@ -950,6 +969,98 @@ supervisor运行python脚本，默认情况下是后台运行。
 
 * 报错信息：“msg“: “Invalid/incorrect password: Permission denied, please try again.“，[参考](https://blog.51cto.com/u_15233520/5222515)
   解决方案：若提示密码错误，则将密码加双引号
+
+# Prometheus 
+
+通过prometheus实现分布式节点
+
+## 安装配置
+
+**测试环境**
+
+* 监控节点： 39.104.17.234   被监控节点：139.196.82.220
+* prometheus 下载安装路径：监控节点-/root/dns/prometheus-3.0.0-beta.linux-amd64.tar.gz
+
+### 控制节点
+
+* 控制节点官网下载合适的二进制文件：[ref](https://prometheus.io/download/)
+
+  * 下载 ：wget https://github.com/prometheus/prometheus/releases/download/v3.0.0-beta.0/prometheus-3.0.0-beta.0.linux-amd64.tar.gz
+  * 解压到当前路径：tar -xvf prometheus-3.0.0-beta.0.linux-amd64.tar.gz
+
+* 切换到安装路径：cd prometheus-3.0.0-beta.0.linux-amd64/
+
+* vim prometheus.yml，添加分布式节点抓取的目标
+
+  * 修改static_configs下的targets
+
+  ```yaml
+  # my global config
+  global:
+    scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+    evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+    # scrape_timeout is set to the global default (10s).
+  
+  # Alertmanager configuration
+  alerting:
+    alertmanagers:
+      - static_configs:
+          - targets:
+            # - alertmanager:9093
+  
+  # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+  rule_files:
+    # - "first_rules.yml"
+    # - "second_rules.yml"
+  
+  # A scrape configuration containing exactly one endpoint to scrape:
+  # Here it's Prometheus itself.
+  scrape_configs:
+    # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+    - job_name: "node_heartbeat"
+      scrape_interval: 15s
+      # metrics_path defaults to '/metrics'
+      # scheme defaults to 'http'.
+  
+      static_configs:
+        - targets: ["172.16.151.22:8000"]
+  ```
+
+* 检查配置文件是否有语法错误：./prometheus --config.file=prometheus.yml --log.level=debug
+* **检查防火墙设置，确保能够从浏览器访问**：
+
+```
+sudo firewall-cmd --zone=public --add-port=9090/tcp --permanent
+sudo firewall-cmd --reload
+```
+
+* 浏览器验证：http://172.16.151.41:9090/
+
+### 分布式节点
+
+使用第三方脚本运行直接暴露心跳信息，以python为例，执行下方脚本，并在http://localhost:8000/metrics 上查看上报信息：
+
+```python
+from prometheus_client import start_http_server, Gauge
+import time
+
+if __name__ == "__main__":
+    # ---------- prometheus 参数配置 ----------
+    # 创建一个心跳指标
+    heart_beat = Gauge('node_heartbeat', 'Heartbeat status of target node')
+    heartbeat_port = 8000  # 在8000端口上暴露 /metrics
+    is_online = 1  # 是否在线,1表示在线
+    update_period = 10  # 每次更新心跳间隔，单位s
+    # ---------- 开始更新心跳 ----------
+    start_http_server(heartbeat_port)
+    while True:
+        heart_beat.set(is_online)  # 设置心跳为true 表示在线
+        time.sleep(update_period)  # 每次更新心跳间隔，
+```
+
+### 最终使用
+
+* 浏览器登录界面后选择“Status->Target health”查看多个节点的心跳状态
 
 # grafana
 
