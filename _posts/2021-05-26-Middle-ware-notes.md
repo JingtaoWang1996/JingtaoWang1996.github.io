@@ -305,6 +305,14 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 
   * 内存映射: 即使顺序写入，硬盘的访问速度还是更不上内存。所以kafka的数据并不是实时写入硬盘，而是通过分页存储来利用内存提高I/O 效率。
 
+## windows 安装配置步骤
+
+* 下载kafka binary downloads：https://kafka.apache.org/downloads
+* 进入解压后的目录：./config/server.properties 
+  * 放开listeners=PLAINTEXT://localhost:9092
+* 修改zk配置：./config/zookeeper.properties 
+  * dataDir: 路径修改为当前路径下
+
 ## linux 安装配置步骤
 
 以22安装单节点为例,[参考](https://www.cnblogs.com/biehongli/p/10216309.html)
@@ -454,7 +462,14 @@ PS: docker-compose 的命令需要在有docker-compose.yml 文件的目录才可
 
 * 机器1：  39.104.17.234【成都】     机器2：8.134.143.28 【广州】      机器3：47.104.176.132【青岛】
 * 目标：机器1作为生产者构建topic-task，机器2和3分别消费其2个replica
-* 
+
+  
+
+## windows本地创建隧道连接云服务器kafka9092
+
+* mobaxterm  /home页面创建隧道--云服务器9092映射到本地9092：ssh -L 9092:localhost:9092 root@39.108.5.254
+* pycharm- tools bigData tools **Enable tunneling** 设置ssh配置后测试连接Test Connection
+* 本地向localhost：9092发送消息获得数据。
 
 ## 操作命令
 
