@@ -187,6 +187,8 @@ public class UserService{
 
 # spring-boot
 
+**[创建java1.8版本的springboot](https://start.aliyun.com/)**
+
 [参考](https://baiyuliang.blog.csdn.net/article/details/109250816)
 
 ## 创建spring-boot项目
@@ -391,6 +393,61 @@ PS: 若工程包含lombok，则--spring之后的参数配置会被认为是lombo
 * 方法2：右侧maven-packages
 
   ![jar2](./img/jar2.png)
+
+# java 调用python脚本及第三方库
+
+## jython
+
+### 安装配置
+
+[教程](https://blog.csdn.net/master_hunter/article/details/127528487)
+
+* [下载](https://www.jython.org/download)
+
+* [环境变量配置](https://testgo.cn/601.html)
+
+* 添加maven依赖
+
+  ```
+  <dependency>
+              <groupId>org.python</groupId>
+              <artifactId>jython-standalone</artifactId>
+              <version>2.7.3</version>
+  </dependency>
+  
+  ```
+
+* 运行python语句：
+
+  ```java
+  import org.python.util.PythonInterpreter;
+   
+  public class HelloPython {
+      public static void main(String[] args) {
+          PythonInterpreter interpreter = new PythonInterpreter();
+  //        interpreter.exec("print('Hello python')");
+          PySystemState sys = Py.getSystemState();
+          sys.path.add("D:\\anaconda3\\Lib\\site-packages");
+          interpreter.execfile("tle.py"); // python 脚本路径
+      }
+  
+   
+  }
+  ```
+
+* 运行python脚本（带第三方库）
+
+  ```java
+  import org.python.util.PythonInterpreter;
+   
+  public class HelloPython {
+      public static void main(String[] args) {
+          PySystemState sys = Py.getSystemState();
+          sys.path.add("D:\\anaconda3\\Lib\\site-packages");
+          interpreter.execfile("E:\\项目相关\\starlink\\starlink\\src\\main\\resources\\python\\tle.py"); // python 脚本路径
+      }
+  }
+  ```
 
 # 问题记录
 
