@@ -154,24 +154,34 @@ DNS缓存探测相关内容：
   * DNSScope工具综合 “统计学习”、“自监督迁移学习” 来得到获得网络的**时序迁移特征**。
   * 此工具能够较准确的获得时变的 **DNS query arrival rates** on recursive DNS resolvers.
 * **CRI： cache refresh interval    &      QAR:  query arrival rate** 
-  * 一个域名越频繁的在一个RDNS上被请求，那么这个域名对应的CRI越小，同时对应这个域名的popularity越高。
+  * **一个域名越频繁的在一个RDNS上被请求，那么这个域名对应的CRI越小，同时对应这个域名的popularity越高。**
   * 当一个域名的ttl较大时，在一个small time window 中，CRI通常非常稀疏，甚至是仅为1.
 * DNS cache probing与被动流量分析的优势：privacy-preserving   & 更轻量化
 
 ### 关于Cache entanglement
 
+
+
 * **A real-world RDNS resolver may deploy multiple caches behind it for load balancing [20-22]. Query for the same domain name are served by diffrent caches.**
   * Therefore，the remaining TTL values of the same domain in different caches may be inconsistent
   * [9-11] 包括之前看过的Geographic web usage estimation by monitor dns caches文章中提到的方法无法区分具体响应是来自哪个缓存。
 * 解决方法-**anchor-port probing**
-  * **对探测包设定不同类型的源端口。对于包含特定源端口的探测包将会被确定性分配到特定的缓存当中。**
-  * anchor port probing 将探测包的
-* 因此，具有特定源端口的探测数据包将确定性地分配给特定缓存。我们枚举不同的源端口以覆盖 R-DNS 解析器上的所有缓存，并为每个缓存提取 CRI？【**源端口一定的探测包，RDNS一定会交给某个固定缓存进行解析吗？】**
+  * **对探测包设定不同类型的<u>源端口</u>。对于包含特定源端口的探测包将会被确定性分配到特定的缓存当中。**
+* 因此，具有特定源端口的探测数据包将确定性地分配给特定缓存。我们枚举不同的源端口以覆盖 R-DNS 解析器上的所有缓存，并为每个缓存提取 CRI？
   * **anchor-port probing 将探测包的source port 与到达的RDNS的具体缓存进行映射**，source port 到 cache的mapping有两种 **Empirical measurement**
-    * Persistent mapping：**源ip、源端口、域名一致的探测包会被映射到相同的缓存？？？这个需要确定**
+    * Persistent mapping：**源ip、源端口、域名一致的探测包会被映射到相同的缓存（见dig命令实现）**
     * one-off mapping：两个连续的探测包，如果源ip、源端口、域名一致且探测时间在一定threshold内，则会被分配到相同的cache
-  * 
+    * 这两个方式，在相同发送探测的机器上探测相同的ip，只要绑定源端口，那么不需要时间一定我感觉？
+    * **dig -b 0.0.0.0#5356**：dig命令类似绑定源端口，没有发现缓存固定的现象，仍然是302
+  * we have also found some R-DNS resolvers exhibiting random cache mapping and [proactive caching](E. Cohen and H. Kaplan, "Proactive caching of dns records: Addressing
+    a performance bottleneck," Computer Networks, 2003[), It's more difficult to extract CRIs for them 【**不止那两个类型的经验结果**】
 * anchor-port probing + different strategies = probe multi-cache RDNS resolver.
+
+#### dig 命令实现
+
+* **dig @223.5.5.5   www.cq.gov.cn a -b 0.0.0.0#4344 +norecurse ** 
+  * -b 命令确认，缓存得到的ttl是在同一个ttl线上的东西，因此：**源端口一定的探测包，向目标RDNS发送请求后，一定会在同一个缓存中进行解析**
+* 
 
 ## 和之前方式的比较
 
@@ -194,7 +204,25 @@ DNS缓存探测相关内容：
 * 图2提到的结构分为2个阶段，第一部分DNS cache probing是为关注对象。
 * DNSScope probes remote RDNS resolver and **continuously tracks（还是需要持续进行监测目标RDNS上的目标域名） the cache state changes for domain name of interests to extract CRIs.(每个城市一个域名方便映射)**
 * 对于不同类型的RDNS，DNSScope 采用不同的策略进行探测，解决cache entanglement问题。
-* 
+
+### Identifying R-DNS resolver Type & Different Probing Strategy
+
+* **type-I R-DNS resolvers**：single cache R-DNS resolvers
+  * initialize a prober with random source port and periodically send probing packets to target resolver
+  * single cache 的默认是等待TTL之后即可，之前的思路可行。
+* **type-II R-DNS resolvers**: multi-cache R-DNS + persistent mapping
+  * 根据前面探测到的缓存个数，每个缓存来一个prober（绑定一个特定的端口，定时探测一遍，类似于type-I的多个版）
+* **type-III R-DNS resolvers**：multi-cache R-DNS + one-off mapping 
+
+**Cache recognition：探测目标RDNS上的独立缓存数量**
+
+* 注册一个域名A，其包含较长的ttl。
+* 每10s向其发送一个请求，发送主机和源端口随机
+* 根据公式计算
+
+**Cache Warming**
+
+* 周期性的向目标RDNS查询目标域名的
 
 # Paper3:  DNS cache-based user tracking
 
