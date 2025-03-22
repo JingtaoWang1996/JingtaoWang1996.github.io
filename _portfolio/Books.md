@@ -274,6 +274,12 @@ Enjoy these worth reading books！
     <tr>
       <td>《我在精神病院学斩神》</td>
     </tr>  
+    <tr>
+      <td>《牧神记》</td>
+    </tr>  
+    <tr>
+      <td>《雷军传》</td>
+    </tr>  
   </tbody>
 </table>
 </details>
