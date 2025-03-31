@@ -1,5 +1,5 @@
 ---
-title: 'Git-command'
+title: 'Full-stack-Engineer'
 date: 2024-07-01
 permalink: /posts/2024/07/FullStackEngneering/
 tags:
