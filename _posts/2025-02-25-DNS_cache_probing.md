@@ -6,7 +6,7 @@ tags:
   - Real Work Practice
 ---
 
-DNS缓存探测相关内容：
+DNS缓存探测相关内容
 
 # 配置了CDN的DNS服务器缓存探测的影响
 
