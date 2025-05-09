@@ -1,5 +1,5 @@
 ---
-title: "Enjoy the wild blowing past my ears"
+title: "Enjoy the wind blowing past my ears"
 collection: portfolio
 ---
 
@@ -36,7 +36,7 @@ Recording all the road that I‘ve passed by !
 * 4h14m-15.8KM/h
 
 <video width="640" height="360" controls>
-  <source src="assets/兴隆湖骑行记录.mp4" type="video/mp4">
+  <source src="assets/xinglonghu.mp4" type="video/mp4">
   您的浏览器不支持 video 标签。
 </video>
 
