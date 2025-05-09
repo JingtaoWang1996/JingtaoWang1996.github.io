@@ -29,7 +29,16 @@ Recording all the road that I‘ve passed by !
 
 
 
+## 兴隆湖-67.1KM
 
+### 20250315
+
+* 4h14m-15.8KM/h
+
+<video width="640" height="360" controls>
+  <source src="assets/兴隆湖骑行记录.mp4" type="video/mp4">
+  您的浏览器不支持 video 标签。
+</video>
 
 ## Target
 
