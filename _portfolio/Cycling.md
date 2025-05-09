@@ -35,10 +35,7 @@ Recording all the road that I‘ve passed by !
 
 * 4h14m-15.8KM/h
 
-<video width="640" height="360" controls>
-  <source src="assets/xinglonghu.mp4" type="video/mp4">
-  您的浏览器不支持 video 标签。
-</video>
+<br/><img src='/images/xinglonghu.gif'>
 
 ## Target
 
