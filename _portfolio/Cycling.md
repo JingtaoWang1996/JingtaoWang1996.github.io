@@ -40,19 +40,4 @@ Recording all the road that I‘ve passed by !
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ------
