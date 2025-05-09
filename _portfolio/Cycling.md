@@ -9,9 +9,13 @@ Recording all the road that I‘ve passed by !
 
 ## 绕城绿道-96.82KM+来回时间
 
-### 20250410
+### 20250404
+
+* 4h41min33-20.6KM
 
 <br/><img src='/images/绿道cycling.jpeg'>
+
+<br/><img src='/images/riding/绕城.gif'>
 
 ### 攻略
 
@@ -21,21 +25,23 @@ Recording all the road that I‘ve passed by !
   * 顺时针：西南这一块儿吃和补给站比较多，离开西南半段后，只有到最北边才有吃的。
   * 逆时针：东南边，公园、吃的居多
 
-## 三环
-
-## 内环-51.4KM
-
-## 外环-57.7KM
-
-
-
 ## 兴隆湖-67.1KM
 
 ### 20250315
 
-* 4h14m-15.8KM/h
+* 4h14m-15.8KM/h【**大风大雨天**！！！！】
 
-<br/><img src='/images/xinglonghu.gif'>
+<br/><img src='/images/riding/兴隆湖.gif'>
+
+## 三环外环-57.7KM
+
+### 20250301
+
+* 2h54min-19.7KM
+
+<br/><img src='/images/riding/三环外环.gif'>
+
+
 
 ## Target
 
