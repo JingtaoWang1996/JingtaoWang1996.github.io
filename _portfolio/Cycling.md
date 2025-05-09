@@ -1,5 +1,5 @@
 ---
-title: "Enjoy the wind blowing past my ears"
+title: "Enjoy the wind blowing pass my ears"
 collection: portfolio
 ---
 
