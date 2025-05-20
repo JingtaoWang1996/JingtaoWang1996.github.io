@@ -289,9 +289,38 @@ Blogs:[ref](https://github.com/n0kovo/n0kovo_subdomains/blob/main/n0kovo_subdoma
 
   * Https isn't the only protocol using SSL certs(Other protocols: FTP, SMTP,IMAPS,POP3,etc.,). So, in theory, **if we could harvest the data from every discoverable SSL certificate, we would compile a pretty comprehensive list of actual subdomains** used in the wild. 
 
+* scan port & protocols：
+
+  | Protocols | ports                 |
+  | --------- | --------------------- |
+  | HTTPS     | 443，8443，4443，8080 |
+  | IMAP      | 993                   |
+  | SMTP      | 587,465,2525          |
+  | XMPP      | 5269                  |
+  | OpenVPN   | 1194                  |
+
+  * ESC:  amazon elastic compute cloud(EC2) c5n.large instance.
+  * software: **masscan【entire ipv4 can replace with zmap】**
+  * time cost: 30-35hours.
+  * target scan: 3,727,369,725【37亿】got 90,012,918 live host-> 10GB results.
+
+
+
+## Problem faced during subdomain brute forcing
+
+### Wildcard(通配符) filtering
+
+* **A wildcard DNS record is a record that matches requests for non-existent domain names.** 
+  * wildcard domain： *.example.com  【\* is the specified denotation of wildcard】
+* In short, if a domain is a wildcard domain we will get all valid response【brute force won‘t be able to differentiate which are valid and which aren‘t】
+* To avoid this various **wildcard filtering(各种通配符过滤之后再进行验证subdomain是否存在)** techniques are used by subdomain bruteforcing tools.
+
+### BandWidth
+
+* performing subdomain usually need very high concurrent rates, so need very high bandwidth.
 * 
 
-* 
+
 
 ## Tools
 
