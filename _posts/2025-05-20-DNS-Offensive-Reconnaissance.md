@@ -313,30 +313,18 @@ Blogs:[ref](https://github.com/n0kovo/n0kovo_subdomains/blob/main/n0kovo_subdoma
 * **A wildcard DNS record is a record that matches requests for non-existent domain names.** 
   * wildcard domain： *.example.com  【\* is the specified denotation of wildcard】
 * In short, if a domain is a wildcard domain we will get all valid response【brute force won‘t be able to differentiate which are valid and which aren‘t】
-* To avoid this various **wildcard filtering(各种通配符过滤之后再进行验证subdomain是否存在)** techniques are used by subdomain bruteforcing tools.
+* To avoid this various **wildcard filtering(各种通配符过滤之后再进行验证subdomain是否存在)** techniques are used by subdomain brute forcing tools.
+
+### wildcard record 过滤方式
+
+* step1：随机生成一个目标域名的子域名
+* step2：请求该生成域名的A记录看是否能够得到ip
+  * 如果能够得到IP记录，表示目标域名一定配置了通配符记录；否则目标域名未配置通配符记录
+* step3: 在后续wordlist的subdomain探测时，如果得到了和通配符相同的域名，则排除该subdomain存在的情况【无法判断时因为通配符产生，还是有这条记录】
 
 ### BandWidth
 
 * performing subdomain usually need very high concurrent rates, so need very high bandwidth.
-* 
-
-
-
-## Tools
-
-### dnsmap 
-
-
-
-### dnsenum
-
-
-
-
-
-
-
-
 
 
 
