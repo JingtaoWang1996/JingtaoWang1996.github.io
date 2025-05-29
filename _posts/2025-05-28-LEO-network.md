@@ -15,6 +15,7 @@ LEO (low-earth-orbit) network related papers
 ## Back Ground & Key Idea
 
 * Most famous LEO satellites: Starlink、Oneweb、Kuiper(亚马逊公司)、Telesat(加拿大卫星通信公司)
+  
   * 
 * **Key point: This paper focus on the satellite access network （SAN）of starlink around the world.**
   * particularly, **measure the access performance** in terms of **one-way delay** and round-trip time from **user terminal to ground station & Pop** [终端到地面站、pop点之间的连接情况及关系]
@@ -155,7 +156,8 @@ LEO (low-earth-orbit) network related papers
 * Comparing UT-Sat-GS performance around the world, **A distinct feature emerges despite the location、satellite & user density、weather condition **
   * The minimum RTT jumps in a step-wise manner in certain intervals。Upon close inspection and investigation，i**t corresponds to the satellite-GS reconfiguration interval every 15s**, as mentioned in [Starlink FCC filings-ref5] and a patent granted to Starlink [ref6]【最小RTT会在特定时间间隔内逐步跃变，最终发现是在satellite 和 GS的调整间隔15s，这个15s在starlink FCC filing 和 patent 中都有提到】
     * Such min-RTT changes，often in 10,20 or even 50 ms，are way above the change of propagation delay of visible satellites(远高于卫星传播的延迟变化)，but indeed caused by the changing GS associated with the satellites and the need to tunnel back to the home POP.
-  * Globally synchronized at 57,12,27,52 seconds off each minutes (discovered by other researchers too )
+  * **Globally synchronized at 57,12,27,42 seconds off each minutes (discovered by other researchers too )**
+    * 间隔是15s
 
 ### Inter-Sat Link(ISL) Performance
 
@@ -177,13 +179,75 @@ CG---(Community Gateway )
 * CG- Community Gateway
   * a mini GS with a local distribution network.
   * Unlink individual user dishes for each household, the CG aggregates and distributes user traffic through the mini GS. 【与单个用户使用的天线不同，CG通过mini GS聚合和分配流量】
-* 
-
-
 
 # Measuring a low-earth-orbit Satellite Network 
 
 **上一篇的previous work **
+
+
+
+# Making Sense of Constellations
+
+ --- subtitle：Methodologies for Understanding Starlink‘s scheduling algorithms
+
+* Use high-frequency and high-fidelity(高保真) measurements to uncover evidence of hierarchical traffic controllers in Starlink 
+  * **A global controller which allocates satellites to UT**
+  * **An on-satellite controller that schedules transmission for user flows**
+* We then devise a novel approach for identifying how satellites are allocated to UT.  **【探测如何将卫星分配给UT的方法】**
+  * Using data gathered with this approach，we measure the characteristics of the global controller and identify the factors that influence the allocation of satellites to UT.
+  * Finally use this data to build a model which approximates Starlink‘s global scheduler.
+    * Model is able to predict the characteristics of the satellite allocated to a UT at a specific location  and time with reasonably high accuracy and at a rate significantly higher than the baseline.
+* Knowledge of algorithms responsible for **determining which satellites route traffic from specific UT location**
+*  This paper: Uncover the scheduling algos used by SAN by Analyzing data from high-frequency measurements from **4 Starlink terminal（Deployed both in US and EU）** to servers co-located at their corresponding Pop
+
+## Back Ground
+
+### Starlink routes traffic from UT2GS in two step
+
+* Step1: **A global network controller** allocates a satellite to each user terminal based on a variety of factors： Load（载荷）、Geospatial conditions（地理空间条件）、Satellite charge（卫星电荷） etc.,
+  * **These allocations are made every 15s，globally**
+* Step2：A local on-satellite controller schedules flows from the UT assigned to it.
+  * The hierarchical traffic engineering mechanisms，commonly deployed in terrestrial WAN. 
+
+### Contributions
+
+* 1st to uncover hierarchical(分层的) controllers and the characteristics of traffic engineering in starlink。
+  * ms级粒度能够确保找到流量中的特征（abrupt latency changes）
+  * By co-locating our destination server at the Starlink PoP，minimize the influence of terrestrial latency on our measurement. 【将目标服务器与starlink的pop **共置-co-locating**】
+  * Novel **methodology for identifying the satellite currently serving a given terminal** allows us to obtain ground-truth regarding the traffic engineering decisions made by Starlink.
+
+* **Uncover the characteristics and performance of Starlink’s global scheduler【The algorithms responsible for allocating satellites to specific UT】**
+
+### Starlink Key component and connection
+
+* **<u>step1: UT connect to satellite >25° （only one satellite at a time ）</u>**
+* **<u>step2: satellite forward traffic from UT 2 Ground Station</u>**
+* **<u>step3: Ground Station received traffic and send it through【wired】 links to Starlink‘s PoP</u>**
+* **<u>step4: Pop is a terrestrial server with wired connectivity to GS, and connect to the Internet backbone</u>**
+* **<u>step5: From pop, the traffic is routed to destination on the Internet.</u>** 
+
+#### UT 
+
+* UT can connect to any satellite at angle of elevation higher tha**n <u>25°s</u>.** While tens of satellites satisfy the angle of elevation constraints. a terminal can connect to only one satellites at a time.
+* Terminals forward user traffic to the satellite assigned to them.
+  * **<u>Internals of the algorithms that maps UT to satellites are currently known only to the operators of the starlink network.</u>**
+    * **In this paper, Empirically demonstrate characteristics of this algo and build its approximation.**
+
+#### Satellites
+
+* A starlink satellites connects to multiple UT at a time. They **allocate radio frames** to UT mapped to them to exchange data. 
+  * This paper find the evidence that this allocation is determined by **a local on-satellite controller.**
+    * This on-satellite controller's description:  **Medium access control scheduler**
+    * This controller considers factors such as: User priority、current load、also the per-terminal flow **when forwarding traffic from UT to Ground Station**
+
+#### Ground stations and Pops
+
+* Ground Station received traffic from satellites and then it through wired links to Starlink Pop.
+* Ground Station can communicates with satellites at an angle > 25 °
+* Pop is a terrestrial server with wired connectivity to GS
+* Pop are connected to the Internet backbone
+* From POP, traffic is routed to destination on the Internet. 
+* 
 
 
 
