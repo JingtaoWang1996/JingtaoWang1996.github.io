@@ -15,8 +15,7 @@ LEO (low-earth-orbit) network related papers
 ## Back Ground & Key Idea
 
 * Most famous LEO satellites: Starlink、Oneweb、Kuiper(亚马逊公司)、Telesat(加拿大卫星通信公司)
-  
-  * 
+
 * **Key point: This paper focus on the satellite access network （SAN）of starlink around the world.**
   * particularly, **measure the access performance** in terms of **one-way delay** and round-trip time from **user terminal to ground station & Pop** [终端到地面站、pop点之间的连接情况及关系]
     * Both **inside-out (user terminal 2 Internet)** and outside-in(Internet 2 user terminal), and even on inactive dishes. [extend UT coverage from ref2]
@@ -196,7 +195,7 @@ CG---(Community Gateway )
 * We then devise a novel approach for identifying how satellites are allocated to UT.  **【探测如何将卫星分配给UT的方法】**
   * Using data gathered with this approach，we measure the characteristics of the global controller and identify the factors that influence the allocation of satellites to UT.
   * Finally use this data to build a model which approximates Starlink‘s global scheduler.
-    * Model is able to predict the characteristics of the satellite allocated to a UT at a specific location  and time with reasonably high accuracy and at a rate significantly higher than the baseline.
+    * **Model is able to predict the characteristics of the satellite allocated to a UT at a specific location  and time** with reasonably high accuracy and at a rate significantly higher than the baseline.
 * Knowledge of algorithms responsible for **determining which satellites route traffic from specific UT location**
 *  This paper: Uncover the scheduling algos used by SAN by Analyzing data from high-frequency measurements from **4 Starlink terminal（Deployed both in US and EU）** to servers co-located at their corresponding Pop
 
@@ -204,7 +203,7 @@ CG---(Community Gateway )
 
 ### Starlink routes traffic from UT2GS in two step
 
-* Step1: **A global network controller** allocates a satellite to each user terminal based on a variety of factors： Load（载荷）、Geospatial conditions（地理空间条件）、Satellite charge（卫星电荷） etc.,
+* Step1: **A global network cntroller** allocates a satellite to each user terminal based on a variety of factors： Load（载荷）、Geospatial conditions（地理空间条件）、Satellite charge（卫星电荷） etc.,
   * **These allocations are made every 15s，globally**
 * Step2：A local on-satellite controller schedules flows from the UT assigned to it.
   * The hierarchical traffic engineering mechanisms，commonly deployed in terrestrial WAN. 
@@ -247,9 +246,36 @@ CG---(Community Gateway )
 * Pop is a terrestrial server with wired connectivity to GS
 * Pop are connected to the Internet backbone
 * From POP, traffic is routed to destination on the Internet. 
+
+## Evidence of Traffic Engineering
+
+### Experiment Setup
+
+* Perform measurement using 4 starlink UT: Western Europe、Northeast US、MiddleWest US、NorthWest US.
+
+* Router configuration ：Operated in bridge mode and **connected them to** a dedicated Raspberry Pi.
+
+  * These pi were the source of the measurement.
+  * This approach prevents the complexities which arise from using wireless router.
+  * The destination of the measurements **were servers co-located at the Starlink PoPs assigned to the regions of our UT.**
+
+  * 在UT侧的router配置成桥接模式，同时将router连接到一个树莓派；探测的终点在POP点分配给这这个UT的server上。
+
+* Measurements:
+
+  * 测量目标：round-trip times(RTT) and packets loss rate **【从router连接的树莓派到pop点的server】**
+  * 探测包发送：【下面这两个数据的选择是为了保证能够获得可靠和未定的SAN数据】
+    * iRTT：1 packet / 20ms
+    * iPerf3: 以上行连接50%的带宽发送探测数据包
+    * 更高的频率和带宽带来的数据稳定度变化极大。
+
+## Observation-starlink relies on a global controller for satellite2UT scheduling
+
+* Figure2：RTT by Time 可以看出每一格(15s)：**图2的间隔正好是12s、27s、42s、57s** 能够看出较大的切换
+
+  <img src="/images/img/leo/RTT探测结果证明.png">
+
 * 
-
-
 
 # Ref 
 
