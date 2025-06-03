@@ -10,7 +10,7 @@ Online learning notes：coursera, etc.
 
 [no ladder possible solution](https://blog.csdn.net/weixin_44491401/article/details/124091938)
 
-# Machine Learning Yealing
+# Course:Machine Learning Yealing
 
 ## 基本点
 
@@ -159,7 +159,7 @@ Online learning notes：coursera, etc.
 
 * learning with large dataset：**It's not who has the best algorithm wins, it's who has the most data.**
 
-# Intro 2 statistic
+# Course:Intro 2 statistic
 
 * **The empirical rules**
 
@@ -239,7 +239,7 @@ Online learning notes：coursera, etc.
 * 多重假设检验：通过p-value 对假设的检验，主要是通过人为设定的阈值来进行，但随着检验总次数无限放大，会导致false positive 概率增高，因此引入多重假设检验来进行校正。
   * Bonferroni correction：拒绝所有false positive 发生的可能性，通过对p值进行校正来消除false positive。【校正公式：p*(1/n)   p –原始阈值 n 总校验次数】
 
-# Discrete Optimization
+# Course:Discrete Optimization
 
 * 时间复杂度：当问题规模扩大后，程序需要的时间增长有多快【不管数据规模多大，花费时间一定，O(1) 常数级别时间复杂度：数据量多大，时间就有多长。】
 
@@ -647,11 +647,44 @@ TO BE CONTINUE ...
   * derived from the structure of constraints & not based on information in the tableau.
   * do not need to generate all of them.
 
-  **What is a Facet?**
 
+### Node Packing问题
 
+**Problem Definition**
 
+* Let G=（V,E） be a graph. Node packing is a subset W of V such that **no two nodes in W are connected by an edge.**
+  * The goal is to find the node packing of maximal size.  **[找到图中尽可能多满足两个node不通过任意一条边相连的点]**
 
+**Express it as MIP-mixed integer programming**
+
+【假设这张图中node1在正中间，node2-6围绕node1顺时针排列，node1与2-6均连接，node2与3连接，3-4，4-5，5-6】
+
+* Decision Variable: node1-node6
+* Constrains：no two nodes in the subset W are connected by an edge.
+
+$$
+\begin{aligned}
+\text{maximize} \quad & x_1 + x_2 + x_3 + x_4 + x_5 + x_6 \\
+\text{subject to} \quad 
+& x_1 + x_2 \leq 1 \\
+& x_1 + x_3 \leq 1 \\
+& x_1 + x_4 \leq 1 \\
+& x_1 + x_5 \leq 1 \\
+& x_1 + x_6 \leq 1 \\
+& x_2 + x_3 \leq 1 \\
+& x_2 + x_4 \leq 1 \\
+& x_2 + x_5 \leq 1 \\
+& x_2 + x_6 \leq 1 \\
+& x_3 + x_4 \leq 1 \\
+& x_3 + x_5 \leq 1 \\
+& x_3 + x_6 \leq 1 \\
+& x_4 + x_5 \leq 1 \\
+& x_4 + x_6 \leq 1 \\
+& x_5 + x_6 \leq 1 \\
+& 0 \leq x_i \leq 1 \quad \text{for } i = 1, \dots, 6
+\end{aligned}
+
+$$
 
   
 
