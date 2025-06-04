@@ -45,6 +45,10 @@ Recording all the road that I‘ve passed by !
 * 5.24【**上山上了1/5，龙头要掉不敢继续骑了，下一把再来**！】
 <br/><img src='/images/riding/龙泉山.gif'>
 
+* 5.30【**端午第一天，终于上去了！**】
+<br/><img src='/images/riding/龙泉山顶藤原豆腐店.jpeg'>
+
+
 ## Target
 
 * [Future Target](https://xstarcd.github.io/wiki/Bike/chengdu_cycling.html)
