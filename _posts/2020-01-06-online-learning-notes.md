@@ -683,10 +683,35 @@ $$
 & x_5 + x_6 \leq 1 \\
 & 0 \leq x_i \leq 1 \quad \text{for } i = 1, \dots, 6
 \end{aligned}
-
 $$
 
+  ## Branching and cut algorithm
+
+### Basic Idea 
+
+* Formulate the application as a MIP
+
+* Solve the linear relaxation；
+
+  * If the linear relaxation is integral，terminate；
+
+* Key step：**Find a polyhedral cut which prunes the linear relaxation and is a facet if possible；**
+
+  * **If such mathematical  object is obtained，back to previous step**
+
+* Otherwise，settle for the poor man‘s choice and brance 
+
   
+
+
+
+
+
+
+
+
+
+
 
 
 ------
