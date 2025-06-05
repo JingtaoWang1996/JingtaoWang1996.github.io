@@ -339,6 +339,32 @@ is that within the fifteen-second time interval, latency measurements the user t
       * We accomplish this by keeping the terminal online for 2 consecutive days. The terminal will establish connections with satellites from practically all the regions of the sky within the field of view. 
         * This will result in essentially fully coloring the polar plot region in the gRPC map **【Figure3的e图】**，Since the gRPC map does not reset.
 
+## Starlink‘s global scheduler
+
+The starlink network uses a global scheduler to allocate UT to individual satellites every 15s. 【The scheduling algo is not publicly known.】
+
+* Analyze characteristics of satellites that were allocated to our UT with the goal of reverse engineering the algorithm of the global scheduler
+
+* On average，there are 35-44 satellites in the field of view of a UT in any 15 seconds slot. 
+
+### Comparing the properties of the satellites that a selected by the schedular VS available but not chosen
+
+#### Angle of elevation-AOE
+
+* The position of a satellite in the sky is defined by its AOE (仰角) and azimuth with respect to the UT(相对用户定义的方位角).
+
+  * Figure 4 中，实线表示的选定卫星的中位仰角比其他虚线表示的可被选择但未被选择的卫星高22.9◦
+
+  * 虽然只有30%的可连接卫星的仰角在45°到90°之间，但是**the global scheduler** 还是在这个范围内选择了80%的卫星作为各个测量位置被选择的卫星。【Although only 30% of all available satellites had their AOEs in 45◦ to 90◦ range,**the global scheduler picked 80% of satellites from the range (averaged over all locations).**】
+
+  <img src="/images/img/leo/UT最终连接卫星仰角关系图.png">
+
+  * 根据上图，CDF值选取到0.8的话，卫星仰角需要选择到65°
+
+* 
+
+#### Direction
+
 
 
 
