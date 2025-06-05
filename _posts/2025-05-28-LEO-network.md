@@ -269,13 +269,81 @@ CG---(Community Gateway )
     * iPerf3: 以上行连接50%的带宽发送探测数据包
     * 更高的频率和带宽带来的数据稳定度变化极大。
 
-## Observation-starlink relies on a global controller for satellite2UT scheduling
+## Observation1-starlink relies on a global controller for satellite2UT scheduling
 
 * Figure2：RTT by Time 可以看出每一格(15s)：**图2的间隔正好是12s、27s、42s、57s** 能够看出较大的切换
 
   <img src="/images/img/leo/RTT探测结果证明.png">
 
-* 
+* 能够确认的确是出现了global change的原因：
+
+  * 测试的两个端点（UT router的树莓派和Pop的server）消除了地面网络的原因-有线连接
+  * These effects were observed,simultaneously from all 4 vantage point (UT)
+  * These effects were noticed even when UT were running well under capacity.
+
+* [FCC filing from space X](https://pdfhost.io/v/BnYWSR~wq_Starlink_Services_LLC_
+  Application_for_ETC_Designation) describes a global scheduler for periodically allocating terminals to satellites 
+
+  * **Page9: Each satellites currently has 2 Ka band parabolic antennas 【抛物面天线】that form connections back 2 the internet backbone.** 
+  * Page9:These **antennas connect to ground station sites** deployed across the country that directly **connect via fiber to SpaceX's PoP** 【地面站和pop点通过光纤直连】
+
+### 天线的作用
+
+* Ka：卫星上两个Ka 频段的抛物面天线用于连接地面站，地面站通过光纤连接到pop点，再到主干网。 [ref](FCC filing form of space X )
+* Ku:  SpaceX also provides customers with their **own phased-array terminal** to be deployed at their service location to **connect directly to the satellite’s Ku- band RF beam** assigned to the user's service area.
+
+### Starlink Handover Info from FCC filing 
+
+* **Page7** of [FCC filing from space X](https://pdfhost.io/v/BnYWSR~wq_Starlink_Services_LLC_
+  Application_for_ETC_Designation) ：Beacuse the Starlink satellites are constantly moving, the network plans these connections on 15s intervals, continuously re-generating and publish a schedule of connections to the satellites fleet and handing off connections between satellites. 
+* To accomplish these frequent hand-off, Starlink uses **advanced phased-array technology** for both the satellites and the customer Starlink Kit, which allows **for nearly instantaneous hand-offs** between different satellites **with no mechanical transitions.** 
+  * Phased-array technologies encourage efficient spectrum sharing(频谱共享) by allowing both the satellite and user antennas to adjust the direction where the steer their RF beams purely by adjusting the signal of individual antenna elements that make up the combined phased-array.
+* Both the UT and the satellite phased-array are made up of hundreds of antenna elements, controlled by proprietary digital beamforming chips that SpaceX has designed for dynamic hand-offs**[space X 专为动态切换涉及的专有数字波束成形芯片控制].** The ability to **control hand-offs in software with millisecond** precision allows SpaceX to turn the constant motion of the constellation into a key advantage for the Starlink network. These micro-adjustments enhance Starlink’s reliability and enables more efficient management of capacity in real time.
+  * 软件控制切换
+
+## Observation2- Starlink use an on-satellite controller for scheduling terminal flows
+
+**The second peculiar characteristic of the latency measurements from our user terminals
+is that within the fifteen-second time interval, latency measurements the user terminal frequently form parallel bands that are a few milliseconds apart.【在十五秒的时间间隔内，用户终端的延迟测量经常形成相隔几毫秒的平行带。】**
+
+* These bands reflect evidence that radio frames（无线电帧） are allocated to user terminals by an on-satellite controller in a somewhat round-robin fashion (某种循环方式分配个UT).
+
+## Obtaining Satellite Allocations
+
+**SAN uses a global scheduler to assign satellites to user terminals every 15s **
+
+* The starlink mobile app **no longer identifies the satellites that a UT is connected to.**
+
+* **Leverages Starlink's obstruction maps to identify the satellite allocated  to a specific UT** 
+  * 将 Starlink 卫星的公开位置与每个终端的障碍物地图中记录的连接卫星的观测结果关联起来。【输入：障碍图-Obstruction maps、UT到卫星的连接情况、卫星轨道】
+
+**输入数据**
+
+* Obstruction maps-[可能的数据来源1](https://github.com/clarkzjw/LENS)：
+  * 123px * 123px 2D images
+  * mark the trajectory of satellites recently served the user terminal 【最近为用户终端提供服务的卫星轨迹】
+  * These images are used to create a 3D map made available to users via Starlink mobile APP.
+    * 3D map is meant to help users identify the quality of the location of their UT.  突出显示UT到any satellites meant to serve the terminal
+    * Obstruction map使用grpc工具获取
+
+* Satellite Position：TLE format
+  * CelesTrak：These files only indicate satellite position every 6 hours， use SGP4 satellite propagation algorithm to calculate satellite positions，relative to a UT location for a specific point in time. 【以UT为观测点，计算所有的卫星位置】
+
+* GRPC 2D obstruction map获取更多参数
+  * Identifying satellite parameters from obstruction map is crucial for identifying the connected satellites.
+    * 将2D的obstruction map 和 3D的 starlink app map对其后会发现：
+      * 2d obstruction map 是一个 以 62*62 为中心的极坐标图
+      * **极坐标图的半径代表仰角，范围从 25 到 90**
+      * **𝜃：在极坐标中表示方位角azimuth，𝜃=0表示正北方**
+    * since the obstruction map is a square which contains a polar plot, we also need to get the boundaries of the polar plot within this square.
+      * We accomplish this by keeping the terminal online for 2 consecutive days. The terminal will establish connections with satellites from practically all the regions of the sky within the field of view. 
+        * This will result in essentially fully coloring the polar plot region in the gRPC map **【Figure3的e图】**，Since the gRPC map does not reset.
+
+
+
+
+
+
 
 # Ref 
 
