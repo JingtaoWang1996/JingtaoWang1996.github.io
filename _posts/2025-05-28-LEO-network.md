@@ -345,9 +345,11 @@ The starlink network uses a global scheduler to allocate UT to individual satell
 
 * Analyze characteristics of satellites that were allocated to our UT with the goal of reverse engineering the algorithm of the global scheduler
 
-* On average，there are 35-44 satellites in the field of view of a UT in any 15 seconds slot. 
+* On average，there are **35-44 satellites in the field of view of a UT in any 15 seconds slot**. 
 
-### Comparing the properties of the satellites that a selected by the schedular VS available but not chosen
+### Feature1-Impact of satellite position
+
+**Comparing the properties of the satellites that a selected by the schedular VS available but not chosen**
 
 #### Angle of elevation-AOE
 
@@ -361,9 +363,65 @@ The starlink network uses a global scheduler to allocate UT to individual satell
 
   * 根据上图，CDF值选取到0.8的话，卫星仰角需要选择到65°
 
-* 
+#### Direction--选择朝向北边的更多
 
-#### Direction
+distribution of azimuth of two sets of satellites.
+
+* 方位角被分成4个90°，**且最终选择的卫星方位角和UT的朝向强相关**
+* 实验结果中除了一个在NY的因为UT在西北方向被遮挡所以选择这个方向的卫星很少，其他的都朝北方倾斜较多。
+  * However，the UT was mapped to satellites【**UT被分配到其北侧的卫星的覆盖率为82%**】
+
+#### Rationale
+
+ref-[WRS-22 Regulation of satellites in Earth's orbit](https://www.itu.int/hub/2023/01/satellite-regulation-leo-geo-wrs/)
+
+* The International Telecommunication Union（国际电信联盟）has imposed a mandatory geo-stationary orbit exclusion zone（地球静止轨道禁区）, which prohibits LEO satellites from transmitting to or receiving from a ground station while being in the protected part of the sky .【ITU没有设立地球禁止轨道禁区，只有一个频段的分配】
+  * A satellite is a repeater in orbit, and it cannot repeat on the same frequency band that it receives on from earth. Otherwise,the satellite will interfere with itself.
+* Based on satellites orbital characteristics, there are 4 types of satellites:
+  * Low Earth orbit (LEO):200-2000km 
+  * Medium Earth Orbit（MEO): 8000-20000
+  * GeoStationary Earth (geosynchronous equatorial) orbit--AKA Clarke Orbit: fixed at 35,786 km above the equator(赤道)
+  * Highly elliptical椭圆 orbit（HEO）:may reach 40,000 KM from earth in apogee (远地点)
+* Satellites with high AOE can communicate with terminals in a more energy efficient way.
+
+**几个映射关系**
+
+* **The distance between UT and satellites increases inversely with AOE**：卫星到UT之间的距离与卫星仰角成反比
+  * Radio frequency RF power decreases inversely with distance, satellites farther way need to use significantly more power to communicate with UT, satellites farther away need to use significantly more power to communicate with UT. 
+
+### Feature2-Satellites launch dates 
+
+**Whether the global scheduler prefers satellites from certain batches of launch dates over others **
+
+* Averaged over all locations, the probability of picking a satellite increases with an increase of one month in the satellite’s launch date： 在基于其观测时间的所有15s间隔中，发射时间每增加一个月，选中的概率都会增加。
+  * 选中概率 = %(No. of slots a satellite from a launch was picked/No. of slots a satellite from a launch was available) for all 15 second slots in our observation.
+
+#### Rationale
+
+* As starlink satellites are launched in batches，the difference in service time between the latest and oldest satellites can differ by years. 
+  * **Starlink satellites has a service lifetime of about 5 years**, some parts of the constellation would be out of service years before others. 
+
+### Feature3 - Sunlit-是否优先选择卫星当前时刻在太阳照射下的，以保证能量支撑
+
+Starlink satellites are equipped with solar panels to provide power for their operations.  **Analyze whether Starlink's global scheduler has preference for sunlit satellites**
+
+**实验方式**
+
+* step1:For every 15s，we calculate positions of all available satellites relative to the sun using the **SkyField library**
+* step2:提取所有15s的slot中至少包含一个sunlit 和 dark satellites 
+
+**结果**
+
+在满足step2条件的所有slot当中：
+
+* 72.3%的情况下选择sunlit的卫星
+* 只有在 **dark satellites/available satellites** >=35%时才会选择dark卫星
+
+
+
+#### Rationale
+
+
 
 
 
