@@ -26,6 +26,7 @@ News!
 * Jan 2024, Got a promotion as a Research Engineer!
 * Jun 2020, Start to work at CETC as an associate Engineer!
 * Jan 2020, Passed my Master's thesis defence and got the M.S degree. Always graceful of the time Prof. Zou has spend on me!
+  * [Topic: Nonparametric quickest change detection for high dimensional sequential data](https://ubir.buffalo.edu/xmlui/bitstream/handle/10477/84065/Wang_buffalo_0656M_16844.pdf?sequence=1&isAllowed=y)
 * Sep 2018, Started my Master academic journey at UB!
 * Jun 2018, Graduated from CQUPT with Honor! (Outstanding Student Scholarship of CQUPT for four consecutive years)
 * Mar 2017, American Collegiate Mathematical Contest in Modeling, Honorable Mentioned!
