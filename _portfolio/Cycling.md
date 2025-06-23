@@ -48,6 +48,13 @@ Recording all the road that I‘ve passed by !
 * 5.30【**端午第一天，终于上去了！**】
 <br/><img src='/images/riding/龙泉山顶藤原豆腐店.jpeg'>
 
+## 白云寺-5X KM
+
+### 2025062X
+
+* XhXminXX-54.XKM
+
+<br/><img src='/images/白云寺.jpeg'>
 
 ## Target
 
