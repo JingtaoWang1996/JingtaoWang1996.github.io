@@ -417,17 +417,179 @@ Starlink satellites are equipped with solar panels to provide power for their op
 * 72.3%的情况下选择sunlit的卫星
 * 只有在 **dark satellites/available satellites** >=35%时才会选择dark卫星
 
+* **AOE of dark satellites picked by the scheduler was 25° higher than their sunlit counterparts** 
+
+## Modeling the global scheduler
+
+* preference：
+  * newer satellites 
+  * sunlit
+  * located towards the North West 
+  * at high angle of elevation
+
+* Goal of this model：**predict the characteristics of the satellites allocated to server a UT in a given location and time** 
 
 
-#### Rationale
+
+# Analysis of LEO-Satellite Fronthaul Schedulers
+
+原文见ref7【综述类型文章-和上一篇没有区别】
+
+## Intro
+
+* LSNs consist of two parts: 
+  * fronthaul is the connection between users and satellite constellations.
+  * backhaul links the constellations to the core network.
+
+* This paper's focuses on **the design concept for fronthaul scheduling algos**:
+  * Objectives: low latency、high capacity、wide coverage、energy efficiency、fault tolerance 
+  * Impact parameters：AOE、direction、launch date、sunlit status【这些参数同时对算法产生pos、neg影响，因此需要一个trade-off】
+* 星间链路定义：The links within a LEO satellite constellation can either be set directly via laser or radio connection.
+
+## Possible factors
+
+* AOE
+* SUNLIT
+* exclusive zone：《无线电通信法规》第22条，因为地球静止卫星相对于地面禁止，因此，尽可能让leo在特定区域不进行连接分配。
+
+# An In-Depth Investigation of LEO Satellite Topology Design Parameters 
+
+## Intro
+
+* There exists thresholds for the number of satellites per orbit and the number of orbits below which the latency performance degrades significantly.
+  * When the number of satellites per orbit is below 28, there is a significant performance drop,even when the total number of orbits is increased to a very high value of 59.
+  * we show that the latency
+    performance is better when the angle between the traffic endpoints
+    is closely aligned with the satellite orbit inclination
+* Network delay between a pair of traffic endpoints depends on the alignment of satellite's orbit (inclination).
+
+* A distinguishing feature of LEO satellites is **the presence of Inter-Satellite-Links** (compared with GEO and MEO satellites)
+  * ISL: allow satellites to communicate with each other directly at the speed of light.
+* Each satellite is equipped with 4 optical space laser generators and 4 laser signal receiver surface [support optical laser communication between neighboring satellites up to 80 Gbps]
+
+* The number of orbits in a shell determines the coverage.
+  * Shell: 处于同一高度、不同轨道上的卫星集合。
+
+* inclination: equator（赤道）和卫星轨道之间的夹角-锐角
+* +Grid: **The most studied topology is the +Grid topology，where each satellite connects to two adjacent satellites in the same orbit and two nearest satellites on each of its neighboring orbits.** 
+
+## Evaluation
+
+**Key-questions**
+
+* what are the key parameters that influence the performance of an LEO network？
+* Are there thresholds for each parameters above/below which the performance degrades significantly?
+* Why does a shell with a low number of satellites outperform another shell with nearly double the number of satellites (Shell1 VS. Shell2)
+* How does the difference between satellite orbit inclination and the geographical angle of the plane containing the source and destination location affect performance?
 
 
 
+## Takeways 
 
+* 97.6° degree orbits are sun-synchronous（太阳同步轨道）
 
+* ISL file (Inter-Satellite Link): We **connect each satellite using the +Grid topology** and build the network for the LEO mega-constellation. Store these edges between satellites in an ISL file, which contains the network graph.
 
+* Why does Starlink Shell 2 offer better performance than shell 1?
 
+  * S2 offer better latency performance compared to S1,in spite of having only nearly half the number of satellites. 
+  * **The satellites/orbit(20) of S1 is lower than the minimum threshold required for good performance (28)**,[satellites/orbit低于20的时候，即使卫星数量远远大于，也不会有很好的latency]
 
+* An inclination of 55° offers the best performance. Most commercial constellations today use an orbital angle very close to this value [**STARLINK 是53°**]
+
+  **The number of average hops changes with the inclination.**
+
+  * When endpoint pairs have a geographic angle >70°，the average hop count gradually decrease with an increase in inclination from 45°-75°
+  * When endpoint pairs have a geographic angle <40°，the average hop count gradually decrease as inclination decreases from 75°-45°
+
+  
+
+# SpaceX星链卫星发布星历的研究
+
+## Intro
+
+* 星历文件后发现该星历基本是**未来3天的预报轨道**
+* 平根数研究表明星历文件的
+  * 前部分是至少考虑20阶非球形引力摄动的外推轨道
+  * 后部分是考虑J2项摄动的设计轨道, 星历包含协方差信息
+
+* 停泊和工作轨道卫星的星历在**前1 d的精度优于2 km**, **抬升阶段卫星星历的精度在半天不到的时间内迅速增长至数公里**
+* 通过发布星历的设计轨道可以**更加精确地分析星链星座构型**, 尤其是各卫星的设计定点位置, 有助于星链卫星的识别和跟踪. 研究为星链星历的广泛应用提供有益参考, 为**星链卫星的机动检测和碰撞预警**提供依据.
+* TLE数据发布方：North American Aerospace Defense Command-NORAD
+* 星历数据发布方：spacex 缺少相应的明确说明给进一步使用带来了困难。
+
+**Paper‘s Contribution**
+
+* 星历文件名的含义、基于平根数方法初步分析了该星历采用的预报轨道模型、给出星历中对应于三个主要运行阶段的轨道精度，并利用星历数据中的理论涉及轨道明确了各星链卫星的顶点位置和星座构型参数。
+
+## 星链卫星星历精度分析
+
+### 发布及格式说明
+
+Space-track是美国联合太空司令部态势感知部队运营的网站, 该网站对外部来源星历的文件命名和数据格式制定了规则, 要求卫星运营商必须按照相应的规则发布星历文件[ref9-ref6]
+
+* 每隔8h左右更新一次，每天发布3次
+
+* 多个压缩文件存储，压缩文件解压后发现有多个文件，每个文件对应一颗卫星：
+
+  * 文件名称示例：对应名称见下方边表格
+
+    **MEME_44713_STARLINK-1007_3312139_Operational_135 3879600_UNCLASSIFIED.txt** 
+
+    | 字段名称      | 字段含义                                                     |      |      |
+    | ------------- | ------------------------------------------------------------ | ---- | ---- |
+    | MEME          | Mean Equator Mean Mean Equinox，verified to math J2000       |      |      |
+    | 44713         | Satellite catalog-星链目录                                   |      |      |
+    | Starlink-1007 | Satellite name                                               |      |      |
+    | 3312139       | Start time of the ephemeris in UTC,formmated as (Day of Year, hour, and minute values) |      |      |
+    | Operational   | Ephemeris includes maneuver information                      |      |      |
+    | 1353879600    | Additional information provided by SpaceX, verified to match the<br/>final epoch’s GPS time in seconds, formatted as “SSSSSSSSSS” |      |      |
+    | UNCLASSIFIED  | Security classification of the data                          |      |      |
+
+* 对于每个星历文件的数据头来说：
+  * 都包含：文件头和数千个数据块
+  * 文件头：4行
+    * 文件创建时间，时间阶段间隔
+    * 起始和结束时间
+    * ephemeris_source:blend（混合模型）【卫星轨道来源】
+    * 采用的坐标系：UVW【相对于某个参考点或方向定义的局部坐标系】
+
+* 数据块定义了:历元时刻和卫星状态及其协方差信息
+  * 协方差矩阵按照下三角的方式保存，60s的时间间隔*3day = 4321个数据块
+* **根据文件头可以看出：**
+  * 星历的创建时间大部分比该星历文件的起始时间晚10-30min
+
+### 星历的模型分析
+
+ephemeris_source: blend
+
+* 对星链卫星这类低轨空间目标而言,地球的非球形引力摄动是造成其轨道根数发生变化的主要摄动力. 将星历中的卫星状态数据转换成不同阶次地球引力场下的拟平均根数[7{8], 可以初步分析外推星历采用的引力场阶次状况. 拟平均根数是密切根数扣除主要摄动力引起的短周期变化后的轨道根数, 由于它消除了短周期变化造成的相位差, 如果采用的引力场摄动阶次合适, 那么在扣除轨道半长径a的1阶和2阶短周期影响后, 平半长径除了在大气阻力摄动下稍有衰减外, 在1阶解的意义下基本保持稳定.
+
+* 在描述卫星的运动轨道时, 通常以开普勒根数(a, e, i, Ω, !, M)为基本变量. 其中, e为偏心率、i为轨道倾角、Ω为升交点赤经、!为近地点幅角、M为平近点角. 然而, 星链卫星的轨道都是偏心率较小的近圆轨道, 继续采用开普勒根数会导致奇异性问题.
+
+**其他结论**
+
+* 对于工作和停泊阶段的星链星历：预测模型在约1.5天处发生突变
+  * 1.5d后的星历数据是仅考虑J2项摄动的理论轨道设计。
+* 抬升阶段的卫星：大部分预报时间采用理论设计模型，时间跨度2.75d
+  * 抬升阶段：频繁的机动可能导致其他摄动力对轨道影响较小，因此抬升阶段直接采用理论设计模型。
+
+### 星历的内部精度分析
+
+* SpaceX发布的星链星历文件包含了卫星状态的协方差信息,这为判定预报轨道的精度提供了方便.
+  * **通过对协方差数据进行分析，可以得到星链预报轨道的自评估精度**
+* starlink卫星和火箭分离后主要有：停泊、抬升、工作3个运行阶段：
+  * 停泊：350KM附近
+  * 抬升：350KM-550KM
+  * 工作：不同shell层的高度也不同：540-550KM
+  * **停泊轨道、抬升轨道、工作轨道的3个阶段的判断方式：分析一定时间内星历数据中提供的卫星高度**
+    * 维持在350KM附近：停泊阶段
+    * 从350KM开始一直到560KM左右一直处于上升阶段：抬升阶段
+    * 工作阶段：540-560KM，维持在一定的高度：工作阶段
+* 预测精度分析：遍历某个一个卫星的星历文件，提取每个历元时刻的1、3、6协方差数据，开方得到U V W 方向的预报轨道自评估误差
+  * 同一阶段星链卫星的预报经度呈现相同的变化趋势。
+  * 处于停泊轨道和工作轨道上的卫星在前1d的轨道预报经度是<2km的，抬升阶段的轨道误差极大
+* 
 
 # Ref 
 
@@ -437,8 +599,10 @@ Starlink satellites are equipped with solar panels to provide power for their op
 * ref4-reveal starlink scheduling internals:[Making sense of constellation](https://dl.acm.org/doi/pdf/10.1145/3624354.3630586)
 * ref5-[Starlink FCC filings](https://forum.nasaspaceflight.com/index.php?topic=48981.0)
 * ref6-[medium access control scheduler for UT communications](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://patentimages.storage.googleapis.com/d2/fe/83/c902a1f49fe66e/US9032075.pdf)
+* ref7-[Analysis of LEO-Satellite Fronthaul Schedulers](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2024-09-1/NET-2024-09-1_01.pdf)
+* ref8-[An In-Depth Investigation of LEO Satellite Topology Design Parameters ](https://arxiv.org/pdf/2402.08988)
 
-
+* ref9-[SpaceX星链卫星发布星历的研究](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://pmo.cas.cn/xscbw/twxb/xbll/2024_65/2024_65_6/202412/P020241202575071476317.pdf)
 
 
 ------
