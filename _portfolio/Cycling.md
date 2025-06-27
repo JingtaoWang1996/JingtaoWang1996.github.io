@@ -50,7 +50,7 @@ Recording all the road that I‘ve passed by !
 
 ## 白云寺-5X KM
 
-### 2025062X
+### 20250628
 
 * XhXminXX-54.XKM
 
