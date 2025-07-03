@@ -555,8 +555,10 @@ Space-track是美国联合太空司令部态势感知部队运营的网站, 该�
     * 采用的坐标系：UVW【相对于某个参考点或方向定义的局部坐标系】
 
 * 数据块定义了:历元时刻和卫星状态及其协方差信息
+  
   * 协方差矩阵按照下三角的方式保存，60s的时间间隔*3day = 4321个数据块
 * **根据文件头可以看出：**
+  
   * 星历的创建时间大部分比该星历文件的起始时间晚10-30min
 
 ### 星历的模型分析
@@ -569,7 +571,7 @@ ephemeris_source: blend
 
 **其他结论**
 
-* 对于工作和停泊阶段的星链星历：预测模型在约1.5天处发生突变
+* **对于工作和停泊阶段的星链星历：预测模型在约1.5天处发生突变，2023年之后会在2d时形成突变**
   * 1.5d后的星历数据是仅考虑J2项摄动的理论轨道设计。
 * 抬升阶段的卫星：大部分预报时间采用理论设计模型，时间跨度2.75d
   * 抬升阶段：频繁的机动可能导致其他摄动力对轨道影响较小，因此抬升阶段直接采用理论设计模型。
@@ -589,7 +591,80 @@ ephemeris_source: blend
 * 预测精度分析：遍历某个一个卫星的星历文件，提取每个历元时刻的1、3、6协方差数据，开方得到U V W 方向的预报轨道自评估误差
   * 同一阶段星链卫星的预报经度呈现相同的变化趋势。
   * 处于停泊轨道和工作轨道上的卫星在前1d的轨道预报经度是<2km的，抬升阶段的轨道误差极大
+
+## 发布星历的初步应用
+
+* 星座构型是星座的基本要素，是星座覆盖特性、工作性能以及运行维持性能的决定性因素。
+* 可以基于tle数据对星链星座构型进行分析
+  * TLE数据+walker-σ星座 + 从卫星发射入轨和轨道面分布两方面讨论了星链星座部署情况
+    * 缺少每颗卫星的定点位置及精度情况。
+* 星历中含有的仅考虑J2带谐项摄动的理论设计轨道，对于研究庞大的starlink卫星非常有利。
+
+# Optimal Gateway Placement for minimizing Intersatellite Link Usage in LEO Megaconstellation
+
+用途：satellite最终入网需要gateway，如果能搞清楚gateway的分布，是否也是方案之一？
+
+## Intro
+
+* In addition to the gateway number，the gateway location also affect the ISL usage.
+* Satellites may require different ISL hop counts and bandwidth to reach gateways at different locations. 
+  * Each ISL relay is also called one hop.
+* The higher user demands also require more ISL resources.
+* **The ISL bandwidth is relatively smaller than the satellite-ground links.**
+  * Due to the onboard limited energy and high requirements of the antenna pointing system constrain the bandwidth of  ISL. Thus, the ISL usage is expected to be minimal.
+* Contribution of this paper：
+  * A novel ISL usage evaluation method is proposed
+  * A mixed-integer optimization model is proposed to minimize the overall ISL usage.
+
+**Focus: The relations between gateway placement and ISL usage**
+
+* An ISL usage metric evaluation method with lower computational cost, and solve the gateway placement problem,by minimize the ISL usage.
+
+* considered factors include:
+  * gateway number
+  * the difference between ascending and descending satellites
+  * ISL configuration
+  * ground traffic pattern
+
+## System model 
+
+### Walker-δ constallation
+
+* Formal notation： **α：Ns/Np/F**
+  * α：orbit inclination
+  * Ns: total satellite number
+  * Np: number of orbit planes。**所有的orbit planes are evenly distributed along the equator**
+    * the right ascension of ascending node(RAAN) difference between adjacent orbits is 2pi/Np
+  * F：phasing factor（相位参数), 代表从一个轨道面到下一个轨道面，卫星的角度偏移量，用于确保卫星平均分布在一个orbit上不会撞上
+    * res = (360°*F/Ns)
+  * u：satellite phase angle(卫星相位角)，用于确定卫星在orbit plane中的位置，取值范围[-180°，180°]
+
+* Based on the satellite flying direction and phase angle, satellites in the constellation are classified into 2 type:
+  * ascending satellite (SatA): 相位角u∈[-90°，90°]从南向北飞
+  * descending satellite (SatD):相位角u∈[-180°，-90° & 90°，180°]从北向南飞
+
+## Multihop ISL path
+
+* **The capacity at each satellite node is occupied by traffic from both its coverage regions and neighboring satellites.**
+  * Since all traffic is destined to gateways, the satellites [At given moment] closer to the gateway need to carry more traffic load.
+* In a multihop transmission，**each packet is relayed through mutlple ISL**, one for **each hop, occuping a larger number of redundant spectrum resources of ISL**
+
+* **Ideally, the system capacity is proportional to the number of ISL, inversely proportional to the average of hop count** <u>**[理想情况下，系统容量与 ISL 数量成正比，与平均跳数成反比.]**</u>
+  * 因此，在ISL资源有限的情况下，minimizing the hop count can effectively save the ISL usage and increase the capacity utilization efficiency
+    * To minimize the usage of ISL,packet should select the minimum hop path and select the nearest gateway in terms of hop count as their destination.
+* 本文关注的点是：**如何获得最少的hop count，而不是具体的路径选择（在hop count相同的情况下选择哪一个）**
+
+## Other refer
+
+* “An optimization method for the gateway station deployment in LEO satellite systems [studied the optimization of gs deployment to minimize the usage and maximize the satellite-ground link capacity for gateway in China]
+  * in china 是不是就拿得到数据源了
+* Y. Vasavada, R. Gopal, C. Ravishankar, G. Zakaria, and N. BenAmmar,
+  “Architectures for next generation high throughput satellite systems,”
+  Int. J. Satell. Commun. Netw., vol. 34, no. 4, pp. 523–546, 2016   
+  * Empirical results for satellite placement 
 * 
+
+
 
 # Ref 
 
