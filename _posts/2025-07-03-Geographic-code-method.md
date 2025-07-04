@@ -10,7 +10,7 @@ tags:
 
 关于Uber‘s H3 cell编码模型、等其他模型的相关应用介绍
 
-# Uber‘s Intro
+# Uber‘s H3 Intro
 
 * Using H3 to optimizing ride pricing and dispatch 
   * 同理可以将卫星看成车、UT看成乘客
@@ -35,30 +35,53 @@ tags:
 
   * 解决方式：hexagon-一次性适配各种大小的scale
 
-# Why hexagon
+## Why hexagon
 
-## Grids
+### Grids
 
 * There are only three regular polygonal tilings **【只有三种正多边形平铺】**
+
   * 正三角形、正四边形、正六边形
+
 * how to choose 
+
   * neighbor traversal 
+
     * 在随意一个cell开始，从一个cell到达另一个cell
       * 正三角：有12个neighbor 【有边、有点、有边点结合】
       * 正四边形：有8个neighbor【有边、有点】
       * 正六边形：有6个neighbor【全是边】
     * Tips1：尽可能以最简单的方式遍历所有的neighbor
     * Tips2：即使只通过边进行遍历，正六边形的扩展性也最好
+
   * subdivision
+
     * Need to be able to index as small possible the resolution【对于热点的定位越准越好，能细分的越细越好】
     * Also need efficiency
     * 正四边形：perfect subdivision
     * hexagon：Alternating CW,CCW 19.1° rotation of 7 children 1/7th the area【通过旋转后，7个hexagon能够十分近似原来的形状】
       * **同时，不同大小的hexagon能够近似任意形状的地区**
-  * distortion
-    * 
+    * subdivision能够将原来地图的大小进行约10倍的缩减
 
-## hexagon的优点
+  * **distortion**
+
+    * we are on earth，earth is a sphere（not flat），but those grids are. **Then, we need projection**
+
+    * Map projection:
+
+      * Mercator
+      * Van der grinten
+      * **dymaxion**
+        * 通过dymaxion折叠打开后的地图，绝大部分的点都在海中，陆地部分能够在一个打开面上。
+      * robinson
+
+    * Distortion: minimize the shape
+
+      * 正20面体lcosahedron，展开后能够较好的对地图进行包围（3d shape with triangles but not the pyramid kind）
+
+        
+
+### hexagon的优点
 
 **Brain storming 选择的hexagon进行划分**
 
@@ -69,9 +92,11 @@ tags:
   * 不需要对各种类型的城市花费时间进行细致的城市neighborhoods划分
   * “Let the city tell us，where the demands is，where we need to send the cars“
 
+## Uber‘s H3 hexagon library 
 
+### Global grid
 
-
+* 可以将cell优化到1m的直径范围内，从全球直接通过上面的19.1°旋转实现。
 
 # Some ref
 
