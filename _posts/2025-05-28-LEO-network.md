@@ -600,7 +600,7 @@ ephemeris_source: blend
     * 缺少每颗卫星的定点位置及精度情况。
 * 星历中含有的仅考虑J2带谐项摄动的理论设计轨道，对于研究庞大的starlink卫星非常有利。
 
-# Optimal Gateway Placement for minimizing Intersatellite Link Usage in LEO Megaconstellation
+# Optimal Gateway Placement for minimizing Intersatellite Link Usage in LEO Megaconstellation Network
 
 用途：satellite最终入网需要gateway，如果能搞清楚gateway的分布，是否也是方案之一？
 
@@ -653,6 +653,56 @@ ephemeris_source: blend
   * 因此，在ISL资源有限的情况下，minimizing the hop count can effectively save the ISL usage and increase the capacity utilization efficiency
     * To minimize the usage of ISL,packet should select the minimum hop path and select the nearest gateway in terms of hop count as their destination.
 * 本文关注的点是：**如何获得最少的hop count，而不是具体的路径选择（在hop count相同的情况下选择哪一个）**
+
+## ISL Usage Evaluation Model
+
+* The constellation network with ISLs can be represented by an **undirected graph** Gsat = (S, E)
+  * S is the satellite node set, |S| = NS(卫星具体数量)
+  *  E is the ISL set, |E| = NL.(As the mesh network topology is a 2-D torus, **NL = 2NS** 【由于网状网络拓扑结构是二维环面，因此**NL = 2NS** 】)
+  * The feeder satellite set is denoted by F, F ⊆ S and |F| = NF.
+* **Takes the overall traffic load on ISL as the ISL usage.**
+
+* Each hop adds the original input traffic to an ISL, and the accumulation of input traffic along the path equals the sum of the traffic of all ISLs. 
+
+  * 每一个卫星(hop)都会有一个自带的输入load，表示当其作为access satellite时候的load
+  * **按照下图所示，在ISL上总的load就是所有黑色箭头的传输方向求和，越到后面占用的ISL越多。**
+
+  <img src="/images/img/leo/ISL load 传输示意图.png">
+
+* 因此，考虑到从某个access satellite的input load可能有多个destination，因此ISL的使用情况总数可以等价于：
+
+  * 每一个卫星的load * 每一个gateway分到的每一个卫星的load的比例 * 每一个卫星到每一个satellite之间的hop count（H\_{i,m}） ==> **To evaluate ISL usage, H_{i,m}--[计算satellite2gateway之间的hop就十分重要]**
+
+## Hop-Count Calculation Model
+
+**We first adopt a theoretical model to calculate the hop count between two satellites**
+
+* input：latitudes and longitudes of two satellites 
+* 基于Fig10，及下面的结果，随着地面站的增加，**最多10跳从一个satellite到一个地面站**
+
+
+
+某个时刻某个UT是否连接到某个GS
+
+* step1: UT 25°过滤出30-50个卫星，目标GS过滤出30-50个卫星
+* step2：基于文中计算出30-50个卫星每一个hop count最少的情况，过滤出最可能的路径
+
+
+
+
+
+
+
+
+
+<img src="/images/img/leo/两个卫星之间基于ISL的hop距离计算示意图.png">
+
+* 如上图，展示了两个卫星之间的hop计算
+* 
+
+
+
+
 
 ## Other refer
 
