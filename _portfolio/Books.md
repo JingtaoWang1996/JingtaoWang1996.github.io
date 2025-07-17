@@ -369,6 +369,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《说岳全传》</td>
     </tr>  
+    <tr>
+      <td>《巫蛊乱长安》</td>
+    </tr>
   </tbody>
 </table>
 </details>
