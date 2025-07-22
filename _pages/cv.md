@@ -18,22 +18,24 @@ Work experience
 ======
 * 06/2020-now: Research & Development Engineer
   * CETC Cyber Security Research Instituion
-<!--   * Duties included: Tagging issues -->
-<!--   * Supervisor: Professor Git -->
 
 Project experiences （Selected）
 ======
-* **04/2024-now: Starlink network info analysis**
-   * Research background information related to starlink and collect DNS, ntp and other basic service IPs.
-   * Finish 20w4k+ nums of AS14593 network basic services with DNS(172 ipv4 recursive server)、NTP(85+ ipv4 ntp server) & other infos(location、whois etc.,)
-   * Other network basic infrastructure security related research topics.
+* **06/2025-now: Starlink network info analysis**
+   * Research background information related to starlink and collect Key Infrastructure of Starlink (Pop,Gateway,satellite tle,ephemeris data).
+   * Minimize possible UT connected satellites to 30-55 by setting Angle of Elevation(AOE) to 25°[with reliable proof]
+   * Currently working on the link line from UT to backbone network.
+* **Different DNS server discovery and server service area estimation**
+   * DNS forwarder,indirect server,open recursive server discovery using controlled authority server & designed DNS requests.
+   * DNS recursive server serve area estimation with localized domain and non-recursive cache probing. [Considering multi-cache case, improving the accuracy]
+   * Authority server affect area estimation by active subdomain ip location. [old method for new question!!!]
 * **Backend development based on Springboot by project**
    * 10/2022-03/2023: Learn springboot and get started with basic development work by BC project.
    * 11/2023-03/2024: Mainly responsible for backend development and detailed communication and modification among all parties by CYD project.
 * **06/2022-09/2022: Malicious Domain Detection: DGA data & Collected open source threat info based**
    * Pre-collected 8 type of malicious domain & ip with total 223w+ data nums.
    * Pre-processed DGA model training data: normal domains(10% alexa top 1million---10w) & 8 type of different dga domains(1w each).
-     * 5 selected domain features：length、entropy、n-gram in normal domains、n-gram in dga domains、diff in previous two n-gram。
+     * 5 selected domain features：length、entropy、n-gram in normal domains、n-gram in dga domains、diff in previous two n-gram.
      * Benchmark: with random selected 36000 test data, Logistic regression can obtain 88.6% accuracy.
      * Ensemble model Based: Using voting classifier with Logistic Regression、RF、Naive Bayes can imporve the accuracy up to 93% with same test data.
    * Modularize the above datas & models and successfully deploy them to multiple projects.
