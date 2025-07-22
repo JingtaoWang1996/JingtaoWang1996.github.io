@@ -86,22 +86,82 @@ DHCPv6服务器按照如下次序为DHCPv6客户端选择IPv6地址/前缀
 
 * IPV6 hosts may automatically **generate** IP addresses internally using SLAAC or they may be **assigned** configuration data with DHCPv6-PD
 
-
-
 SLAAC can automatically configure IPV6 host parameters on an IPV6 host **without the need for manual configuration or a DHCP server**
 
 * SLAAC automatically configures an ipv6 address on an IPv6 hosts
 * Stateless： no centralized server tracking address assignments，corresponding MAC address， and lease time.
 
+## How does SLAAC work 
+
+how an ipv6 host obtains IPV6 network parameters via SLAAC
+
+### Step0: Link-local IPV6 address assignment 【prerequisite】
+
+* as soon as an ipv6 host is connected to an ipv6 network, it automatically **generates its own IPV6 link-local address.**
+  * link-local addresses are in the form of **fe80::/64**
+* link-local address are generated in various ways depending on the operating system or fireware of the IPV6 device question.
+  * **eg1:Cisco devices use EUI-64, which generates an address using the interface’s MAC address as part of the algorithm,**
+  * **eg2: Windows computers generate them randomly.**
+* link-local ipv6 address生成后，client performs duplicate address detection, 确保这个link-local address没有重复，如果有重复则重新生成后再开始SLAAC的步骤。
+
+### Step1：Router solicitation and router advertisement
+
+* The ipv6 host sends out and RS message using its newly obtained link-local address. 
+* The RS message solicits any router that may be on the segment for an ipv6 global unicast prefix. 
+* The **FF02::2（所有路由器的多播地址,RS报文的目的地址）** **all routers** multicast address is used as the destination of the RS message.
+*  **Only IPv6 routers will receive this message because only IPv6 routers belong to this multicast group（ff02::2）**
+  * ipv6 routers会返回一个RA信息，包含其控制的ipv6 prefix、network prefix length. 【PS: 大概率是一个/64的前缀，同之前的例子】
+
+**RS报文**
+
+* RS（**Router Solicitation**）报文是 IPv6 协议中 **邻居发现协议（Neighbor Discovery Protocol, NDP）** 的一种报文类型，属于 ICMPv6 协议的一部分。
+* 由主机发送，用来主动请求本地链路上的路由器发送 RA（Router Advertisement）报文。
+
+* 场景说明：
+
+  * 当一个ipv6主机刚刚连接到网络上时，它并不立即直到网络上是否又路由器，因此它会发送一个RS报文到ff02::2，询问："有没有路由器可以告诉我网络配置信息"
+
+  * 路由器收到RS报文后，回复一个RA报文，包含：ipv6前缀信息（SLAAC自动配置地址）、默认网关信息、是否使用DHCPv6等
+  * 主机根据收到的RA报文参数，自动生成ipv6地址**【根据step0的例子，不同类型的操作系统等生成ipv6地址的方式不同】**
+
+### Step2：Global unicast address configuration
+
+* 在step1中，**入网的ipv6主机已经获得了路由器分配的前缀和网络长度(/64)，接下来只需要确定其ipv6地址的最右64位即可**
+
+  * eg：router 提供的前缀 2001:1234 ::/ 64 ,再确定右侧的64位即可。
+
+  * **Q：如何获取路由器的ipv6地址前缀？假定发送一个RS报文进行请求？？？**
+
+* 基于操作系统 or ipv6的固件信息不同，会有不同的生成方式：
+
+  * eg：ref-intro中的host随机选择了::2 作为最右侧64位ip地址，因此最终通过SLAAC生成的地址为2001：1234::2/64
+
+* The router may specify its own address as the host's default gateway,depending on whether we configure the router to do so or not.
 
 
 
+### Step3: Duplicate address detection for the global unicast address 
 
+* RUN duplicate address detection on the network, 只要没有重复的ip地址，那么host已经有：
+  * ipv6 global unicast address
+  * a prefix length
+  * a default router
 
+## SLAAC on starlink
 
+* starlink路由器: 定制版**OpenWrt（Linux内核）**，通过自动固件更新系统推送新版固件。
+* 固件更新版本（根据starlinkTrack）的更新日志：
+  * 20250714：2025.07.07.mr56060
+  * 20250712：2025.07.07.cr56060
+  * 20250709：2025.06.30.mr55627
+* SLAAC中，当starlink用户接收到路由器发来的RA中的prefix/64后，**前缀+接口ID生成完成的ipv6地址**，接口ID有两种生成方式：
+  * EUI-64将mac地址转为64位接口标识符
+  * RFC 4941中的ipv6隐私拓展，使用临时地址替代MAC，防止通过MAC跟踪设备[无法预测，防追踪]
+  * PS：SLAAC的随机接口ID是通过内核专用算法生成的带隐私保护的伪随机64位值，防止通过ipv6地址识别或追踪设备身份。
 
+## ref
 
-
+[intro](https://www.catchpoint.com/benefits-of-ipv6/slaac-ipv6)
 
 
 
