@@ -15,7 +15,7 @@ I am a Research Engineer at CETC Cyber Security Research Instituion from Jun 202
 
 Research Interests:
 ======
-My research interests include DNS security, intrusion detection and analysis
+My research interests include DNS security, Intrusion detection and analysis, Quickest change detection
 
 Current research topic include:
 * DNS detection and security
