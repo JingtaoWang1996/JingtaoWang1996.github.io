@@ -25,7 +25,7 @@ Project experiences （Selected）
    * Research background information related to starlink and collect Key Infrastructure of Starlink (Pop,Gateway,satellite tle,ephemeris data).
    * Minimize possible UT connected satellites to 30-55 by setting Angle of Elevation(AOE) to 25°[with reliable proof]
    * Currently working on the link line from UT to backbone network.
-* **Different DNS server discovery and server service area estimation**
+* **08/2024-03/2025: Different DNS server discovery and server service area estimation**
    * DNS forwarder,indirect server,open recursive server discovery using controlled authority server & designed DNS requests.
    * DNS recursive server serve area estimation with localized domain and non-recursive cache probing. [Considering multi-cache case, improving the accuracy]
    * Authority server affect area estimation by active subdomain ip location. [old method for new question!!!]
