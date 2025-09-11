@@ -240,6 +240,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《长安的荔枝》</td>
     </tr>
+    <tr>
+      <td>《太白金星有点烦》</td>
+    </tr>
   </tbody>
 </table>
 </details>
