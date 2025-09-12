@@ -241,7 +241,7 @@ Enjoy these worth reading books！
       <td>《长安的荔枝》</td>
     </tr>
     <tr>
-      <td>《太白金星有点烦》</td>
+      <td>《太白金星有点烦》:另眼看西游</td>
     </tr>
   </tbody>
 </table>
