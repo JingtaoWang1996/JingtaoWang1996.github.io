@@ -243,6 +243,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《太白金星有点烦》:另眼看西游</td>
     </tr>
+    <tr>
+      <td>《两京十五日》:大明"长安十二时辰"</td>
+    </tr>
   </tbody>
 </table>
 </details>
