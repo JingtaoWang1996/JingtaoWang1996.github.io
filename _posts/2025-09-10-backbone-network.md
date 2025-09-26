@@ -222,13 +222,51 @@ From our own experience with the 6Bone, and IPv4-based experiments performed by 
     * 该现象的主要原因2：当在一个给定的管理域中，分配给路由器接口的地址没有在通过外部路由协议如BGP传播的路由中进行聚合时，**会导致路由表中出现过多单独条目，增加路由表大小，影响性能和可扩展性。**
 * **Atlas is able to determine connectivity within restricted areas**
   * 寻找一个在restricted area边界上的router**（globally accessible & able to forward packets to routers within the restricted routing areas.）**[必须要明确直到这个router满足要求，目前看starlink估计不行]
+  * 基于上述的节点，atlas执行 additional level source routing 
+    * 首先将探测包发到restricted area中的某个边界节点上，边界节点将其转发到restricted area中间的某个路由器X当中，通过X可以进一步探测到内部的某些无法从P直接探测到的拓扑路径。
 
+### Routing Loops 
 
+* 由错误的路由表产生
 
 ## Preliminary results from simulation and probing the 6Bone
+
+## Assessment of Effect Coverage 
+
+* NS-2 simulator：Intended to support source-routing and Atlas-probing algo
+
+* Simulating a single network topology of **1000 nodes and 3000 links takes approximately three days.**
+
+* 最终实验只保留：50个nodes，其中10个是匿名节点；
+
+  * 拓扑连接关系从50-120之间随机变化
+
+  * 最终的模拟从tree-like 变为well-connected structure 
+  * Average node degree of 4.8
+
+* Node Coverage also increases according to the degree of connectivity of the topology being probed. 
+
+  * The more seeds in use, the higher coverage it will get. 
+  * 基于Fig10，最终coverage会收敛，因此并不是seed越多越好。
+
+## Results from 6Bone 
+
+* Beginning：426 seeds were gathered by probing addresses that were derived from prefixes. 
+  * 类似的情况Starlink 可以从feed.csv or 活跃ipv6中生成
+* 基于这些seeds，probing engine ran for **8 weeks, 发现了2420个router.**
+* **由于IPv6-in-IPv4 隧道的广泛部署，任意两个节点之间的Maximum shortest path相对较小。**
+  * Tunneling mechanism essentially provide "virtual hyper-links". 
+    * **A single IPv6 hop may correspond to multiple underlying IPv4 Hops.** 因此，基于IPv4-IPv6的tunneling存在， a large physical distance are often mapped to a relatively small IPv6 hop distance. 
+* Path or network topology info can be obtained from different sources, including routing protocols (eg:BGP,OSPF,IGMP), management protocol （SNMP) , Control protocol (ICMP)
+  * BGP peers model the network through a router-level topology(RFC 2328)
+* [The route Views project](University of Oregon, "Route views project," http://www.routeviews.org/.) collects BGP routing protocols information by the distribution of BGP peers. [The data collected by these servers is then used to construct an AS-level network topology]
+
+
 
 
 
 
 ------
+
+
 
