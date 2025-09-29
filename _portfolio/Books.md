@@ -92,9 +92,6 @@ Enjoy these worth reading books！
       <td>《水浒传》</td>
     </tr>
     <tr>
-      <td>《长安十二时辰》</td>
-    </tr>
-    <tr>
       <td>《将夜》</td>
     </tr>
     <tr>
@@ -242,6 +239,9 @@ Enjoy these worth reading books！
     </tr>
     <tr>
       <td>《太白金星有点烦》:另眼看西游-20250918</td>
+    </tr>
+    <tr>
+      <td>《长安十二时辰》</td>
     </tr>
     <tr>
       <td>《两京十五日》:大明"长安十二时辰"之朱瞻基大冒险-20250928</td>
