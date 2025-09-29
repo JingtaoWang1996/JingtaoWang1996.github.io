@@ -434,6 +434,19 @@ Enjoy these worth reading books！
     <tr>
       <td>《暗黑者四部曲》</td>
     </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+    <summary>个人成长类心理学</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>《臣服实验》Michael A.Singer</td>
     </tr> 
