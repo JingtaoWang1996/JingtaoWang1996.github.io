@@ -448,7 +448,7 @@ Enjoy these worth reading books！
   </thead>
   <tbody>
     <tr>
-      <td>《臣服实验》Michael A.Singer</td>
+      <td>《臣服实验》Michael A.Singer,难得使自己静下来看的一本书</td>
     </tr> 
   </tbody>
 </table>
