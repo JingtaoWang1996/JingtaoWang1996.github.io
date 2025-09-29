@@ -419,7 +419,10 @@ Enjoy these worth reading books！
     </tr>
     <tr>
       <td>《暗黑者四部曲》</td>
-    </tr>  
+    </tr>
+    <tr>
+      <td>《臣服实验》Michael A.Singer</td>
+    </tr> 
   </tbody>
 </table>
 </details>
@@ -464,9 +467,6 @@ Enjoy these worth reading books！
     </tr>   
     <tr>
       <td>《瓦尔登湖》沈从文</td>
-    </tr> 
-    <tr>
-      <td>《臣服实验》Michael A.Singer</td>
     </tr> 
   </tbody>
 </table>
