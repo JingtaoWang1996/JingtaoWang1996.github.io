@@ -263,6 +263,9 @@ Enjoy these worth reading books！
     <tr>
       <td>《两京十五日》:大明"长安十二时辰"之朱瞻基大冒险-20250928</td>
     </tr>
+    <tr>
+      <td>《三国配角演义》:另眼看马谡失街亭-20251006</td>
+    </tr>
   </tbody>
 </table>
 </details>
