@@ -105,6 +105,23 @@ Enjoy these worth reading books！
 </details>
 
 
+# 传记
+
+<details>
+    <summary>现代人物传记</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《雷军传》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
 
 # 想象
 
@@ -282,9 +299,6 @@ Enjoy these worth reading books！
     </tr>  
     <tr>
       <td>《牧神记》</td>
-    </tr>  
-    <tr>
-      <td>《雷军传》</td>
     </tr>  
   </tbody>
 </table>
