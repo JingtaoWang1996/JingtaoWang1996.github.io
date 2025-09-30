@@ -264,7 +264,7 @@ Enjoy these worth reading books！
       <td>《两京十五日》:大明"长安十二时辰"之朱瞻基大冒险-20250928</td>
     </tr>
     <tr>
-      <td>《三国配角演义》:马谡失街亭 & 白帝城托孤 VersionB-20251006</td>
+      <td>《三国配角演义》:马谡失街亭复仇版 & 白帝托孤疑云 & 官渡杀人事件 VersionB-20251006</td>
     </tr>
   </tbody>
 </table>
