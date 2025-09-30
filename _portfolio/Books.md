@@ -16,6 +16,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -70,6 +72,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -85,6 +89,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -113,6 +119,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -131,6 +139,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -165,6 +175,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -196,6 +208,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -226,6 +240,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -245,6 +261,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -255,16 +273,22 @@ Enjoy these worth reading books！
       <td>《长安的荔枝》</td>
     </tr>
     <tr>
-      <td>《太白金星有点烦》:另眼看西游-20250918</td>
+      <td>《太白金星有点烦》</td>
+      <td> 另眼看西游</td>
+      <td> 20250918</td>  
     </tr>
     <tr>
       <td>《长安十二时辰》</td>
     </tr>
     <tr>
-      <td>《两京十五日》:大明"长安十二时辰"之朱瞻基大冒险-20250928</td>
+      <td>《两京十五日》</td>
+      <td> 大明"长安十二时辰"之朱瞻基大冒险</td>
+      <td> 20250928</td>
     </tr>
     <tr>
-      <td>《三国配角演义》:马谡失街亭复仇版 & 白帝托孤疑云 & 官渡杀人事件 VersionB-20251006</td>
+      <td>《三国配角演义》:</td>
+      <td> 马谡失街亭复仇版 & 白帝托孤疑云 & 官渡杀人事件 VersionB</td>
+      <td>20251006</td>  
     </tr>
   </tbody>
 </table>
@@ -276,6 +300,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -316,6 +342,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -337,6 +365,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -356,6 +386,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -374,6 +406,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -407,6 +441,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -425,6 +461,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -447,11 +485,15 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>《臣服实验》Michael A.Singer,难得使自己静下来看的一本书</td>
+      <td>《臣服实验》Michael A.Singer</td>
+      <td> 内耗时记得来翻翻</td>
+      <td> 20250930</td>  
     </tr> 
   </tbody>
 </table>
@@ -465,6 +507,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
@@ -507,6 +551,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
+      <th>概要</th>
+      <th>读完日期</th>
     </tr>
   </thead>
   <tbody>
