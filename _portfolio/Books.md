@@ -16,8 +16,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -72,8 +72,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -89,8 +89,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -119,8 +119,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -139,8 +139,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -175,8 +175,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -208,8 +208,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -240,8 +240,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -261,8 +261,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -300,8 +300,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -342,8 +342,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -365,8 +365,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -386,8 +386,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -406,8 +406,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -441,8 +441,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -461,8 +461,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -485,8 +485,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -512,8 +512,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
@@ -556,8 +556,8 @@ Enjoy these worth reading books！
   <thead>
     <tr>
       <th>书名</th>
-      <th>概要</th>
-      <th>读完日期</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
     </tr>
   </thead>
   <tbody>
