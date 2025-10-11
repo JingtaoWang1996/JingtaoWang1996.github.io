@@ -495,6 +495,11 @@ Enjoy these worth reading books！
       <td> 内耗时记得来翻翻</td>
       <td> 20250930</td>  
     </tr> 
+    <tr>
+      <td>《被讨厌的勇气》</td>
+      <td> 当知足凌驾于自我否定之上，幸福将贯穿于整个人生</td>
+      <td> 202511</td>  
+    </tr>   
   </tbody>
 </table>
 </details>
