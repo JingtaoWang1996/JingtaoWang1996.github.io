@@ -491,15 +491,21 @@ Enjoy these worth reading books！
   </thead>
   <tbody>
     <tr>
-      <td>《臣服实验》Michael A.Singer</td>
+      <td>《The Surrender Experiment-臣服实验》Michael A.Singer</td>
       <td> 内耗时记得来翻翻</td>
       <td> 20250930</td>  
+    </tr> 
+    <tr>
+      <td>《Living Untethered-活出不羁的人生》Michael A.Singer</td>
+      <td> **看完了来填这里**</td>
+      <td> 2025011xx</td>  
     </tr> 
     <tr>
       <td>《被讨厌的勇气》岸见一郎，古贺史健</td>
       <td> 当知足凌驾于自我否定之上，幸福将贯穿于整个人生</td>
       <td> 202511</td>  
     </tr>   
+
   </tbody>
 </table>
 </details>
