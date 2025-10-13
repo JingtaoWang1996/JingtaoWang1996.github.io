@@ -497,8 +497,8 @@ Enjoy these worth reading books！
     </tr> 
     <tr>
       <td>《Living Untethered-活出不羁的人生》Michael A.Singer</td>
-      <td> **看完了来填这里**</td>
-      <td> 2025011xx</td>  
+      <td> 有什么心结解不开，就把它系成蝴蝶结</td>
+      <td> 202501111</td>  
     </tr> 
     <tr>
       <td>《被讨厌的勇气》岸见一郎，古贺史健</td>
