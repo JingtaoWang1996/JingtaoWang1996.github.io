@@ -497,7 +497,7 @@ Enjoy these worth reading books！
     </tr> 
     <tr>
       <td>《Living Untethered-活出不羁的人生》Michael A.Singer</td>
-      <td> 有什么心结解不开，就把它系成蝴蝶结</td>
+      <td> 事实是生活没有打击你的弱点，而是你把自己的弱点投射在生活中</td>
       <td> 202501111</td>  
     </tr> 
     <tr>
