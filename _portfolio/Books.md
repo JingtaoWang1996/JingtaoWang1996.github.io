@@ -126,6 +126,7 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《雷军传》</td>
+      <td>人物本身的传奇故事，并不能代表其公司的传奇</td>
     </tr>
   </tbody>
 </table>
@@ -215,18 +216,23 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《龙族-火之晨曦》</td>
+      <td></td>
     </tr>
     <tr>
       <td>《龙族-悼亡者之瞳》</td>
+      <td></td>
     </tr>
     <tr>
       <td>《龙族-黑月之潮》</td>
+      <td></td>
     </tr>
-        <tr>
+    <tr>
       <td>《龙族-奥丁之渊》</td>
+      <td> 雨夜-高速-迈巴赫</td>
     </tr>
     <tr>
       <td>《龙族-悼亡者的归来》</td>
+      <td></td>
     </tr>
     <tr>
       <td>《上海堡垒》</td>
@@ -268,9 +274,12 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《古董局中局1-4》</td>
+      <td> 就此对古玩感兴趣是怎么回事？？？</td>
+      <td> 202210</td>
     </tr>
     <tr>
       <td>《长安的荔枝》</td>
+      <td> Fake it til You make it </td>
     </tr>
     <tr>
       <td>《太白金星有点烦》</td>
@@ -322,9 +331,13 @@ Enjoy these worth reading books！
     </tr>
     <tr>
       <td>《吞噬星空》</td>
+      <td> 从想在市区买房开始的故事</td>
+      <td> 202401</td>
     </tr>  
     <tr>
       <td>《我在精神病院学斩神》</td>
+      <td> 将中外神话任务结合的最好的故事之一</td>
+      <td> 202403</td>
     </tr>  
     <tr>
       <td>《牧神记》</td>
@@ -349,6 +362,8 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《嫌疑人X的献身》</td>
+      <td> 仍然记得这是高二第一次觉得侦探故事可以有这么多反转，然后入坑"东野圭吾"</td>
+      <td> 201208</td>
     </tr>
     <tr>
       <td>《解忧杂货店》</td>
@@ -416,6 +431,7 @@ Enjoy these worth reading books！
     </tr>
     <tr>
       <td>《曹操》</td>
+      <td> "治世之能臣，乱世之奸雄",此评价完全不为过</td>
     </tr>
     <tr>
       <td>《宋朝原来是这样》</td>
