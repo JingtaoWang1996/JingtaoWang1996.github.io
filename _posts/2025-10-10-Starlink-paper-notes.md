@@ -66,24 +66,132 @@ IPv6的地址是128位， <u>**此规仅限于 /40的网段下**</u>
 * If the Starlink users in a certian region are assigned /40 prefix in feed.csv [ref2], we only need to focus on the remaining bits 41-56 to identify active Starlink user router's IPv6 address.
   * For example, Seattle,USA, the GeoIP database provides the prefix **2605:59c8::/40.**
   * We begin with 2605:59c8:0000:0000::1 (with the gray segments fixed) and then continue with 2605:59c8:00**00:01**00::1,upto2605:59c8:00**ff:ff**00::1.
+    
     * 对于/40的网络，只有上面加黑的部分是需要变化的，后面的57-128位是固定的
-  * PS:前40位已经确定，57-128位已经确定，只需要确定41-56位即可
-
+* PS:前40位已经确定，57-128位已经确定，只需要确定41-56位即可
+  
         * 基于这个规则下获取的ipv6地址再集合Xmap可以更快的发现active IPV6 address 
+        * **考虑通过掩码构建其他非/40网段的扫描**
 
 ### XMAP
 
 [xmap-git](https://github.com/idealeer/xmap)
 
-**安装配置**
+**安装配置---从源码安装**
 
+ref：https://blog.csdn.net/gitblog_00047/article/details/142606578
 
+* 安装环境：47.236.28.227；
 
-### Proposed method 
+```具体执行的安装步骤
+cd /leo/
+git clone https://github.com/idealeer/xmap.git
+cd xmap
+sudo apt-get install build-essential cmake libgmp3-dev gengetopt libpcap-dev flex byacc libjson-c-dev pkg-config libunistring-dev
+mkdir build
+cd build
+cmake .
+make -j4
+sudo make install
+```
 
+* 验证方式：xmap --version
 
+#### ipv6扫描命令
 
+* 目标环境上验证：xmap -6 2606:4700:4700::1111  
+* 查看参数配置：xmap -h
 
+#### TODO：具体需要使用的参数计算
+
+### Enumerating Starlink Pops 
+
+Starlink PoPs spread all over the world, and user traffic will be tunneled to its home PoPs before entering the public Internet. 
+
+* 通过域名反查的形式：dig -x xxxx，将活跃的ipv6反向映射到具体的pop点名称中
+
+  目前经过DNS反查后，有以下两个类型的反查域名，其中 * 代表pop名称【by 郝楠】
+
+  * customer.\*.pop.starlinkisp.net
+  * customer.\*.isp.starlink.com
+
+### Mapping Starlink backbone network
+
+Starlink uses its backbone network to route user traffic between different PoPs. **To investigate tehe Starlink backbone network,we need to determine connections between these pops**
+
+* **Probe active user routers directly from a Starlink dish**, as routing through other ISPs' network would bypass the backbone network. **【pop之间的具体连接关系还是需要有一个Starlink dish】**
+
+  * When probing user routers from a starlink dish，the **traffic passes through the user router's home pop** and **gateway** before reaching the target user router. 
+    * 会先经过home pop【customer.xxxxx.isp.starlink.com---feed.csv当中的】
+    * 还会经过gateway【后续会被识别的】
+
+  * **<u>Identify the third-to-last hop as the backbone router within the home pop of the target user router</u>**
+    * <u>ICMP包的倒数第三跳确定为**目标用户路由器**主干网内的主干路由器</u> 
+  * To determine the associated home PoP of the target user router, we perform a reverse DNS lookup  on this third-to-last hop
+    * 倒数第三跳通过域名反查后最终获得具体的pop点名称
+
+* Home pop & pop
+
+  * Home pop：通常指家庭接入点，ISP为家庭设置的接入点，通常在较小范围内提供服务。
+  * pop：一个城市的ISP建立的一个pop，允许多个用户连接到互联网
+  * 多个home pop 可以视作构成一个pop的一部分
+
+* However，a pop may contain multiple backbone router for performance reason，meaning data packets might pass through more than one hop within the same PoP
+
+  * 数据包在同一个pop内可能经过多跳
+
+* To identify additional backbone routers，we deduce that **the router belong to the same pop if the latency between them is small (< 5ms)**
+
+* Starlink uses **multiprotocol Label Switching (MPLS)** to reach its customers. 【？落地第三跳之后再这么用好像是】
+
+  * MPLS：为每个数据包分配一个固定的标签，数据在转发时，路由器和交换机会检查标签来决定如何转发数据，而不是使用ip查找路由表
+
+    * 标签分配原理
+      * 数据包进入MPLS网络时，会被分配一个标签，这个进入的标签由进入MPLS网络的路由器（Label Edge Router）分配【标签分配基于某些规则：路径、服务类型、流量类型】
+    * 标签交换
+      * 一旦数据包获得标签，后续的路由器（Label Switch Router）通过查找标签来决定如何转发数据包，而不需要查看ip地址，每个LSR根据标签来快速转发数据包（将标签更新为另一个标签）
+    * 标签剥离
+      * 数据包到达目的地的Label edge router时，标签被剥离，数据包通过传统的IP路由继续转发到目标主机。
+
+    * MPLS的优势
+      * 高效的流量转发（避免进行负载的ip路由查找）
+      * 路径控制（label的分配可以基于具体的路径给出）
+      * 多协议支持、延迟优化
+
+* 基于MPLS tunnel传递的ICMP信息可能导致RTT的延长，因此最佳办法是：**traceroute directly to the backbone routers** to obtain more stable latency measurement between backbone router
+* Deduce the connection between pop and backbone router 
+  * 2 probes from RIPE atlas & 6 Starlink dishes 
+    * 2 probes from RIPE: Santiago,Chile & North Carolina 
+    * 6 dishes: VICTORIA,CA；Lincoln，US；Brisbane，Au；Bruhl，Germany；Kanazawa Japan；Salt Lake City，USA；
+    * **We only use Starlink dishes as probes and do not locate a Starlink dish in each pop**
+
+* Source: https://ki3.org.cn/#/starlink-network 
+  * 可以在上面的数据源中找到pop之间的连线结果【基于popName，可以映射到地图上，但是没法更新】
+
+### Statistics on measurement results
+
+* distribution of Starlink users：北美用户最多
+* Starlink pops and their served users：基于上面提到的方法，可以将活跃的ipv6用户终端地址【有Starlink内部节点的情况下】按照延时归类到各个pop当中（<5ms）
+* While Starlink users in most regions are served by a certain pop, users in 44 regions are served by serveral Pops.
+  * Users in Sao Paulo are served by:  Santiago-sntochl1、Lima-limaper1、Sao Paulo-splobra1、Buenos Aires-bnssarg1、mmmiflx-1，bgtacol1 【基于hn扫描的结果，至少包含bgtacol1、bnssarg1、limaper1、splobra1】
+  * Pops are assigned different network prefixes in the same region：**【已经进行过验证-hn的pops.json】**
+    * splobra1：2803:9810:4300::/40
+    * bgtacol1：2803:9810:5380::/42
+    * mmmiflx1：2803:9810:a100::/40
+
+* IPv6 address assignment strategy：
+  * 57-127bit：设置为0
+  * 128bit：设置为1
+* **IPv6  address of Starlink gateway：**
+  * gateway的ipv6地址pattern：2620:134:b0fe:x ::y **【前48位已经确定】**
+  * **49-64bit：range from 0x0248 - 0x0253**
+  * **65-116bit：设置为0**
+  * **117-128bit：range from 0x000 - 0x057** 
+  * gateway ipv6 规则示例：【将ip地址转为二进制后判断具体的位数是否满足即可】
+* GATEWAY的ipv4和ipv6地址的映射关系：
+  * **2620:134:b0fe:x ::y  == 172.16.x.y** 
+  * PS：类似郝楠neo4j中的结果可以看出哪些gateway的地址池比较大，然后能够提高性能
+* **The IPv6 address blocks assigned to Starlink PoPs are 2620:134:b0ff::/116 and 2620:134:b004::/116.**
 
 
 
