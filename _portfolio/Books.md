@@ -514,7 +514,7 @@ Enjoy these worth reading books！
     <tr>
       <td>《Living Untethered-活出不羁的人生》Michael A.Singer</td>
       <td> 事实是生活没有打击你的弱点，而是你把自己的弱点投射在生活中</td>
-      <td> 202501111</td>  
+      <td> 202501022</td>  
     </tr> 
     <tr>
       <td>《被讨厌的勇气》岸见一郎，古贺史健</td>
