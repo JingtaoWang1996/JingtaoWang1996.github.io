@@ -523,8 +523,8 @@ Enjoy these worth reading books！
     </tr>   
     <tr>
       <td>《The Crowd-乌合之众》[法]古斯塔夫.勒庞</td>
-      <td> XXXXXXXXX</td>
-      <td> 202511XXX</td>  
+      <td> 纯-社会群体心理学，被某些想法带着走时可以来翻翻看</td>
+      <td> 20251111</td>  
     </tr>  
 
   </tbody>
