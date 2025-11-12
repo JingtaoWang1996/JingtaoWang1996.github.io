@@ -519,7 +519,7 @@ Enjoy these worth reading books！
     <tr>
       <td>《被讨厌的勇气》岸见一郎，古贺史健</td>
       <td> 当知足凌驾于自我否定之上，幸福将贯穿于整个人生</td>
-      <td> 202511XX</td>  
+      <td> 20251112</td>  
     </tr>   
     <tr>
       <td>《The Crowd-乌合之众》[法]古斯塔夫.勒庞</td>
