@@ -551,33 +551,53 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《追风筝的人》</td>
+      <td></td>
+      <td></td>  
     </tr>
     <tr>
       <td>《小王子》</td>
+      <td></td>
+      <td></td> 
     </tr>
     <tr>
       <td>《谁动了我的奶酪》</td>
+      <td></td>
+      <td></td> 
     </tr>
     <tr>
       <td>《蝇王》</td>
+      <td></td>
+      <td></td> 
     </tr> 
     <tr>
       <td>《岛上书店》</td>
+      <td></td>
+      <td></td> 
     </tr>
     <tr>
       <td>《海底两万里》</td>
+      <td></td>
+      <td></td> 
     </tr>
     <tr>
       <td>《文化苦旅》余秋雨</td>
+      <td></td>
+      <td></td> 
     </tr> 
     <tr>
       <td>《围城》钱钟书</td>
+      <td></td>
+      <td></td> 
     </tr> 
     <tr>
       <td>《边城》沈从文</td>
+      <td></td>
+      <td></td> 
     </tr>   
     <tr>
       <td>《瓦尔登湖》沈从文</td>
+      <td></td>
+      <td></td> 
     </tr> 
   </tbody>
 </table>
@@ -595,6 +615,25 @@ Enjoy these worth reading books！
   <tbody>
     <tr>
       <td>《货币战争1-5》</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+<details>
+    <summary>生命中的美好</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《一生里的某一刻》张春</td>
+      <td>生命中的美好的文字具象化：各种食物、</td>
+      <td>202512XX</td> 
     </tr>
   </tbody>
 </table>
