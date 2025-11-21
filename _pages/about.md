@@ -21,10 +21,6 @@ Current research topic include:
 * DNS detection and security
 * DGA detection and analysis
 
-Useful Resources：
-======
-* The Largest Library of Open-Source UI elements->[uiverse](https://uiverse.io/)
-  
 News!
 ======
 * Jan 2024, Got a promotion as a Research Engineer!
@@ -35,3 +31,6 @@ News!
 * Jun 2018, Graduated from CQUPT with Honor! (Outstanding Student Scholarship of CQUPT for four consecutive years)
 * Mar 2017, American Collegiate Mathematical Contest in Modeling, Honorable Mentioned!
 
+Useful Resources：
+======
+* The Largest Library of Open-Source UI elements->[uiverse](https://uiverse.io/)
