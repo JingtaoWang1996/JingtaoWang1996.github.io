@@ -33,9 +33,17 @@ News!
 
 Useful Resources
 ======
+* [Online class](https://www.classcentral.com/)
 * Computer Science:
+  *[AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
-  * Find the similar website:[Similar Sites](https://www.similarsites.com/) 
+  * Find the similar website:[Similar Sites](https://www.similarsites.com/)
+  * [Excel to pic！！！！](https://flourish.studio/)
+  * Generate 3d model with a single picture:
+      * [Tripo](https://studio.tripo3d.ai/)
+      * [hitem3d.ai](https://www.hitem3d.ai/))
+  * [GPT collection!!!!](https://app.chathub.gg/?utm_source=chathub.gg)
+  * [Space Simulation](https://app.keeptrack.space/)
 * Science:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
@@ -44,7 +52,14 @@ Useful Resources
 * Online Games:
   * [Snooker](http://www.heyzxz.me/pcol/)
   * [Flight simulator](https://www.geo-fs.com/)
+  * [Board Game collections](https://game.hullqin.cn/)
 * Earth Infos:
   * Earth global weather:[zoom earth](https://zoom.earth/)
   * See the world cames:[World web cameras](https://www.skylinewebcams.com/)
+  * [Ambient Sound](https://books.ambient-mixer.com/)
+* Virtual Travel
   * A virtual journey around the world:[AirPano](https://www.airpano.com/)
+  * [drivenlisten](https://drivenlisten.com/)
+
+
+  * 
