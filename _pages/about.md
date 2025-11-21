@@ -35,7 +35,7 @@ Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
 * Computer Science:
-  *[AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
+  * [AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
   * [Excel to pic！！！！](https://flourish.studio/)
@@ -44,6 +44,7 @@ Useful Resources
       * [hitem3d.ai](https://www.hitem3d.ai/))
   * [GPT collection!!!!](https://app.chathub.gg/?utm_source=chathub.gg)
   * [Space Simulation](https://app.keeptrack.space/)
+  * [Remove pic background](https://tools.dverso.io/)
 * Science:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
