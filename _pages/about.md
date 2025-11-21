@@ -31,6 +31,20 @@ News!
 * Jun 2018, Graduated from CQUPT with Honor! (Outstanding Student Scholarship of CQUPT for four consecutive years)
 * Mar 2017, American Collegiate Mathematical Contest in Modeling, Honorable Mentioned!
 
-Useful Resources：
+Useful Resources
 ======
-* The Largest Library of Open-Source UI elements->[uiverse](https://uiverse.io/)
+* Computer Science:
+  * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
+  * Find the similar website:[Similar Sites](https://www.similarsites.com/) 
+* Science:
+  * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
+  * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
+  * [Human Biodigital](human.biodigital)
+  * History:[Play with the history](chronas.org)
+* Online Games:
+  * [Snooker](http://www.heyzxz.me/pcol/)
+  * [Flight simulator](https://www.geo-fs.com/)
+* Earth Infos:
+  * Earth global weather:[zoom earth](https://zoom.earth/)
+  * See the world cames:[World web cameras](https://www.skylinewebcams.com/)
+  * A virtual journey around the world:[AirPano](https://www.airpano.com/)
