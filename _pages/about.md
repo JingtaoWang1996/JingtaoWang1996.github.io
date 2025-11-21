@@ -34,8 +34,10 @@ News!
 Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
+* [资源网站](https://fmhy.net/)
 * Computer Science:
   * [AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
+  * [录制网站操作，生成pdf](https://scribe.com/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
   * [Excel表格转可视化](https://flourish.studio/)
@@ -62,6 +64,3 @@ Useful Resources
 * Virtual Travel
   * A virtual journey around the world:[AirPano](https://www.airpano.com/)
   * [drivenlisten](https://drivenlisten.com/)
-
-
-  * 
