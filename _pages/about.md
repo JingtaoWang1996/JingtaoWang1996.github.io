@@ -35,6 +35,7 @@ Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
 * [资源网站](https://fmhy.net/)
+* [开源网盘游戏加速器](https://github.com/game1024/Speedy)
 * Computer Science:
   * [AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
   * [录制网站操作，生成pdf](https://scribe.com/)
@@ -44,10 +45,13 @@ Useful Resources
   * Generate 3d model with a single picture:
       * [Tripo](https://studio.tripo3d.ai/)
       * [hitem3d.ai](https://www.hitem3d.ai/)
-  * [GPT collection!!!!](https://app.chathub.gg/?utm_source=chathub.gg)
+  * [GPT模型合集](https://app.chathub.gg/?utm_source=chathub.gg)
+  * [GPT镜像站](https://www.chatgptnet.com/list/#/home))
   * [Space Simulation](https://app.keeptrack.space/)
   * [图片背景抠图](https://tools.dverso.io/)
   * [地图生成器](https://topoexport.com/)
+  * [任意网站资源下载](https://aixdownloader.com/zh/)
+  * [windows/office激活网站](https://kms.cx/)
 * Science:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
