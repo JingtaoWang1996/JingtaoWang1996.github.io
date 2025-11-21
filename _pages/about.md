@@ -34,10 +34,14 @@ News!
 Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
-* [资源网站](https://fmhy.net/)
-* [开源网盘游戏加速器](https://github.com/game1024/Speedy)
-* Computer Science:
-  * [AI 为你高效生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
+* 加速器：
+  * [开源网盘游戏加速器](https://github.com/game1024/Speedy)
+  * [加速下载器](https://abdownloadmanager.com/)
+* 资源网站：
+  * [软仓](https://www.ruancang.net/)
+  * [资源网站](https://fmhy.net/)
+* 计算机科学
+  * [AI生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
   * [录制网站操作，生成pdf](https://scribe.com/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
@@ -52,7 +56,7 @@ Useful Resources
   * [地图生成器](https://topoexport.com/)
   * [任意网站资源下载](https://aixdownloader.com/zh/)
   * [windows/office激活网站](https://kms.cx/)
-* Science:
+* 科学实验:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
   * [Human Biodigital](human.biodigital)
@@ -61,10 +65,10 @@ Useful Resources
   * [在线斯诺克](http://www.heyzxz.me/pcol/)
   * [飞行模拟器](https://www.geo-fs.com/)
   * [桌游合集](https://game.hullqin.cn/)
-* Earth Infos:
+* 地球信息
   * Earth global weather:[zoom earth](https://zoom.earth/)
   * See the world cames:[World web cameras](https://www.skylinewebcams.com/)
   * [Ambient Sound](https://books.ambient-mixer.com/)
-* Virtual Travel
+* 云旅游
   * A virtual journey around the world:[AirPano](https://www.airpano.com/)
   * [drivenlisten](https://drivenlisten.com/)
