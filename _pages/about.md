@@ -41,7 +41,6 @@ Useful Resources
   * [软仓](https://www.ruancang.net/)
   * [资源网站](https://fmhy.net/)
 * 计算机科学
-  * [AI生成网站与App的视觉设计、交互原型及前端代码](https://www.uxbot.cn/)
   * [录制网站操作，生成pdf](https://scribe.com/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
@@ -50,7 +49,7 @@ Useful Resources
       * [Tripo](https://studio.tripo3d.ai/)
       * [hitem3d.ai](https://www.hitem3d.ai/)
   * [GPT模型合集](https://app.chathub.gg/?utm_source=chathub.gg)
-  * [GPT镜像站](https://www.chatgptnet.com/list/#/home))
+  * [GPT镜像站](https://www.chatgptnet.com/list/#/home)
   * [Space Simulation](https://app.keeptrack.space/)
   * [图片背景抠图](https://tools.dverso.io/)
   * [地图生成器](https://topoexport.com/)
