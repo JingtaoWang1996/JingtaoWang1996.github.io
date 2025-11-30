@@ -529,7 +529,7 @@ Enjoy these worth reading books！
     <tr>
       <td>《你的孤独，虽败犹荣》刘同</td>
       <td> 金句柠檬：人生小故事合集</td>
-      <td> 202512XX</td>  
+      <td> 20251130</td>  
     </tr>  
 
   </tbody>
