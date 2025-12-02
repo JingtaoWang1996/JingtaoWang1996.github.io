@@ -34,40 +34,40 @@ News!
 Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
-* 加速器：
-  * [开源网盘游戏加速器](https://github.com/game1024/Speedy)
-  * [加速下载器](https://abdownloadmanager.com/)
-* 资源网站：
-  * [软仓](https://www.ruancang.net/)
-  * [资源网站](https://fmhy.net/)
-* 计算机科学
-  * [录制网站操作，生成pdf](https://scribe.com/)
+* Accelerator：
+  * [netdisk-accelerator](https://github.com/game1024/Speedy)
+  * [ab-download-manager](https://abdownloadmanager.com/)
+* Resource website：
+  * [ruancang](https://www.ruancang.net/)
+  * [may be resource website](https://fmhy.net/)
+* CS
+  * [web2pdf](https://scribe.com/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
-  * [Excel表格转可视化](https://flourish.studio/)
+  * [Excel visualization](https://flourish.studio/)
   * Generate 3d model with a single picture:
       * [Tripo](https://studio.tripo3d.ai/)
       * [hitem3d.ai](https://www.hitem3d.ai/)
-  * [GPT模型合集](https://app.chathub.gg/?utm_source=chathub.gg)
-  * [GPT镜像站](https://www.chatgptnet.com/list/#/home)
+  * [chathub](https://app.chathub.gg/?utm_source=chathub.gg)
+  * [GPT mirror site](https://www.chatgptnet.com/list/#/home)
   * [Space Simulation](https://app.keeptrack.space/)
-  * [图片背景抠图](https://tools.dverso.io/)
-  * [地图生成器](https://topoexport.com/)
-  * [任意网站资源下载](https://aixdownloader.com/zh/)
-  * [windows/office激活网站](https://kms.cx/)
-* 科学实验:
+  * [Background cutout](https://tools.dverso.io/)
+  * [Map Generator](https://topoexport.com/)
+  * [aix-downloader](https://aixdownloader.com/zh/)
+  * [windows/office activate](https://kms.cx/)
+* Scienc:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
   * [Human Biodigital](human.biodigital)
   * History:[Play with the history](chronas.org)
 * Online Games:
-  * [在线斯诺克](http://www.heyzxz.me/pcol/)
-  * [飞行模拟器](https://www.geo-fs.com/)
-  * [桌游合集](https://game.hullqin.cn/)
-* 地球信息
+  * [Online Snooker](http://www.heyzxz.me/pcol/)
+  * [Flight Simulator](https://www.geo-fs.com/)
+  * [Board game collection](https://game.hullqin.cn/)
+* Earth-online
   * Earth global weather:[zoom earth](https://zoom.earth/)
   * See the world cames:[World web cameras](https://www.skylinewebcams.com/)
   * [Ambient Sound](https://books.ambient-mixer.com/)
-* 云旅游
+* Online-travel
   * A virtual journey around the world:[AirPano](https://www.airpano.com/)
   * [drivenlisten](https://drivenlisten.com/)
