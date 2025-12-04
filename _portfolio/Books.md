@@ -531,6 +531,11 @@ Enjoy these worth reading books！
       <td> 金句柠檬：人生小故事合集</td>
       <td> 20251130</td>  
     </tr>  
+    <tr>
+      <td>《活出生命的意义》XX</td>
+      <td> 面对极端苦难更要积极乐观</td>
+      <td> 20251204</td>  
+    </tr>  
 
   </tbody>
 </table>
