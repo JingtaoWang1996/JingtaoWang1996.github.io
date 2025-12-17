@@ -532,8 +532,8 @@ Enjoy these worth reading books！
       <td> 20251130</td>  
     </tr>  
     <tr>
-      <td>《活出生命的意义》XX</td>
-      <td> 面对极端苦难更要积极乐观</td>
+      <td>《活出生命的意义》</td>
+      <td> 面对极端苦难更要积极乐观，寻找一个“继续”的理由</td>
       <td> 20251204</td>  
     </tr>  
 
@@ -638,7 +638,7 @@ Enjoy these worth reading books！
     <tr>
       <td>《一生里的某一刻》张春</td>
       <td>生命中的美好的文字具象化，还是要学会善于观察生活</td>
-      <td>202512XX</td> 
+      <td>202601XX</td> 
     </tr>
   </tbody>
 </table>
