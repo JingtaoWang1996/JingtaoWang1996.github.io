@@ -638,7 +638,7 @@ Enjoy these worth reading books！
     <tr>
       <td>《一生里的某一刻》张春</td>
       <td>生命中的美好的文字具象化，还是要学会善于观察生活：张狗，保住狗命，无所畏惧！</td>
-      <td>202601XX</td> 
+      <td>20260101</td> 
     </tr>
   </tbody>
 </table>
