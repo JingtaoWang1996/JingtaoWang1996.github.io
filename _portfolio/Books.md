@@ -535,7 +535,12 @@ Enjoy these worth reading books！
       <td>《活出生命的意义》</td>
       <td> 面对极端苦难更要积极乐观，寻找一个“继续”的理由</td>
       <td> 20251204</td>  
-    </tr>  
+    </tr> 
+    <tr>
+      <td>《不抱怨的世界-A Complaint Free World》威尔·鲍温</td>
+      <td> 积极的态度/思考：接受并认清现有情况，思考此刻能做什么事让事情变的更好并付诸行动，而不是抱怨和纠结已经失去的东西</td>
+      <td> 20260101</td>  
+    </tr> 
 
   </tbody>
 </table>
