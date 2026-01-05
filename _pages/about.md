@@ -34,7 +34,7 @@ News!
 Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
-* [A powerful tool for visualizing abstract concepts][fogsight.ai](https://fogsight.ai/app)
+* [A powerful tool for visualizing abstract concepts：fogsight.ai](https://fogsight.ai/app)
 * Accelerator：
   * [netdisk-accelerator](https://github.com/game1024/Speedy)
   * [ab-download-manager](https://abdownloadmanager.com/)
