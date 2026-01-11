@@ -35,6 +35,8 @@ Useful Resources
 ======
 * [Online class](https://www.classcentral.com/)
 * [A powerful tool for visualizing abstract concepts：fogsight.ai](https://fogsight.ai/app)
+* [Remove Paywalls Instantly](https://paywallbuster.com/)
+* [Awesom llm apps](https://github.com/Shubhamsaboo/awesome-llm-apps)
 * Accelerator：
   * [netdisk-accelerator](https://github.com/game1024/Speedy)
   * [ab-download-manager](https://abdownloadmanager.com/)
