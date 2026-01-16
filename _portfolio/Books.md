@@ -560,6 +560,11 @@ Enjoy these worth reading books！
   </thead>
   <tbody>
     <tr>
+      <td>《病隙随笔》史铁生</td>
+      <td>不是因为看见希望才相信，而是因为相信才能看见希望；真正的信心前面，除了希望什么也没有，想要也没有</td>
+      <td>20260112</td>  
+    </tr>  
+    <tr>
       <td>《追风筝的人》</td>
       <td></td>
       <td></td>  
