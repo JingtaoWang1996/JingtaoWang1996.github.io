@@ -1,5 +1,5 @@
 ---
-permalink: /
+plink: /
 title: "About Me"
 excerpt: "About me"
 author_profile: true
@@ -58,6 +58,7 @@ Useful Resources
   * [Map Generator](https://topoexport.com/)
   * [aix-downloader](https://aixdownloader.com/zh/)
   * [windows/office activate](https://kms.cx/)
+  * [A collection of free APIs ](https://free-apis.github.io/#/)
 * Scienc:
   * Interesting multiple calculators:[Omni Calculator](https://www.omnicalculator.com/)
   * Scientific experiment:[Interactive Experiment](https://phet.colorado.edu/)
