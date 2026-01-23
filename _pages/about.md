@@ -44,7 +44,7 @@ Useful Resources
   * [ruancang](https://www.ruancang.net/)
   * [may be resource website](https://fmhy.net/)
 * CS
-  * [UI design with vue code]([https://scribe.com/](https://pixso.net/app/drafts))
+  * [UI design with vue code](https://pixso.net/app/drafts)
   * [web2pdf](https://scribe.com/)
   * The Largest Library of Open-Source UI elements:[uiverse](https://uiverse.io/)
   * Find the similar website:[Similar Sites](https://www.similarsites.com/)
