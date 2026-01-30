@@ -125,6 +125,14 @@ Best movies worth to try!
      <td>黑铁的鱼影</td>
      <td>2023.4.14</td>
    </tr>
+   <tr>
+     <td>百万美元的五棱星</td>
+     <td>2024.6.15</td>
+   </tr>
+   <tr>
+     <td>独眼的残像</td>
+     <td>2025.6.27</td>
+   </tr>
   </tbody>
 </table>
 </details>
