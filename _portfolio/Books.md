@@ -84,6 +84,25 @@ Enjoy these worth reading books！
 </table>
 </details>
 <details>
+    <summary>烽火戏诸侯</summary>
+    <table>
+  <thead>
+    <tr>
+      <th>书名</th>
+      <th>Takeway</th>
+      <th>LastFinishDate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>《剑来》</td>
+      <td>遇事不决，可问春风，春风不语，既随本心</td>
+      <td>20260303</td>
+    </tr>
+  </tbody>
+</table>
+</details>
+<details>
     <summary>其他</summary>
     <table>
   <thead>
